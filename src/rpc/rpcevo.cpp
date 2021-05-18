@@ -153,28 +153,48 @@ static CBLSSecretKey ParseBLSSecretKey(const std::string& hexKey, const std::str
 
 #ifdef ENABLE_WALLET
 
-bool GetGVTCredits(CWallet* pwallet, std::vector<COutput>& credits) {
+bool GetGVTCredits(CWallet* pwallet, std::vector<COutput>& coins) {
 
     // Get grpID for GVT.credit
     CTokenGroupID grpID(tokenGroupManager.get()->GetGVTID(), "credit");
 
     // Find GVT.credit coins
-    credits.clear();
+    coins.clear();
 
-    pwallet->FilterCoins(credits, [grpID](const CWalletTx *tx, const CTxOut *out) {
+    pwallet->FilterCoins(coins, [grpID](const CWalletTx *tx, const CTxOut *out) {
         CTokenGroupInfo tg(out->scriptPubKey);
         // must be a grouped output sitting in group address
         return ((grpID == tg.associatedGroup) && !tg.isAuthority() && tg.getAmount() == 1);
     });
 
-    if (credits.size() == 0) {
+    if (coins.size() == 0) {
+        return false;
+    }
+    return true;
+}
+
+bool GetGVTRevoke(CWallet* pwallet, std::vector<COutput>& coins) {
+
+    // Get grpID for GVT.revoke
+    CTokenGroupID grpID(tokenGroupManager.get()->GetGVTID(), "revoke");
+
+    // Find GVT.revoke coins
+    coins.clear();
+
+    pwallet->FilterCoins(coins, [grpID](const CWalletTx *tx, const CTxOut *out) {
+        CTokenGroupInfo tg(out->scriptPubKey);
+        // must be a grouped output sitting in group address
+        return ((grpID == tg.associatedGroup) && !tg.isAuthority() && tg.getAmount() == 1);
+    });
+
+    if (coins.size() == 0) {
         return false;
     }
     return true;
 }
 
 template<typename SpecialTxPayload>
-static void FundSpecialTx(CWallet* pwallet, CMutableTransaction& tx, const SpecialTxPayload& payload, const CTxDestination& fundDest)
+static void FundSpecialTx(CWallet* pwallet, CMutableTransaction& tx, const SpecialTxPayload& payload, const CTxDestination& fundDest, const std::vector<COutput>& tokens = std::vector<COutput>())
 {
     assert(pwallet != nullptr);
 
@@ -233,17 +253,12 @@ static void FundSpecialTx(CWallet* pwallet, CMutableTransaction& tx, const Speci
     int nChangePos = -1;
     std::string strFailReason;
 
-    std::vector<COutput> credits;
-    CTxIn gvtCreditTxIn;
+    std::vector<CTxIn> gvtCreditsTxIn;
     int creditSize = 0;
-    bool fSpendCredit = tx.nType == TRANSACTION_PROVIDER_REGISTER;
-    if (fSpendCredit) {
-        if (!GetGVTCredits(pwallet, credits)) {
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "No Governance Validator Node credit (GVT.credit) found");
-        }
-
-        gvtCreditTxIn = CTxIn(credits[0].GetOutPoint(), CScript(), CTxIn::SEQUENCE_FINAL - 1);
-        creditSize = credits[0].nInputBytes;
+    bool fSpendCredit = (tokens.size() > 0);
+    for (const auto& token : tokens) {
+        gvtCreditsTxIn.emplace_back(token.GetOutPoint(), CScript(), CTxIn::SEQUENCE_FINAL - 1);
+        creditSize += token.nInputBytes;
     }
 
     if (!pwallet->CreateTransaction(vecSend, newTx, reservekey, nFee, nChangePos, strFailReason, coinControl, false, tx.vExtraPayload.size() + creditSize)) {
@@ -253,7 +268,7 @@ static void FundSpecialTx(CWallet* pwallet, CMutableTransaction& tx, const Speci
     tx.vin = newTx->vin;
     tx.vout = newTx->vout;
 
-    if (fSpendCredit) {
+    for (const auto& gvtCreditTxIn : gvtCreditsTxIn) {
         // add creditIn to tx.vin
         tx.vin.push_back(gvtCreditTxIn);
     }
@@ -544,7 +559,13 @@ UniValue protx_register(const JSONRPCRequest& request)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Dash address: ") + request.params[paramIdx + 6].get_str());
     }
 
-    FundSpecialTx(pwallet, tx, ptx, fundDest);
+    std::vector<COutput> tokens;
+    if (!GetGVTCredits(pwallet, tokens)) {
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "No Governance Validator Node credit (GVT.credit) found");
+    }
+    tokens.erase(tokens.begin() + 1, tokens.end());
+
+    FundSpecialTx(pwallet, tx, ptx, fundDest, tokens);
     UpdateSpecialTxInputsHash(tx, ptx);
 
     bool fSubmit{true};
@@ -866,6 +887,9 @@ UniValue protx_revoke(const JSONRPCRequest& request)
         if (nReason < 0 || nReason > CProUpRevTx::REASON_LAST) {
             throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("invalid reason %d, must be between 0 and %d", nReason, CProUpRevTx::REASON_LAST));
         }
+        if (nReason == CProUpRevTx::REASON_EXPIRED) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("use revoke_prepare/revoke_authorize/revoke_submit for reason %d", nReason));
+        }
         ptx.nReason = (uint16_t)nReason;
     }
 
@@ -951,6 +975,13 @@ UniValue protx_revoke_prepare(const JSONRPCRequest& request)
         }
         ptx.nReason = (uint16_t)nReason;
     }
+    std::vector<COutput> tokens;
+    if (ptx.nReason == CProUpRevTx::REASON_EXPIRED) {
+        if (!GetGVTRevoke(pwallet, tokens)) {
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "No Governance Validator Node credit (GVT.credit) found");
+        }
+        tokens.erase(tokens.begin() + 1, tokens.end());
+    }
 
     auto dmn = deterministicMNManager->GetListAtChainTip().GetMN(ptx.proTxHash);
     if (!dmn) {
@@ -965,17 +996,17 @@ UniValue protx_revoke_prepare(const JSONRPCRequest& request)
         CTxDestination feeSourceDest = DecodeDestination(request.params[3].get_str());
         if (!IsValidDestination(feeSourceDest))
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Dash address: ") + request.params[3].get_str());
-        FundSpecialTx(pwallet, tx, ptx, feeSourceDest);
+        FundSpecialTx(pwallet, tx, ptx, feeSourceDest, tokens);
     } else if (dmn->pdmnState->scriptOperatorPayout != CScript()) {
         // Using funds from previousely specified operator payout address
         CTxDestination txDest;
         ExtractDestination(dmn->pdmnState->scriptOperatorPayout, txDest);
-        FundSpecialTx(pwallet, tx, ptx, txDest);
+        FundSpecialTx(pwallet, tx, ptx, txDest, tokens);
     } else if (dmn->pdmnState->scriptPayout != CScript()) {
         // Using funds from previousely specified masternode payout address
         CTxDestination txDest;
         ExtractDestination(dmn->pdmnState->scriptPayout, txDest);
-        FundSpecialTx(pwallet, tx, ptx, txDest);
+        FundSpecialTx(pwallet, tx, ptx, txDest, tokens);
     } else {
         throw JSONRPCError(RPC_INTERNAL_ERROR, "No payout or fee source addresses found, can't revoke");
     }
@@ -1034,11 +1065,41 @@ UniValue protx_revoke_authorize(const JSONRPCRequest& request)
 
     CBLSSecretKey keyOperator = ParseBLSSecretKey(request.params[2].get_str(), "operatorKey");
 
-/*
-    if (keyOperator.GetPublicKey() != dmn->pdmnState->pubKeyOperator.Get()) {
-        throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("the operator key does not belong to the registered public key"));
+    if (proTx.nReason == CProUpRevTx::REASON_EXPIRED) {
+        if (!tokenGroupManager->ManagementTokensCreated()) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "management tokens not created");
+        }
+        // the private key must match the public key of the GVT token
+        CTokenGroupID gvtCreditID(tokenGroupManager->GetGVTID(), "revoke");
+        CValidationState state;
+        CCoinsViewCache &view = *pcoinsTip;
+        CAmount nCredit;
+        CAmount nDebit;
+        if (!GetTokenBalance(tx, gvtCreditID, state, view, nCredit, nDebit)) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, FormatStateMessage(state));
+        }
+        if (nCredit - nDebit != 1) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "unable to find GVT.revoke");
+        }
+        CTokenGroupCreation gvtCreation;
+        if (!tokenGroupManager->GetTokenGroupCreation(tokenGroupManager->GetGVTID(), gvtCreation)) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "unable to find GVT creation");
+        }
+        CTokenGroupDescriptionMGT* gvtDesc = static_cast<CTokenGroupDescriptionMGT*>(gvtCreation.pTokenGroupDescription.get());
+        if (keyOperator.GetPublicKey() != gvtDesc->blsPubKey) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("the operator key does not belong to the registered GVT bls public key"));
+        }
+    } else {
+        // the bls private key must match the operator bls public key of the MN
+        auto dmn = deterministicMNManager->GetListAtChainTip().GetMN(proTx.proTxHash);
+        if (!dmn) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("masternode %s not found", proTx.proTxHash.ToString()));
+        }
+
+        if (keyOperator.GetPublicKey() != dmn->pdmnState->pubKeyOperator.Get()) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("the operator key does not belong to the registered public key"));
+        }
     }
-*/
 
     SignSpecialTxPayloadByHash(tx, proTx, keyOperator);
     SetTxPayload(tx, proTx);
