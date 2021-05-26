@@ -1,0 +1,11 @@
+prefix=/home/user/git/celbalrai_bytz/depends/x86_64-w64-mingw32
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Bytz Core consensus library
+Description: Library for the Bitcoin consensus protocol.
+Version: 0.17.0
+Libs: -L${libdir} -lbytzconsensus
+Cflags: -I${includedir}
+Requires.private: libcrypto
