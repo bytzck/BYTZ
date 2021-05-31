@@ -181,10 +181,10 @@ static Consensus::LLMQParams llmq_test = {
         .minSize = 2,
         .threshold = 2,
 
-        .dkgInterval = 24, // one DKG per hour
-        .dkgPhaseBlocks = 2,
-        .dkgMiningWindowStart = 10, // dkgPhaseBlocks * 5 = after finalization
-        .dkgMiningWindowEnd = 18,
+        .dkgInterval = 30, // one DKG every 30 minutes
+        .dkgPhaseBlocks = 3,
+        .dkgMiningWindowStart = 15, // dkgPhaseBlocks * 5 = after finalization
+        .dkgMiningWindowEnd = 27,
         .dkgBadVotesThreshold = 2,
 
         .signingActiveQuorumCount = 2, // just a few ones to allow easier testing
@@ -202,9 +202,9 @@ static Consensus::LLMQParams llmq_test_v17 = {
         .threshold = 2,
 
         .dkgInterval = 24, // one DKG per hour
-        .dkgPhaseBlocks = 2,
-        .dkgMiningWindowStart = 10, // dkgPhaseBlocks * 5 = after finalization
-        .dkgMiningWindowEnd = 18,
+        .dkgPhaseBlocks = 3,
+        .dkgMiningWindowStart = 15, // dkgPhaseBlocks * 5 = after finalization
+        .dkgMiningWindowEnd = 27,
         .dkgBadVotesThreshold = 2,
 
         .signingActiveQuorumCount = 2, // just a few ones to allow easier testing
@@ -221,10 +221,10 @@ static Consensus::LLMQParams llmq_devnet = {
         .minSize = 7,
         .threshold = 6,
 
-        .dkgInterval = 24, // one DKG per hour
-        .dkgPhaseBlocks = 2,
-        .dkgMiningWindowStart = 10, // dkgPhaseBlocks * 5 = after finalization
-        .dkgMiningWindowEnd = 18,
+        .dkgInterval = 30, // one DKG per hour
+        .dkgPhaseBlocks = 3,
+        .dkgMiningWindowStart = 15, // dkgPhaseBlocks * 5 = after finalization
+        .dkgMiningWindowEnd = 27,
         .dkgBadVotesThreshold = 7,
 
         .signingActiveQuorumCount = 3, // just a few ones to allow easier testing
@@ -255,9 +255,9 @@ static Consensus::LLMQParams llmq50_60 = {
 static Consensus::LLMQParams llmq400_60 = {
         .type = Consensus::LLMQ_400_60,
         .name = "llmq_400_60",
-        .size = 400,
-        .minSize = 300,
-        .threshold = 240,
+        .size = 40,
+        .minSize = 30,
+        .threshold = 24,
 
         .dkgInterval = 24 * 12, // one DKG every 12 hours
         .dkgPhaseBlocks = 4,
@@ -268,7 +268,7 @@ static Consensus::LLMQParams llmq400_60 = {
         .signingActiveQuorumCount = 4, // two days worth of LLMQs
 
         .keepOldConnections = 5,
-        .recoveryMembers = 100,
+        .recoveryMembers = 10,
 };
 
 // Used for deployment and min-proto-version signalling, so it needs a higher threshold
