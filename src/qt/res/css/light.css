@@ -652,7 +652,7 @@ QToolBar {
 
 QToolBar > QToolButton {
     background-color: #31353c;
-    color: #000000;
+    color: #c1c2c4;
 }
 
 QToolBar > QToolButton:hover:!checked {
@@ -661,12 +661,12 @@ QToolBar > QToolButton:hover:!checked {
 }
 
 QToolBar > QToolButton:checked {
-    background-color: #11161d;
+    background-color: #11161D;
     color: #ff005b;
 }
 
 QToolBar > QToolButton:disabled {
-    color: #31353c;
+    color: #4a4a4b;
 }
 
 /******************************************************
