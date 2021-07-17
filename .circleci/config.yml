@@ -42,6 +42,8 @@ jobs:
             # univalue
             git subtree add --prefix src/univalue univalue 9f0b9975925b202ab130714e5422f8dd8bf40ac3 --squash
             # snap
+            ls
+            ls contrib/devtools/*sh
             source .circleci/lint_06_script.sh
   x86_64_bionic:
     docker:
