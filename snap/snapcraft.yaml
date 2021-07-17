@@ -1,5 +1,5 @@
 # Copyright (c) 2018-2021 The Bytz Core developers
-name: bytz
+name: bytzcoin
 base: core18
 version: 0.2.0.0
 summary:   bytz, digital currency for media content
@@ -21,7 +21,7 @@ description: |
 
   Homepage: https://bytz.gg/
   Blockexplorer (main): https://chainz.cryptoid.info/bytz/
-  Github: https://github.com/bytzcurrencycurrency/bytz/
+  Github: https://github.com/bytzcurrency/bytz/
   Wiki: https://github.com/bytzcurrency/bytz/wiki
 
   Social networks/forums:
@@ -97,9 +97,9 @@ apps:
     plugs: [home]
 parts:
   bytz:
-    source: http://github.com/bytzcurrency/bytz
+    source: http://github.com/bytzck/bytz
     source-type: git
-    source-tag: v0.2.0.0
+    source-tag: snap-test
     plugin: nil
     override-build: |
       echo "+++++++++++++++++++++++++++++++++++++++++++++++"
