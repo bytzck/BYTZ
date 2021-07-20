@@ -1,6 +1,7 @@
 Bytz Core staging tree 0.2
 ===========================
 
+Current Build State
 
 ![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)
 
