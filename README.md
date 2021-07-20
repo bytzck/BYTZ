@@ -6,6 +6,9 @@ Bytz Core staging tree 0.2
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/bytz)
 
+[![Latest release](https://img.shields.io/github/release/bytzcurrency/BYTZ.svg)](https://github.com/bytzcurrency/BYTZ/releases/latest) ![Latest stable Release](https://img.shields.io/github/downloads/bytzcurrency/BYTZ/latest/total.svg?style=social)
+
+
 https://www.bytz.gg
 
 
