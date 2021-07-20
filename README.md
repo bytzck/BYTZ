@@ -4,6 +4,7 @@ Bytz Core staging tree 0.2
 Current Build State
 
 [![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)](https://app.circleci.com/pipelines/github/bytzcurrency)
+
 Download the latest release from github
 
 [![Latest release](https://img.shields.io/github/release/bytzcurrency/BYTZ.svg)](https://github.com/bytzcurrency/BYTZ/releases/latest) ![Latest stable Release](https://img.shields.io/github/downloads/bytzcurrency/BYTZ/latest/total.svg?style=social)
