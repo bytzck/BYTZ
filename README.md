@@ -1,9 +1,9 @@
 Bytz Core staging tree 0.2
 ===========================
 
-|CI|master|develop|
-|-|-|-|
-|CircleCI|!bytzcurrency(https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)]((https://app.circleci.com/pipelines/github/bytzcurrency)|[![Build Status](https://gitlab.com/bytzcurrency/bytz/badges/develop/pipeline.svg)](https://gitlab.com/bytzcurrency/bytz/-/tree/develop)|
+|CI|master|
+|-|-|
+|CircleCI|![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)]((https://app.circleci.com/pipelines/gh/bytzcurrency)|
 
 https://www.bytz.gg
 
