@@ -12,6 +12,8 @@ Install the latest release from the Snap Store
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/bytz)
 
+BYTZ Officlal Web Page
+
 https://www.bytz.gg
 
 
