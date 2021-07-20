@@ -3,7 +3,7 @@ Bytz Core staging tree 0.2
 
 |CI|
 |-|
-|![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)(https://app.circleci.com/pipelines/github/bytzcurrency)|
+|![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)|
 
 ![Snap Store](https://snapcraft.io/bytz/embedded?button=black)
 
