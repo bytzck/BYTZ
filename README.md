@@ -1,11 +1,12 @@
 Bytz Core staging tree 0.2
 ===========================
 
-|CI|
-|-|
-|![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)|
 
-![Snap Store](https://snapcraft.io/bytz/embedded?button=black)
+![bytzcurrency](https://circleci.com/gh/bytzcurrency/BYTZ.svg?style=shield)
+
+![Snap Store]("https://snapcraft.io/bytz/embedded?button=black" frameborder="0" width="100%" height="310px" style="border: 1px solid #CCC; border-radius: 2px;")
+
+<iframe src="https://snapcraft.io/bytz/embedded?button=black" frameborder="0" width="100%" height="310px" style="border: 1px solid #CCC; border-radius: 2px;"></iframe>
 
 https://www.bytz.gg
 
