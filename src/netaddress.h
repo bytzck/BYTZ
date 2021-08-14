@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
+#include <version.h>
 
 extern bool fAllowPrivateNet;
 
@@ -39,7 +40,7 @@ enum Network
     /// IPv6
     NET_IPV6,
 
-    /// TORv2
+    /// TORv2 Torv3
     NET_ONION,
 
     /// A set of dummy addresses that map a name to an IPv6 address. These
@@ -62,11 +63,12 @@ class CNetAddr
          * Network to which this address belongs.
          */
         Network m_net{NET_IPV6};
-
-        unsigned char ip[16]; // in network byte order
+        unsigned char ip[41]; // in network byte order
+        bool usesTorV3 = false;
         uint32_t scopeId{0}; // for scoped/link-local ipv6 addresses
 
     public:
+
         CNetAddr();
         explicit CNetAddr(const struct in_addr& ipv4Addr);
         void SetIP(const CNetAddr& ip);
@@ -112,6 +114,7 @@ class CNetAddr
         bool IsRFC6052() const; // IPv6 well-known prefix (64:FF9B::/96)
         bool IsRFC6145() const; // IPv6 IPv4-translated address (::FFFF:0:0:0/96)
         bool IsTor() const;
+        bool IsTorV3() const;
         bool IsLocal() const;
         bool IsRoutable() const;
         bool IsInternal() const;
@@ -130,32 +133,38 @@ class CNetAddr
         bool GetIn6Addr(struct in6_addr* pipv6Addr) const;
 
         friend bool operator==(const CNetAddr& a, const CNetAddr& b);
-        friend bool operator!=(const CNetAddr& a, const CNetAddr& b) { return !(a == b); }
+        friend bool operator!=(const CNetAddr& a, const CNetAddr& b);
         friend bool operator<(const CNetAddr& a, const CNetAddr& b);
 
-        /**
-         * Serialize to a stream.
-         */
-        template <typename Stream>
-        void Serialize(Stream& s) const
-        {
-            s << ip;
-        }
+    ADD_SERIALIZE_METHODS;
 
-        /**
-         * Unserialize from a stream.
-         */
-        template <typename Stream>
-        void Unserialize(Stream& s)
-        {
-            unsigned char ip_temp[sizeof(ip)];
-            s >> ip_temp;
-            // Use SetLegacyIPv6() so that m_net is set correctly. For example
-            // ::FFFF:0102:0304 should be set as m_net=NET_IPV4 (1.2.3.4).
-            SetLegacyIPv6(ip_temp);
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action)
+    {
+        if((s.GetVersion() == INIT_PROTO_VERSION && !ser_action.ForRead()) || 
+                s.GetVersion() >= TORV3_SERVICES_VERSION || 
+                s.GetType() == SER_DISK
+            ) {
+            READWRITE(FLATDATA(ip));
+            // Reads at this point should be Tor v3 address's if they it is a Tor address
+            if(ser_action.ForRead() && IsTor() && ip[40] != '\0') {
+                usesTorV3 = true;
+            }
+        } else { // backwards compatibility
+            if (ser_action.ForRead()) {
+                unsigned char compatibleIP[16];
+                READWRITE(FLATDATA(compatibleIP));
+                memcpy(CNetAddr::ip, compatibleIP, sizeof(compatibleIP));
+                SetLegacyIPv6(compatibleIP);
+            } else {
+                unsigned char compatibleIP[16];
+                memcpy(compatibleIP, CNetAddr::ip, sizeof(compatibleIP));
+                READWRITE(FLATDATA(compatibleIP));
+            }
         }
+    }
 
-        friend class CSubNet;
+    friend class CSubNet;
 };
 
 class CSubNet
@@ -182,7 +191,7 @@ class CSubNet
         bool IsValid() const;
 
         friend bool operator==(const CSubNet& a, const CSubNet& b);
-        friend bool operator!=(const CSubNet& a, const CSubNet& b) { return !(a == b); }
+        friend bool operator!=(const CSubNet& a, const CSubNet& b);
         friend bool operator<(const CSubNet& a, const CSubNet& b);
 
         ADD_SERIALIZE_METHODS;
@@ -190,9 +199,9 @@ class CSubNet
         template <typename Stream, typename Operation>
         inline void SerializationOp(Stream& s, Operation ser_action) {
             READWRITE(network);
-            READWRITE(netmask);
-            READWRITE(valid);
-        }
+            READWRITE(FLATDATA(netmask));
+            READWRITE(FLATDATA(valid));
+        } 
 };
 
 /** A combination of a network address (CNetAddr) and a (TCP) port */
@@ -211,7 +220,7 @@ class CService : public CNetAddr
         bool GetSockAddr(struct sockaddr* paddr, socklen_t *addrlen) const;
         bool SetSockAddr(const struct sockaddr* paddr);
         friend bool operator==(const CService& a, const CService& b);
-        friend bool operator!=(const CService& a, const CService& b) { return !(a == b); }
+        friend bool operator!=(const CService& a, const CService& b);
         friend bool operator<(const CService& a, const CService& b);
         std::vector<unsigned char> GetKey() const;
         std::string ToString(bool fUseGetnameinfo = true) const;
@@ -221,29 +230,37 @@ class CService : public CNetAddr
         CService(const struct in6_addr& ipv6Addr, unsigned short port);
         explicit CService(const struct sockaddr_in6& addr);
 
-        /**
-         * Serialize to a stream.
-         */
-        template <typename Stream>
-        void Serialize(Stream& s) const
-        {
-            s << ip;
-            s << WrapBigEndian(port);
-        }
+    ADD_SERIALIZE_METHODS;
 
-        /**
-         * Unserialize from a stream.
-         */
-        template <typename Stream>
-        void Unserialize(Stream& s)
-        {
-            unsigned char ip_temp[sizeof(ip)];
-            s >> ip_temp;
-            // Use SetLegacyIPv6() so that m_net is set correctly. For example
-            // ::FFFF:0102:0304 should be set as m_net=NET_IPV4 (1.2.3.4).
-            SetLegacyIPv6(ip_temp);
-            s >> WrapBigEndian(port);
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action)
+    {
+        if((s.GetVersion() == INIT_PROTO_VERSION && !ser_action.ForRead()) || 
+                s.GetVersion() >= TORV3_SERVICES_VERSION || 
+                s.GetType() == SER_DISK
+            ) {
+            READWRITE(FLATDATA(ip));
+            // Reads at this point should be Tor v3 address's if they it is a Tor address
+            if(ser_action.ForRead() && IsTor() && ip[40] != '\0') {
+                usesTorV3 = true;
+            }
+        } else {
+            if (ser_action.ForRead()) {
+                unsigned char compatibleIP[16];
+                READWRITE(FLATDATA(compatibleIP));
+                memcpy(CNetAddr::ip, compatibleIP, sizeof(compatibleIP));
+                SetLegacyIPv6(compatibleIP);
+            } else {
+                unsigned char compatibleIP[16]; // backwards compatibility
+                memcpy(compatibleIP, CNetAddr::ip, sizeof(compatibleIP));
+                READWRITE(FLATDATA(compatibleIP));
+            }
         }
+        unsigned short portN = htons(port);
+        READWRITE(FLATDATA(portN));
+        if (ser_action.ForRead())
+            port = ntohs(portN);
+    }
 };
 
 #endif // BITCOIN_NETADDRESS_H

@@ -76,13 +76,25 @@ bool CNetAddr::SetSpecial(const std::string &strName)
 {
     if (strName.size()>6 && strName.substr(strName.size() - 6, 6) == ".onion") {
         std::vector<unsigned char> vchAddr = DecodeBase32(strName.substr(0, strName.size() - 6).c_str());
-        if (vchAddr.size() != 16-sizeof(pchOnionCat))
-            return false;
-        m_net = NET_ONION;
-        memcpy(ip, pchOnionCat, sizeof(pchOnionCat));
-        for (unsigned int i=0; i<16-sizeof(pchOnionCat); i++)
-            ip[i + sizeof(pchOnionCat)] = vchAddr[i];
-        return true;
+         // 16' length - v2 tor addresses
+        if (vchAddr.size() == 16-sizeof(pchOnionCat)){
+            m_net = NET_ONION;
+            memcpy(ip, pchOnionCat, sizeof(pchOnionCat));
+            for (unsigned int i=0; i<16-sizeof(pchOnionCat); i++)
+                ip[i + sizeof(pchOnionCat)] = vchAddr[i];
+            usesTorV3 = false;
+            return true;
+        }
+        // 56' length - v3 tor addressess
+        std::vector<unsigned char> vchAddrV3 = DecodeBase32(strName.substr(0, strName.size() - 6).c_str());
+        if (vchAddrV3.size() == 41-sizeof(pchOnionCat)){
+            m_net = NET_ONION;
+            memcpy(ip, pchOnionCat, sizeof(pchOnionCat));
+            for (unsigned int i=0; i<41-sizeof(pchOnionCat); i++)
+                ip[i + sizeof(pchOnionCat)] = vchAddrV3[i];
+            usesTorV3 = true;
+            return true;
+        } 
     }
     return false;
 }
@@ -199,7 +211,15 @@ bool CNetAddr::IsRFC7343() const
            GetByte(13) == 0x00 && (GetByte(12) & 0xF0) == 0x20;
 }
 
-bool CNetAddr::IsTor() const { return m_net == NET_ONION; }
+bool CNetAddr::IsTor() const { 
+    return m_net == NET_ONION && !usesTorV3 &&
+        (memcmp(ip, pchOnionCat, sizeof(pchOnionCat)) == 0);
+ }
+
+bool CNetAddr::IsTorV3() const {
+     return m_net == NET_ONION && usesTorV3 &&
+        (memcmp(ip, pchOnionCat, sizeof(pchOnionCat)) == 0);
+}
 
 bool CNetAddr::IsLocal() const
 {
@@ -260,7 +280,7 @@ bool CNetAddr::IsRoutable() const
         return false;
     if (!fAllowPrivateNet && IsRFC1918())
         return false;
-    return !(IsRFC2544() || IsRFC3927() || IsRFC4862() || IsRFC6598() || IsRFC5737() || (IsRFC4193() && !IsTor()) || IsRFC4843() || IsRFC7343() || IsLocal() || IsInternal());
+    return !(IsRFC2544() || IsRFC3927() || IsRFC4862() || IsRFC6598() || IsRFC5737() || (IsRFC4193() && !IsTor() && !IsTorV3()) || IsRFC4843() || IsRFC7343() || IsLocal() || IsInternal());
 }
 
 bool CNetAddr::IsInternal() const
@@ -283,6 +303,8 @@ std::string CNetAddr::ToStringIP(bool fUseGetnameinfo) const
 {
     if (IsTor())
         return EncodeBase32(&ip[6], 10) + ".onion";
+    if (IsTorV3())
+        return EncodeBase32(&ip[6], 35) + ".onion";
     if (IsInternal())
         return EncodeBase32(ip + sizeof(g_internal_prefix), sizeof(ip) - sizeof(g_internal_prefix)) + ".internal";
     if (fUseGetnameinfo)
@@ -314,6 +336,11 @@ std::string CNetAddr::ToString() const
 bool operator==(const CNetAddr& a, const CNetAddr& b)
 {
     return a.m_net == b.m_net && memcmp(a.ip, b.ip, 16) == 0;
+}
+
+bool operator!=(const CNetAddr& a, const CNetAddr& b)
+{
+    return a.m_net != b.m_net && (memcmp(a.ip, b.ip, 16) != 0);
 }
 
 bool operator<(const CNetAddr& a, const CNetAddr& b)
@@ -387,7 +414,7 @@ std::vector<unsigned char> CNetAddr::GetGroup() const
         vchRet.push_back(GetByte(2) ^ 0xFF);
         return vchRet;
     }
-    else if (IsTor())
+    else if (IsTor() || IsTorV3())
     {
         nClass = NET_ONION;
         nStartByte = 6;
@@ -543,6 +570,11 @@ bool operator==(const CService& a, const CService& b)
     return static_cast<CNetAddr>(a) == static_cast<CNetAddr>(b) && a.port == b.port;
 }
 
+bool operator!=(const CService& a, const CService& b)
+{
+    return static_cast<CNetAddr>(a) != static_cast<CNetAddr>(b) || a.port != b.port;
+}
+
 bool operator<(const CService& a, const CService& b)
 {
     return static_cast<CNetAddr>(a) < static_cast<CNetAddr>(b) || (static_cast<CNetAddr>(a) == static_cast<CNetAddr>(b) && a.port < b.port);
@@ -593,7 +625,7 @@ std::string CService::ToStringPort() const
 
 std::string CService::ToStringIPPort(bool fUseGetnameinfo) const
 {
-    if (IsIPv4() || IsTor() || IsInternal()) {
+    if (IsIPv4() || IsTor() || IsTorV3() || IsInternal()) {
         return ToStringIP(fUseGetnameinfo) + ":" + ToStringPort();
     } else {
         return "[" + ToStringIP(fUseGetnameinfo) + "]:" + ToStringPort();
@@ -679,16 +711,16 @@ bool CSubNet::Match(const CNetAddr &addr) const
 static inline int NetmaskBits(uint8_t x)
 {
     switch(x) {
-    case 0x00: return 0;
-    case 0x80: return 1;
-    case 0xc0: return 2;
-    case 0xe0: return 3;
-    case 0xf0: return 4;
-    case 0xf8: return 5;
-    case 0xfc: return 6;
-    case 0xfe: return 7;
-    case 0xff: return 8;
-    default: return -1;
+    case 0x00: return 0; break;
+    case 0x80: return 1; break;
+    case 0xc0: return 2; break;
+    case 0xe0: return 3; break;
+    case 0xf0: return 4; break;
+    case 0xf8: return 5; break;
+    case 0xfc: return 6; break;
+    case 0xfe: return 7; break;
+    case 0xff: return 8; break;
+    default: return -1; break;
     }
 }
 
@@ -738,6 +770,11 @@ bool CSubNet::IsValid() const
 bool operator==(const CSubNet& a, const CSubNet& b)
 {
     return a.valid == b.valid && a.network == b.network && !memcmp(a.netmask, b.netmask, 16);
+}
+
+bool operator!=(const CSubNet& a, const CSubNet& b)
+{
+    return !(a==b);
 }
 
 bool operator<(const CSubNet& a, const CSubNet& b)

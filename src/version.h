@@ -11,7 +11,7 @@
  */
 
 
-static const int PROTOCOL_VERSION = 70918;
+static const int PROTOCOL_VERSION = 70919;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -22,9 +22,16 @@ static const int GETHEADERS_VERSION = 70918;
 //! New spork protocol
 static const int MIN_SPORK_VERSION = 70918;
 
+// Tor V3 Version
+static const int TORV3_SERVICES_VERSION = 70919;
+
 //! disconnect from peers older than this proto version
+// static const int MIN_PEER_PROTO_VERSION = TORV3_SERVICES_VERSION;
 static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70915;
 static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70918;
+
+//! In this version, 'segwit' was enabled.
+static const int SEGWIT_VERSION = 70918;
 
 //! minimum proto version of masternode to accept in DKGs
 static const int MIN_MASTERNODE_PROTO_VERSION = 70918;
