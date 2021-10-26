@@ -13,11 +13,16 @@
 
 static const int PROTOCOL_VERSION = 70918;
 
+static const int TORV3_SERVICES_VERSION = 70918;
+
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
 
 //! In this version, 'getheaders' was introduced.
 static const int GETHEADERS_VERSION = 70918;
+
+//! In this version, 'segwit' was enabled.
+static const int SEGWIT_VERSION = 70918;
 
 //! New spork protocol
 static const int MIN_SPORK_VERSION = 70918;
