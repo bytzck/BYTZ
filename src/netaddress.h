@@ -158,7 +158,7 @@ class CNetAddr
         } else { // backwards compatibility
 
             if (ser_action.ForRead()) {
-                if (IsTorV3()) {
+                if (IsTor() && ip[40] != '\0') {
                     LogPrintf("Tor V3 set 1\n");
                     usesTorV3 = true;
                     unsigned char compatibleIP[41];
@@ -177,7 +177,7 @@ class CNetAddr
                 SetLegacyIPv6(compatibleIP);*/
 
             } else {
-               if (IsTorV3()) {
+               if (IsTor() && ip[40] != '\0') {
                     usesTorV3 = true;
                     LogPrintf("Tor V3 set 2\n");
                     unsigned char compatibleIP[41];
@@ -284,7 +284,7 @@ class CService : public CNetAddr
             }
         } else {
             if (ser_action.ForRead()) {
-                if (IsTorV3()) {
+                if (IsTor() && ip[40] != '\0') {
                     usesTorV3 = true;
                     LogPrintf("Tor V3 set 3\n");
                     unsigned char compatibleIP[41];
@@ -302,7 +302,7 @@ class CService : public CNetAddr
                 memcpy(CNetAddr::ip, compatibleIP, sizeof(compatibleIP));
                 SetLegacyIPv6(compatibleIP); */
             } else {
-                if (IsTorV3()) {
+                if (IsTor() && ip[40] != '\0') {
                     usesTorV3 = true;
                     LogPrintf("Tor V3 set 4\n");
                     unsigned char compatibleIP[41];
