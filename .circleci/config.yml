@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   lint_all:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     parallelism: 4
     environment:
@@ -45,7 +45,7 @@ jobs:
             source .circleci/lint_06_script.sh
   x86_64_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: x86_64-linux-gnu
@@ -73,7 +73,7 @@ jobs:
             test/functional/test_runner.py
   x86_64_focal:
     docker:
-      - image: circleci/buildpack-deps:focal
+      - image: cimg/base:stable-20.04
         user: root
     environment:
       HOST: x86_64-linux-gnu
@@ -95,7 +95,7 @@ jobs:
             make -j${JOBS}
   i686_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: i686-linux-gnu
@@ -138,7 +138,7 @@ jobs:
             make -j${JOBS}
   arm64_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: aarch64-linux-gnu
@@ -160,7 +160,7 @@ jobs:
             make -j${JOBS}
   win32_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: i686-w64-mingw32
@@ -180,7 +180,7 @@ jobs:
             make -j${JOBS}
   win64_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: x86_64-w64-mingw32
@@ -200,7 +200,7 @@ jobs:
             make -j${JOBS}
   mac_bionic:
     docker:
-      - image: circleci/buildpack-deps:18.04
+      - image: cimg/base:stable-18.04
         user: root
     environment:
       HOST: x86_64-apple-darwin16
