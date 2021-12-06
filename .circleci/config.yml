@@ -399,7 +399,6 @@ jobs:
           - bytz-win64-depends-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
-         command: |
             if [ -d depends/x86_64-w64-mingw32 ]; then
               exit
             else
