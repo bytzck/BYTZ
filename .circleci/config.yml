@@ -187,7 +187,7 @@ jobs:
               update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 100
               make -j${JOBS} -C depends HOST=${HOST}
             fi
-     - save_cache:
+      - save_cache:
           key: bytz-i686-depends-{{ .Branch }}-{{ .Revision }}
           paths:
             - /root/project/depends/built
