@@ -173,8 +173,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys: 
-        - bytz-i686-depends-{{ .Branch }}-{{ .Revision }}
+          keys: 
+          - bytz-i686-depends-{{ .Branch }}-{{ .Revision }}
       - run:
           command: |
             if [ -d depends/i686-linux-gnu ]; then
