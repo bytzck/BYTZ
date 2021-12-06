@@ -133,7 +133,7 @@ jobs:
               make -j${JOBS} -C depends HOST=${HOST}
             fi
       - save_cache:
-          key: bytz-bionic-depends-{{ .Branch }}-{{ .Revision }}
+          key: bytz-focal-depends-{{ .Branch }}-{{ .Revision }}
           paths:
             - /root/project/depends/built
             - /root/project/depends/sources
@@ -244,7 +244,7 @@ jobs:
               make -j${JOBS} -C depends HOST=${HOST}
             fi
       - save_cache:
-          key: bytz-bionic-depends-{{ .Branch }}-{{ .Revision }}
+          key: bytz-arm32-depends-{{ .Branch }}-{{ .Revision }}
           paths:
             - /root/project/depends/built
             - /root/project/depends/sources
