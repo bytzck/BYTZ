@@ -438,7 +438,7 @@ jobs:
             ./autogen.sh
             ./configure --host=${HOST} --prefix=`pwd`/depends/${HOST} --enable-reduce-exports
             make -j${JOBS}
-  mac_bionic:
+  mac_bionic_depends:
     docker:
       - image: cimg/base:stable-18.04
         user: root
