@@ -135,8 +135,8 @@ chain for " target " development."))
       (home-page (package-home-page xgcc))
       (license (package-license xgcc)))))
 
-(define base-gcc
-  (package-with-extra-patches gcc-9))
+(define base-gcc gcc-9)
+  ;;(package-with-extra-patches gcc-9))
     ;;(search-our-patches "gcc-8-sort-libtool-find-output.patch")))
 
 ;; Building glibc with stack smashing protector first landed in glibc 2.25, use
