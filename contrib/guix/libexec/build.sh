@@ -308,7 +308,7 @@ mkdir -p "$DISTSRC"
     make -C src --jobs=1 check-symbols  ${V:+V=1}
 
     mkdir -p "$OUTDIR"
-
+    bash
     # Make the os-specific installers
     case "$HOST" in
         *mingw*)
