@@ -308,7 +308,7 @@ mkdir -p "$DISTSRC"
     make -C src --jobs=1 check-symbols  ${V:+V=1}
 
     mkdir -p "$OUTDIR"
-    bash
+
     # Make the os-specific installers
     case "$HOST" in
         *mingw*)
@@ -367,7 +367,7 @@ mkdir -p "$DISTSRC"
 
         # Prune pkg-config files
         rm -rf "${DISTNAME}/lib/pkgconfig"
-
+echo "Here11"
         case "$HOST" in
             *darwin*) ;;
             *)
