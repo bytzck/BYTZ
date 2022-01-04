@@ -378,6 +378,7 @@ echo "Here11"
                 } | xargs -0 -n1 -P"$JOBS" -I{} "${DISTSRC}/contrib/devtools/split-debug.sh" {} {} {}.dbg
                 ;;
         esac
+        echo "Here 12"
 
         case "$HOST" in
             *mingw*)
@@ -387,7 +388,7 @@ echo "Here11"
                 cp "${DISTSRC}/README.md" "${DISTNAME}/"
                 ;;
         esac
-
+        echo "Here 13"
         # Finally, deterministically produce {non-,}debug binary tarballs ready
         # for release
         case "$HOST" in
@@ -406,7 +407,6 @@ echo "Here11"
                     || ( rm -f "${OUTDIR}/${DISTNAME}-${HOST//x86_64-w64-mingw32/win64}-debug.zip" && exit 1 )
                 ;;
             *linux*)
-            echo "Here 11a"
                 find "${DISTNAME}" -not -name "*.dbg" -print0 \
                     | sort --zero-terminated \
                     | tar --create --no-recursion --mode='u+rw,go+r-w,a+X' --null --files-from=- \
@@ -427,7 +427,7 @@ echo "Here11"
                 ;;
         esac
     )  # $DISTSRC/installed
-
+    echo "Here 14"
     case "$HOST" in
         *mingw*)
             cp -rf --target-directory=. contrib/windeploy
