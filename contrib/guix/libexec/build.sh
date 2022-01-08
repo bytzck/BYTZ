@@ -213,6 +213,8 @@ make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
                                    x86_64_linux_NM=x86_64-linux-gnu-nm \
                                    x86_64_linux_STRIP=x86_64-linux-gnu-strip \
+                                   qt_config_opts_i686_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
+                                   qt_config_opts_x86_64_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
                                    FORCE_USE_SYSTEM_CLANG=1
 
 
@@ -367,7 +369,7 @@ mkdir -p "$DISTSRC"
 
         # Prune pkg-config files
         rm -rf "${DISTNAME}/lib/pkgconfig"
-echo "Here11"
+
         case "$HOST" in
             *darwin*) ;;
             *)
@@ -378,7 +380,6 @@ echo "Here11"
                 } | xargs -0 -n1 -P"$JOBS" -I{} "${DISTSRC}/contrib/devtools/split-debug.sh" {} {} {}.dbg
                 ;;
         esac
-        echo "Here 12"
 
         case "$HOST" in
             *mingw*)
@@ -388,7 +389,7 @@ echo "Here11"
                 cp "${DISTSRC}/README.md" "${DISTNAME}/"
                 ;;
         esac
-        echo "Here 13"
+ 
         # Finally, deterministically produce {non-,}debug binary tarballs ready
         # for release
         case "$HOST" in
@@ -427,7 +428,7 @@ echo "Here11"
                 ;;
         esac
     )  # $DISTSRC/installed
-    echo "Here 14"
+ 
     case "$HOST" in
         *mingw*)
             cp -rf --target-directory=. contrib/windeploy
