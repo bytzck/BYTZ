@@ -34,7 +34,6 @@
              (guix build-system python)
              (guix build-system trivial)
              (guix download)
-             (guix libtool)
              (guix gexp)
              (guix git-download)
              ((guix licenses) #:prefix license:)
