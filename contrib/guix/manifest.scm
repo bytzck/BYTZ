@@ -19,6 +19,7 @@
              (gnu packages image)
              (gnu packages imagemagick)
              (gnu packages installers)
+             (gnu packages linux)
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
@@ -625,7 +626,6 @@ inspecting signatures in Mach-O binaries.")
         libtool
         autoconf
         automake
-        libtool
         pkg-config
         bison
         ;; Scripting
