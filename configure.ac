@@ -1318,26 +1318,6 @@ if test x$enable_wallet != xno; then
       fi
     fi
 
-    dnl Check for sqlite3
-    if test "x$use_sqlite" != "xno"; then
-      PKG_CHECK_MODULES([SQLITE], [sqlite3 >= 3.7.17], [have_sqlite=yes], [have_sqlite=no])
-    fi
-    AC_MSG_CHECKING([whether to build wallet with support for sqlite])
-    if test "x$use_sqlite" = "xno"; then
-      use_sqlite=no
-    elif test "x$have_sqlite" = "xno"; then
-      if test "x$use_sqlite" = "xyes"; then
-        AC_MSG_ERROR([sqlite support requested but cannot be built. Use --without-sqlite])
-      fi
-      use_sqlite=no
-    else
-      if test x$use_sqlite != xno; then
-        AC_DEFINE([USE_SQLITE],[1],[Define if sqlite support should be compiled in])
-        use_sqlite=yes
-      fi
-    fi
-    AC_MSG_RESULT([$use_sqlite])
-
     dnl Disable wallet if both --without-bdb and --without-sqlite
     if test "x$use_bdb$use_sqlite" = "xnono"; then
         if test "x$enable_wallet" = "xyes"; then
