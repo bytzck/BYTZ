@@ -213,12 +213,12 @@ make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
                                    x86_64_linux_NM=x86_64-linux-gnu-nm \
                                    x86_64_linux_STRIP=x86_64-linux-gnu-strip \
-                                   arm_linux_CC=x86_64-linux-gnu-gcc \
-                                   arm_linux_CXX=x86_64-linux-gnu-g++ \
-                                   arm_linux_AR=x86_64-linux-gnu-ar \
-                                   arm_linux_RANLIB=x86_64-linux-gnu-ranlib \
-                                   arm_linux_NM=x86_64-linux-gnu-nm \
-                                   arm_linux_STRIP=x86_64-linux-gnu-strip \
+                                   arm_linux_CC=arm-linux-gnueabihf-gcc \
+                                   arm_linux_CXX=arm-linux-gnueabihf-g++ \
+                                   arm_linux_AR=arm-linux-gnueabihf-ar \
+                                   arm_linux_RANLIB=arm-linux-gnueabihf-ranlib \
+                                   arm_linux_NM=arm-linux-gnueabihf-nm \
+                                   arm_linux_STRIP=arm-linux-gnueabihf-strip \
                                    FORCE_USE_SYSTEM_CLANG=1
 
 
