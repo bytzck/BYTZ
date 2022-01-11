@@ -296,6 +296,11 @@ mkdir -p "$DISTSRC"
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
+                    --enable-glibc-back-compat \
+                    --enable-reduce-exports \
+                    --disable-bench \
+                    --disable-gui-tests \
+                    --enable-crash-hooks \
                     ${CONFIGFLAGS} \
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
                     ${HOST_CXXFLAGS:+CXXFLAGS="${HOST_CXXFLAGS}"} \
