@@ -587,7 +587,7 @@ inspecting signatures in Mach-O binaries.")
               (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
               (sha256
                (base32
-                "093gnb856k0xzrfm2634sixwf96cr6yisfa542basd13y7cpdrvk"))
+                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
                                            "glibc-versioned-locpath.patch"
                                            "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
