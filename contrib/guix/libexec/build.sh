@@ -293,6 +293,7 @@ mkdir -p "$DISTSRC"
     # shellcheck disable=SC2086
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
         ./configure --prefix=${BASEPREFIX}/${HOST} \
+                    --with-qt-plugindir=${BASEPREFIX}/${HOST}/plugins/platforms \
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
