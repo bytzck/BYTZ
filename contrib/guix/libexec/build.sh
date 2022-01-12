@@ -294,6 +294,7 @@ mkdir -p "$DISTSRC"
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
         ./configure --prefix=${BASEPREFIX}/${HOST} \
                     --with-qt-plugindir=${BASEPREFIX}/${HOST}/plugins/platforms \
+                    --with-qt-libdir=${BASEPREFIX}/${HOST}/plugins/platforms \
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
