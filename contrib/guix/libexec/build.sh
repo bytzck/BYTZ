@@ -292,16 +292,10 @@ mkdir -p "$DISTSRC"
     # Configure this DISTSRC for $HOST
     # shellcheck disable=SC2086
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
-        ./configure --prefix=${BASEPREFIX}/${HOST} \
-                    --with-qt-plugindir=${BASEPREFIX}/${HOST}/plugins/platforms \
-                    --with-qt-libdir=${BASEPREFIX}/${HOST}/plugins/platforms \
+        ./configure --prefix=/ \
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
-                    --enable-glibc-back-compat \
-                    --enable-reduce-exports \
-                    --disable-bench \
-                    --disable-gui-tests \
                     --enable-crash-hooks \
                     ${CONFIGFLAGS} \
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
