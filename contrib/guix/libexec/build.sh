@@ -292,7 +292,7 @@ mkdir -p "$DISTSRC"
     # Configure this DISTSRC for $HOST
     # shellcheck disable=SC2086
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
-        ./configure --prefix=/ \
+        ./configure --prefix=${BASEPREFIX}/${HOST} \
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
