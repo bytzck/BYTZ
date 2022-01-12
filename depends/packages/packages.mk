@@ -1,4 +1,4 @@
-packages:=boost libevent bsl-dash cmake
+packages:=boost libevent bls-dash cmake
 
 qrencode_packages = qrencode
 
