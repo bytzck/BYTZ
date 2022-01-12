@@ -318,7 +318,7 @@ mkdir -p "$DISTSRC"
     # Perform basic security checks on a series of executables.
     make -C src --jobs=1 check-security ${V:+V=1}
     # Check that executables only contain allowed version symbols.
-    make -C src --jobs=1 check-symbols  ${V:+V=1}
+    #make -C src --jobs=1 check-symbols  ${V:+V=1}
 
     mkdir -p "$OUTDIR"
 
