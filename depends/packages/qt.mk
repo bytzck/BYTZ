@@ -68,63 +68,31 @@ $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
 $(package)_config_opts += -nomake tools
 $(package)_config_opts += -opensource
+$(package)_config_opts += -openssl-linked
+$(package)_config_opts += -optimized-qmake
+$(package)_config_opts += -pch
 $(package)_config_opts += -pkg-config
 $(package)_config_opts += -prefix $(host_prefix)
 $(package)_config_opts += -qt-libpng
+$(package)_config_opts += -qt-libjpeg
 $(package)_config_opts += -qt-pcre
 $(package)_config_opts += -qt-harfbuzz
 $(package)_config_opts += -qt-zlib
 $(package)_config_opts += -static
 $(package)_config_opts += -v
-$(package)_config_opts += -no-feature-bearermanagement
-$(package)_config_opts += -no-feature-colordialog
-$(package)_config_opts += -no-feature-commandlineparser
-$(package)_config_opts += -no-feature-concurrent
-$(package)_config_opts += -no-feature-dial
-$(package)_config_opts += -no-feature-fontcombobox
-$(package)_config_opts += -no-feature-ftp
-$(package)_config_opts += -no-feature-http
-$(package)_config_opts += -no-feature-image_heuristic_mask
-$(package)_config_opts += -no-feature-keysequenceedit
-$(package)_config_opts += -no-feature-lcdnumber
-$(package)_config_opts += -no-feature-networkdiskcache
-$(package)_config_opts += -no-feature-networkproxy
-$(package)_config_opts += -no-feature-pdf
-$(package)_config_opts += -no-feature-printdialog
 $(package)_config_opts += -no-feature-printer
-$(package)_config_opts += -no-feature-printpreviewdialog
-$(package)_config_opts += -no-feature-printpreviewwidget
-$(package)_config_opts += -no-feature-sessionmanager
-$(package)_config_opts += -no-feature-socks5
-$(package)_config_opts += -no-feature-sql
-$(package)_config_opts += -no-feature-sqlmodel
-$(package)_config_opts += -no-feature-statemachine
-$(package)_config_opts += -no-feature-syntaxhighlighter
-$(package)_config_opts += -no-feature-textbrowser
-$(package)_config_opts += -no-feature-textodfwriter
-$(package)_config_opts += -no-feature-topleveldomain
-$(package)_config_opts += -no-feature-udpsocket
-$(package)_config_opts += -no-feature-undocommand
-$(package)_config_opts += -no-feature-undogroup
-$(package)_config_opts += -no-feature-undostack
-$(package)_config_opts += -no-feature-undoview
-$(package)_config_opts += -no-feature-vnc
-$(package)_config_opts += -no-feature-wizard
+$(package)_config_opts += -no-feature-printdialog
+$(package)_config_opts += -no-feature-concurrent
 $(package)_config_opts += -no-feature-xml
 
-$(package)_config_opts_darwin = -no-dbus
-$(package)_config_opts_darwin += -no-opengl
-$(package)_config_opts_darwin += -pch
-$(package)_config_opts_darwin += -no-feature-corewlan
-$(package)_config_opts_darwin += QMAKE_MACOSX_DEPLOYMENT_TARGET=$(OSX_MIN_VERSION)
-
 ifneq ($(build_os),darwin)
-$(package)_config_opts_darwin += -xplatform macx-clang-linux
+$(package)_config_opts_darwin = -xplatform macx-clang-linux
 $(package)_config_opts_darwin += -device-option MAC_SDK_PATH=$(OSX_SDK)
 $(package)_config_opts_darwin += -device-option MAC_SDK_VERSION=$(OSX_SDK_VERSION)
 $(package)_config_opts_darwin += -device-option CROSS_COMPILE="$(host)-"
+$(package)_config_opts_darwin += -device-option MAC_MIN_VERSION=$(OSX_MIN_VERSION)
 $(package)_config_opts_darwin += -device-option MAC_TARGET=$(host)
-$(package)_config_opts_darwin += -device-option XCODE_VERSION=$(XCODE_VERSION)
+$(package)_config_opts_darwin += -device-option MAC_LD64_VERSION=$(LD64_VERSION)
 endif
 
 # for macOS on Apple Silicon (ARM) see https://bugreports.qt.io/browse/QTBUG-85279
