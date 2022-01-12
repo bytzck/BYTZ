@@ -2,7 +2,7 @@ packages:=boost libevent bls-dash cmake gmp openssl backtrace
 
 qrencode_packages = qrencode
 
-qt_linux_packages:=qt expat libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
+qt_linux_packages:=qt expat dbus libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
 qt_android_packages=qt
 
 qt_darwin_packages=qt
