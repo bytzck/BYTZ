@@ -646,7 +646,7 @@ inspecting signatures in Mach-O binaries.")
                  (make-mingw-pthreads-cross-toolchain "x86_64-w64-mingw32")
                  (make-nsis-with-sde-support nsis-x86_64)
                  osslsigncode)
-                 ((string contains target i686)
+                 (else
                  (make-mingw-pthreads-cross-toolchain "i686-w64-mingw32")
                  (make-nsis-with-sde-support nsis-i686)
                  osslsigncode))
