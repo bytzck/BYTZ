@@ -43,7 +43,7 @@ packages:
 - "libxkbcommon0"
 - "linux-libc-dev"
 - "doxygen"
-- "yacc"
+- "bison"
 remotes:
 - "url": "https://github.com/bytzcurrency/bytz.git"
   "dir": "bytz"
