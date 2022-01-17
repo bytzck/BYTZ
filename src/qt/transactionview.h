@@ -11,7 +11,6 @@
 
 #include <QtWidgets/QWidget>
 #include <QtGui/QKeyEvent>
-#include <QtCore/QObject>
 
 class TransactionFilterProxy;
 class WalletModel;
