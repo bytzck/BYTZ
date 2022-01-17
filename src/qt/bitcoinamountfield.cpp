@@ -12,6 +12,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtGui/QKeyEvent>
 #include <QtWidgets/QLineEdit>
+#include <QtCore/qobjectdefs.h>
 
 /**
  * Parse a string into a number of base monetary units and
