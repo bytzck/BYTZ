@@ -9,8 +9,8 @@
 
 #include <uint256.h>
 
-#include <QWidget>
-#include <QKeyEvent>
+#include <QtWidgets/QWidget>
+#include <QtGui/QKeyEvent>
 
 class TransactionFilterProxy;
 class WalletModel;
