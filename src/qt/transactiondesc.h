@@ -5,7 +5,7 @@
 #ifndef BITCOIN_QT_TRANSACTIONDESC_H
 #define BITCOIN_QT_TRANSACTIONDESC_H
 
-#include <QtCore/QObject>
+#include <QtCore/qobject.h>
 #include <QtCore/QString>
 
 class TransactionRecord;
