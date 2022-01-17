@@ -10,7 +10,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QAbstractSpinBox>
 #include <QtWidgets/QHBoxLayout>
-#include <QtGuiQKeyEvent>
+#include <QtGui/QKeyEvent>
 #include <QtWidgets/QLineEdit>
 
 /**
