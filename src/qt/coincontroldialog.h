@@ -7,14 +7,14 @@
 
 #include <amount.h>
 
-#include <QAbstractButton>
-#include <QAction>
-#include <QDialog>
-#include <QList>
-#include <QMenu>
-#include <QPoint>
-#include <QString>
-#include <QTreeWidgetItem>
+#include <QtWidgets/QAbstractButton>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QDialog>
+#include <QtCore/QList>
+#include <QtWidgets/QMenu>
+#include <QtCore/QPoint>
+#include <QtCore/QString>
+#include <QtWidgets/QTreeWidgetItem>
 
 class WalletModel;
 
