@@ -205,7 +205,7 @@ chain for " target " development."))
 (define-public ncurses
   (package
     (name "ncurses")
-    (version "6.3")
+    (version "5.7")
     (source
      (origin
        (method url-fetch)
@@ -213,7 +213,7 @@ chain for " target " development."))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
          (base32
-          "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))
+          "1x4q6kma6zgg438llbgiac3kik7j2lln9v97jdffv3fyqyjxx6qa"))))
     (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/")
      (synopsis "Ncurses terminal interface")
