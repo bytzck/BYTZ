@@ -400,10 +400,10 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
              #t)))))))
 
 (define-public python-certvalidator
-  (let ((commit "27283e4657456d6d3e266e019800e33c853d6068"))
+  (let ((commit "e5bdb4bfcaa09fa0af355eb8867d00dfeecba08c"))
     (package
       (name "python-certvalidator")
-      (version "master")
+      (version (git-version "0.1" "1" commit))
       (source
        (origin
          (method git-fetch)
@@ -413,7 +413,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
          (file-name (git-file-name name commit))
          (sha256
           (base32
-           "0vxmnfc30c50hdf521pm20g6lr7bfyikmrqxhffhxrmw5l405zj1"))))
+           "18pvxkvpkfkzgvfylv0kx65pmxfcv1hpsg03cip93krfvrrl4c75"))))
       (build-system python-build-system)
       (propagated-inputs
        `(("python-asn1crypto" ,python-asn1crypto)
@@ -575,25 +575,23 @@ and endian independent.")
       ;; problems, just disable the test
       (arguments '(#:tests? #f))
       (home-page "https://github.com/achow101/signapple")
-      (synopsis "Mach-O binary signature tool")
+(define-public glibc-2.27
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
-      (license license:expat))))
+    (version "2.27")
 
 (define-public glibc-2.27
   (package
     (inherit glibc)
-    (version "2.27")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "https://sourceware.org/git/glibc.git")
                     (commit "23158b08a0908f381459f273a984c6fd328363cb")))
               (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
-              (sha256
-               (base32
+              (method git-fetch)
+              (uri (git-reference
                 "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
-              (patches (search-our-patches "glibc-ldd-x86_64.patch"
+                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
+                                           "glibc-versioned-locpath.patch"))))))
+                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
+(define glibc-2.27/bytz-patched
                                            "glibc-versioned-locpath.patch"))))))
 
 (define glibc-2.27/bytz-patched
@@ -635,9 +633,9 @@ inspecting signatures in Mach-O binaries.")
         perl
         python-3
         ;; Git
-        git
-        ;; Tests
-        lief
+        ;; Native gcc 8 toolchain
+        gcc-toolchain-8
+        (list gcc-toolchain-8 "static"))
         ;; Native gcc 8 toolchain
         gcc-toolchain-8
         (list gcc-toolchain-8 "static"))
@@ -647,11 +645,11 @@ inspecting signatures in Mach-O binaries.")
            (list zip
                  (make-mingw-pthreads-cross-toolchain "x86_64-w64-mingw32")
                  (make-nsis-with-sde-support nsis-x86_64)
-                 osslsigncode))
-          ((string-contains target "-linux-")
-           (list (cond ((string-contains target "riscv64-")
                         (make-bytz-cross-toolchain target
                                                       #:base-libc glibc-2.27/bytz-patched
+           (list (cond ((string-contains target "riscv64-")
+                        (make-bytz-cross-toolchain target
+                        (make-bytz-cross-toolchain target)))))
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
                         (make-bytz-cross-toolchain target)))))
