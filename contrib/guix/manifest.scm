@@ -212,7 +212,7 @@ chain for " target " development."))
         (uri (string-append "https://invisible-mirror.net/archives/ncurses/ncurses-" version ".tar.gz"))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-         (base 32
+         (base32
           "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))
     (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/")
