@@ -214,7 +214,7 @@ chain for " target " development."))
         (sha256
          (base 32
           "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))
-    (build-system gcc)
+    (build-system gnu)
     (home-page "https://invisible-island.net/ncurses/")
      (synopsis "Ncurses terminal interface")
       (description "Ncurses terminal interface")
