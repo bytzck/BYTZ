@@ -575,24 +575,28 @@ and endian independent.")
       ;; problems, just disable the test
       (arguments '(#:tests? #f))
       (home-page "https://github.com/achow101/signapple")
-(define-public glibc-2.27
+            (synopsis "Mach-O binary signature tool")
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
-    (version "2.27")
+      (license license:expat))))
 
 (define-public glibc-2.27
   (package
     (inherit glibc)
-                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
-              (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
+   (version "2.27")
+    (source (origin
               (method git-fetch)
               (uri (git-reference
-                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
-                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
-                                           "glibc-versioned-locpath.patch"))))))
-                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
-(define glibc-2.27/bytz-patched
-                                           "glibc-versioned-locpath.patch"))))))
+                    (url "https://sourceware.org/git/glibc.git")
+                    (commit "0d7f1ed30969886c8dde62fbf7d2c79967d4bace")))
+              (file-name (git-file-name "glibc" "0d7f1ed30969886c8dde62fbf7d2c79967d4bace"))
+              (sha256
+               (base32
+                "0g5hryia5v1k0qx97qffgwzrz4lr4jw3s5kj04yllhswsxyjbic3"))
+              (patches (search-our-patches "glibc-ldd-x86_64.patch"
+                                           "glibc-versioned-locpath.patch"
+                                           "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
+                                           "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
 
 (define glibc-2.27/bytz-patched
   (package-with-extra-patches glibc-2.27
