@@ -575,10 +575,10 @@ and endian independent.")
       ;; problems, just disable the test
       (arguments '(#:tests? #f))
       (home-page "https://github.com/achow101/signapple")
-(define-public glibc-2.27
+            (synopsis "Mach-O binary signature tool")
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
-    (version "2.27")
+      (license license:expat))))
 
 (define-public glibc-2.27
   (package
