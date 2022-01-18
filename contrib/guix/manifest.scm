@@ -403,7 +403,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
   (let ((commit "27283e4657456d6d3e266e019800e33c853d6068"))
     (package
       (name "python-certvalidator")
-      (version (git-version "master" commit))
+      (version "master")
       (source
        (origin
          (method git-fetch)
