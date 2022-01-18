@@ -400,7 +400,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
              #t)))))))
 
 (define-public python-certvalidator
-  (let ((commit "dc260ea65888ae2d10232613d8dbd23752d35f04"))
+  (let ((commit "27283e4657456d6d3e266e019800e33c853d6068"))
     (package
       (name "python-certvalidator")
       (version "master")
@@ -408,12 +408,12 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/wbond/certvalidator")
+               (url "https://github.com/achow101/certvalidator")
                (commit commit)))
          (file-name (git-file-name name commit))
          (sha256
           (base32
-           "1hnf7489fdr2vlr3khp3f9qkf1g9xjbr7n9lhjgvzv6r42ip7hkb"))))
+           "0vxmnfc30c50hdf521pm20g6lr7bfyikmrqxhffhxrmw5l405zj1"))))
       (build-system python-build-system)
       (propagated-inputs
        `(("python-asn1crypto" ,python-asn1crypto)
@@ -446,6 +446,11 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                                  line)))
                (substitute* "tests/test_validate.py"
                  (("^(.*)def test_revocation_mode_hard" line indent)
+                  (string-append indent
+                                 "@unittest.skip(\"Disabled by Guix\")\n"
+                                 line)))
+               (substitute* "tests/test_validate.py"
+                 (("^(.*)def test_revocation_mode_soft" line indent)
                   (string-append indent
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
