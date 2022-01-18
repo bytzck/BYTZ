@@ -400,7 +400,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
              #t)))))))
 
 (define-public python-certvalidator
-  (let ((commit "27283e4657456d6d3e266e019800e33c853d6068"))
+  (let ((commit "dc260ea65888ae2d10232613d8dbd23752d35f04"))
     (package
       (name "python-certvalidator")
       (version "master")
@@ -408,12 +408,12 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/achow101/certvalidator")
+               (url "https://github.com/wbond/certvalidator")
                (commit commit)))
          (file-name (git-file-name name commit))
          (sha256
           (base32
-           "0vxmnfc30c50hdf521pm20g6lr7bfyikmrqxhffhxrmw5l405zj1"))))
+           "1hnf7489fdr2vlr3khp3f9qkf1g9xjbr7n9lhjgvzv6r42ip7hkb"))))
       (build-system python-build-system)
       (propagated-inputs
        `(("python-asn1crypto" ,python-asn1crypto)
