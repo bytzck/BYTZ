@@ -213,13 +213,13 @@ chain for " target " development."))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
          (base32
-          "1x4q6kma6zgg438llbgiac3kik7j2lln9v97jdffv3fyqyjxx6qa"))
+          "1x4q6kma6zgg438llbgiac3kik7j2lln9v97jdffv3fyqyjxx6qa"))))
         (patches (search-our-patches "bash.patch"))
     (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/")
     (synopsis "Ncurses terminal interface")
     (description "Ncurses terminal interface")
-    (license license:lgpl2.1)))))
+    (license license:lgpl2.1)))
 
 (define-public font-tuffy
   (package
