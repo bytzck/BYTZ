@@ -213,7 +213,12 @@ chain for " target " development."))
         (file-name (string-append name"-"version".tar.gz"))
         (sha256
          (base 32
-          "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))))
+          "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))
+    (build-system gcc)
+    (home-page "https://invisible-island.net/ncurses/")
+     (synopsis "Ncurses terminal interface")
+      (description "Ncurses terminal interface")
+      (license "gpl")))
 
 (define-public font-tuffy
   (package
