@@ -217,9 +217,9 @@ chain for " target " development."))
         (patches (search-our-patches "bash.patch"))
     (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/")
-     (synopsis "Ncurses terminal interface")
-      (description "Ncurses terminal interface")
-      (license license:lgpl2.1)))))
+    (synopsis "Ncurses terminal interface")
+    (description "Ncurses terminal interface")
+    (license license:lgpl2.1)))))
 
 (define-public font-tuffy
   (package
