@@ -400,10 +400,10 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
              #t)))))))
 
 (define-public python-certvalidator
-  (let ((commit "e5bdb4bfcaa09fa0af355eb8867d00dfeecba08c"))
+  (let ((commit "27283e4657456d6d3e266e019800e33c853d6068"))
     (package
       (name "python-certvalidator")
-      (version (git-version "0.1" "1" commit))
+      (version (git-version "master" commit))
       (source
        (origin
          (method git-fetch)
@@ -413,7 +413,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
          (file-name (git-file-name name commit))
          (sha256
           (base32
-           "18pvxkvpkfkzgvfylv0kx65pmxfcv1hpsg03cip93krfvrrl4c75"))))
+           "0vxmnfc30c50hdf521pm20g6lr7bfyikmrqxhffhxrmw5l405zj1"))))
       (build-system python-build-system)
       (propagated-inputs
        `(("python-asn1crypto" ,python-asn1crypto)
