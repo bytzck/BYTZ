@@ -204,7 +204,7 @@ chain for " target " development."))
 
 (define-public ncurses
   (package
-    (name ncurses)
+    (name "ncurses")
     (version "6.3")
     (source
      (origin
