@@ -202,6 +202,19 @@ chain for " target " development."))
   (package-with-extra-patches base-nsis
     (search-our-patches "nsis-SConstruct-sde-support.patch")))
 
+(define public ncurses
+  (package
+    (name ncurses)
+    (version "6.3")
+    (source
+     (origin
+       (method url-fetch)
+        (uri (string-append "https://invisible-mirror.net/archives/ncurses/ncurses-"version".tar.gz"))
+        (file-name (string-append name"-"version".tar.gz"))
+        (sha256
+         (base 32
+          "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))))
+
 (define-public font-tuffy
   (package
     (name "font-tuffy")
