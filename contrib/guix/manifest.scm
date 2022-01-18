@@ -214,11 +214,11 @@ chain for " target " development."))
         (sha256
          (base 32
           "0ng0hhbc4ppw60xa944hgqhvq6n248qjqkgg67g4qp885fn53z4p"))))
-    (build-system gnu)
+    (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/")
      (synopsis "Ncurses terminal interface")
       (description "Ncurses terminal interface")
-      (license "gpl")))
+      (license license:lgpl2.1)))
 
 (define-public font-tuffy
   (package
