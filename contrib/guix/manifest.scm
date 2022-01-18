@@ -202,7 +202,7 @@ chain for " target " development."))
   (package-with-extra-patches base-nsis
     (search-our-patches "nsis-SConstruct-sde-support.patch")))
 
-(define public ncurses
+(define-public ncurses
   (package
     (name ncurses)
     (version "6.3")
