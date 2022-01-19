@@ -1,4 +1,4 @@
-packages:=boost openssl libevent gmp bls-dash backtrace cmake
+packages:=boost openssl libevent zeromq gmp bls-dash backtrace cmake
 
 qrencode_packages = qrencode
 
