@@ -654,7 +654,7 @@ inspecting signatures in Mach-O binaries.")
                                                       #:base-libc glibc-2.27/bitcoin-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
-                        (make-bitcoin-cross-toolchain target)))))
+                        (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
            (list binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
