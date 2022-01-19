@@ -202,25 +202,6 @@ chain for " target " development."))
   (package-with-extra-patches base-nsis
     (search-our-patches "nsis-SConstruct-sde-support.patch")))
 
-(define-public ncurses
-  (package
-    (name "ncurses")
-    (version "5.7")
-    (source
-     (origin
-       (method url-fetch)
-        (uri (string-append "https://invisible-mirror.net/archives/ncurses/ncurses-" version ".tar.gz"))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-         (base32
-          "1x4q6kma6zgg438llbgiac3kik7j2lln9v97jdffv3fyqyjxx6qa"))))
-        (patches (search-our-patches "bash.patch"))
-    (build-system gnu-build-system)
-    (home-page "https://invisible-island.net/ncurses/")
-    (synopsis "Ncurses terminal interface")
-    (description "Ncurses terminal interface")
-    (license license:lgpl2.1)))
-
 (define-public font-tuffy
   (package
     (name "font-tuffy")
