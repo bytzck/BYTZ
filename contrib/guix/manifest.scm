@@ -244,6 +244,27 @@ chain for " target " development."))
 parse, modify and abstract ELF, PE and MachO formats.")
    (license license:asl2.0)))
 
+(define-public bison
+  (package
+    (name "bison")
+    (version "3.8")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://ftp.gnu.org/gnu/bison"
+                                  name "/bison-" version ".tar.gz"))
+              (sha256
+                (base 32
+                  "0sx2ycbxd4xn0ih7hp4lpd55df03s10475gqkzcn2ha8ypycr8fh"))))
+          (build-system gnu-build-system)
+    (home-page "https://www.gnu.org/software/bison/")
+    (synopsis "Bison is a general-purpose parser generator")
+    (description "Bison is a general-purpose parser generator
+that converts an annotated context-free grammar into a deterministic
+LR or generalized LR (GLR) parser employing LALR(1) parser tables.
+As an experimental feature, Bison can also generate IELR(1)
+or canonical LR(1) parser tables")
+    (license license:gpl3+)))
+
 (define osslsigncode
   (package
     (name "osslsigncode")
