@@ -36,6 +36,7 @@ packages:
 - "autoconf"
 - "libtool"
 - "automake"
+- "bison"
 - "faketime"
 - "bsdmainutils"
 - "ca-certificates"
