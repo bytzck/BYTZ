@@ -61,6 +61,7 @@ $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
 $(package)_config_opts += -opensource
 $(package)_config_opts += -optimized-qmake
+$(package)_config_opts += -openssl
 $(package)_config_opts += -pch
 $(package)_config_opts += -pkg-config
 $(package)_config_opts += -prefix $(host_prefix)
