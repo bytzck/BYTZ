@@ -26,6 +26,8 @@ $(package)_extra_sources += $($(package)_qttools_file_name)
 define $(package)_set_vars
 $(package)_config_opts_release = -release
 $(package)_config_opts_debug = -debug
+$(package)_config_opts += -L $(host_prefix)/lib
+$(package)_config_opts += -I $(host_prefix)/include
 $(package)_config_opts += -bindir $(build_prefix)/bin
 $(package)_config_opts += -c++std c++11
 $(package)_config_opts += -confirm-license
@@ -115,6 +117,7 @@ $(package)_config_opts_mingw32 += "QMAKE_CFLAGS = '$($(package)_cflags) $($(pack
 $(package)_config_opts_mingw32 += "QMAKE_CXXFLAGS = '$($(package)_cflags) $($(package)_cppflags)'"
 $(package)_config_opts_mingw32 += "QMAKE_LFLAGS = '$($(package)_ldflags)'"
 $(package)_config_opts_mingw32 += -device-option CROSS_COMPILE="$(host)-"
+
 $(package)_config_opts_mingw32 += -pch
 
 $(package)_config_opts_android = -xplatform android-clang
