@@ -6,6 +6,7 @@ $(package)_file_name=qtbase-$($(package)_suffix)
 $(package)_sha256_hash=1c1b4e33137ca77881074c140d54c3c9747e845a31338cfe8680f171f0bc3a39
 $(package)_dependencies=openssl zlib
 $(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
+$(package)_build_subdir=qtbase
 $(package)_qt_libs=corelib network widgets gui plugins testlib
 $(package)_linguist_tools = lrelease lupdate lconvert
 $(package)_patches = qt.pro qttools_src.pro
@@ -213,8 +214,7 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
-  cd qtbase && \
-  ./configure -top-level $($(package)_config_opts)
+  ./configure $($(package)_config_opts)
 endef
 
 define $(package)_build_cmds
