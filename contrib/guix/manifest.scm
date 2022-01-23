@@ -599,19 +599,19 @@ and endian independent.")
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
 
-(define-public glibc-2.25
+(define-public glibc-2.26
   (package
     (inherit glibc)
-   (version "2.25")
+   (version "2.26")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                     (url "https://sourceware.org/git/glibc.git")
-                    (commit "db0242e3023436757bbc7c488a779e6e3343db04")))
-              (file-name (git-file-name "glibc" "db0242e3023436757bbc7c488a779e6e3343db04"))
+                    (commit "1c9a5c270d8b66f30dcfaf1cb2d6cf39d3e18369")))
+              (file-name (git-file-name "glibc" "1c9a5c270d8b66f30dcfaf1cb2d6cf39d3e18369"))
               (sha256
                (base32
-                "1rn8gqi1kavmn6ggi11f2j56mxf4sknwb7kpzqqqnblikbny1i96"))))))
+                "0smhnabn62vzrbbc3554pyk9dbgdhg42s2dgjwic87pbim67pm92"))))))
              ;; (patches (search-our-patches "glibc-ldd-x86_64.patch"
              ;;                              "glibc-versioned-locpath.patch"))))))
 
