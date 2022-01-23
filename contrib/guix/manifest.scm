@@ -136,8 +136,8 @@ chain for " target " development."))
       (license (package-license xgcc)))))
 
 (define base-gcc
-  (package-with-extra-patches gcc-8
-    (search-our-patches "gcc-8-sort-libtool-find-output.patch")))
+  (package-with-extra-patches gcc-9))
+;;    (search-our-patches "gcc-8-sort-libtool-find-output.patch")))
 
 ;; Building glibc with stack smashing protector first landed in glibc 2.25, use
 ;; this function to disable for older glibcs
@@ -155,9 +155,9 @@ chain for " target " development."))
 
 (define* (make-bytz-cross-toolchain target
                                        #:key
-                                       (base-gcc-for-libc gcc-8)
+                                       (base-gcc-for-libc gcc-9)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-without-ssp glibc-2.27))
+                                       (base-libc (make-glibc-without-ssp glibc-2.25))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
 desirable for building Bytz Core release binaries."
@@ -601,19 +601,19 @@ and endian independent.")
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
 
-(define-public glibc-2.27
+(define-public glibc-2.25
   (package
     (inherit glibc)
-   (version "2.27")
+   (version "2.25")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                     (url "https://sourceware.org/git/glibc.git")
-                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
-              (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
+                    (commit "db0242e3023436757bbc7c488a779e6e3343db04")))
+              (file-name (git-file-name "glibc" "db0242e3023436757bbc7c488a779e6e3343db04"))
               (sha256
                (base32
-                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
+                "1rn8gqi1kavmn6ggi11f2j56mxf4sknwb7kpzqqqnblikbny1i96"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
                                            "glibc-versioned-locpath.patch"))))))
 
@@ -659,9 +659,9 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
-        ;; Native gcc 8 toolchain
-        gcc-toolchain-8
-        (list gcc-toolchain-8 "static"))
+        ;; Native gcc 9 toolchain
+        gcc-toolchain-9
+        (list gcc-toolchain-9 "static"))
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
