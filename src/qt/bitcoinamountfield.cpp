@@ -7,12 +7,11 @@
 #include <qt/bitcoinunits.h>
 #include <qt/guiutil.h>
 
-#include <QApplication>
-#include <QAbstractSpinBox>
-#include <QHBoxLayout>
-#include <QKeyEvent>
-#include <QLineEdit>
-#include <QWidget>
+#include <QTWidgets/QApplication>
+#include <QTWidgets/QAbstractSpinBox>
+#include <QTWidgets/QHBoxLayout>
+#include <QTGui/QKeyEvent>
+#include <QTWidgets/QLineEdit>
 
 /**
  * Parse a string into a number of base monetary units and
