@@ -1,0 +1,33 @@
+--- a/install-sh	2022-01-18 15:36:47.617114817 +0000
++++ b/install-sh	2022-01-18 15:37:36.220787465 +0000
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /bin/bash
+ #
+ # install - install a program, script, or datafile
+ #
+@@ -113,7 +113,7 @@
+ 	    then
+ 		src=$1
+ 	    else
+-		# this colon is to work around a 386BSD /bin/sh bug
++		# this colon is to work around a 386BSD /bin/bash bug
+ 		:
+ 		dst=$1
+ 	    fi
+--- a/mkdirs.sh	2022-01-18 15:37:01.825018909 +0000
++++ b/mkdirs.sh	2022-01-18 15:37:36.220787465 +0000
+@@ -1,4 +1,4 @@
+-#! /bin/sh
++#! /bin/bash
+ # $Id: mkdirs.sh,v 1.5 2007/03/25 22:29:46 tom Exp $
+ # -----------------------------------------------------------------------------
+ # mkinstalldirs --- make directory hierarchy
+--- a/tar-copy.sh	2022-01-18 15:37:15.720925290 +0000
++++ b/tar-copy.sh	2022-01-18 15:37:36.220787465 +0000
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # $Id: tar-copy.sh,v 1.5 2003/10/25 14:40:07 tom Exp $
+ ##############################################################################
+ # Copyright (c) 1998,2003 Free Software Foundation, Inc.                     #
