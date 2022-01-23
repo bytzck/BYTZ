@@ -611,9 +611,9 @@ inspecting signatures in Mach-O binaries.")
               (file-name (git-file-name "glibc" "db0242e3023436757bbc7c488a779e6e3343db04"))
               (sha256
                (base32
-                "1rn8gqi1kavmn6ggi11f2j56mxf4sknwb7kpzqqqnblikbny1i96"))
-              (patches (search-our-patches "glibc-ldd-x86_64.patch"
-                                           "glibc-versioned-locpath.patch"))))))
+                "1rn8gqi1kavmn6ggi11f2j56mxf4sknwb7kpzqqqnblikbny1i96")))))
+             ;; (patches (search-our-patches "glibc-ldd-x86_64.patch"
+             ;;                              "glibc-versioned-locpath.patch"))))))
 
 (define glibc-2.27/bytz-patched
   (package-with-extra-patches glibc-2.27
