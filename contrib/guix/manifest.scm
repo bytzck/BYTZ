@@ -145,17 +145,17 @@ chain for " target " development."))
 ;;   * Most of glibc can now be built with the stack smashing protector enabled.
 ;;     It is recommended to build glibc with --enable-stack-protector=strong.
 ;;     Implemented by Nick Alcock (Oracle).
-(define (make-glibc-without-ssp xglibc)
+(define (make-glibc-with-ssp xglibc)
   (package-with-extra-configure-variable
    (package-with-extra-configure-variable
-    xglibc "libc_cv_ssp" "no")
-   "libc_cv_ssp_strong" "no"))
+    xglibc "libc_cv_ssp" "yes")
+   "libc_cv_ssp_strong" "yes"))
 
 (define* (make-bytz-cross-toolchain target
                                        #:key
                                        (base-gcc-for-libc gcc-9)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-without-ssp glibc-2.25))
+                                       (base-libc (make-glibc-with-ssp glibc-2.25))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
 desirable for building Bytz Core release binaries."
