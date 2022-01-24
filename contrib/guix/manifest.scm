@@ -155,7 +155,7 @@ chain for " target " development."))
                                        #:key
                                        (base-gcc-for-libc gcc-9)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-with-ssp glibc-2.25))
+                                       (base-libc (make-glibc-with-ssp glibc-2.26))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
 desirable for building Bytz Core release binaries."
