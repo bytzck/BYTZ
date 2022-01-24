@@ -599,21 +599,23 @@ and endian independent.")
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
 
-(define-public glibc-2.26
+(define-public glibc-2.24
   (package
     (inherit glibc)
-   (version "2.26")
+    (version "2.24")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                     (url "https://sourceware.org/git/glibc.git")
-                    (commit "1c9a5c270d8b66f30dcfaf1cb2d6cf39d3e18369")))
-              (file-name (git-file-name "glibc" "1c9a5c270d8b66f30dcfaf1cb2d6cf39d3e18369"))
+                    (commit "0d7f1ed30969886c8dde62fbf7d2c79967d4bace")))
+              (file-name (git-file-name "glibc" "0d7f1ed30969886c8dde62fbf7d2c79967d4bace"))
               (sha256
                (base32
-                "0smhnabn62vzrbbc3554pyk9dbgdhg42s2dgjwic87pbim67pm92"))
+                "0g5hryia5v1k0qx97qffgwzrz4lr4jw3s5kj04yllhswsxyjbic3"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
-                                           "glibc-versioned-locpath.patch"))))))
+                                           "glibc-versioned-locpath.patch"
+                                           "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
+                                           "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
 
 (define glibc-2.27/bytz-patched
   (package-with-extra-patches glibc-2.27
