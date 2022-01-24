@@ -275,15 +275,12 @@ parse, modify and abstract ELF, PE and MachO formats.")
                                   name "/ncurses-" version ".tar.gz"))
               (sha256
                (base32
-                "0fsn7xis81za62afan0vvm38bvgzg5wfmv1m86flqcj0nj7jjilh"))))
+                "0fsn7xis81za62afan0vvm38bvgzg5wfmv1m86flqcj0nj7jjilh"))
+          patches (search-our-patches "ncurses-configure.patch")))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
-    (synopsis "Bison is a general-purpose parser generator")
-    (description "Bison is a general-purpose parser generator
-that converts an annotated context-free grammar into a deterministic
-LR or generalized LR (GLR) parser employing LALR(1) parser tables.
-As an experimental feature, Bison can also generate IELR(1)
-or canonical LR(1) parser tables")
+    (synopsis "Ncurses terminal programming")
+    (description "Ncurses terminal programming")
     (license license:gpl3+)))
 
 (define osslsigncode
