@@ -471,11 +471,6 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                   (string-append indent
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
-               (substitute* "tests/test_validate.py"
-                 (("^(.*)def test_revocation_mode_soft" line indent)
-                  (string-append indent
-                                 "@unittest.skip(\"Disabled by Guix\")\n"
-                                 line)))
                (substitute* "tests/test_crl_client.py"
                  (("^(.*)def test_fetch_crl" line indent)
                   (string-append indent
@@ -621,8 +616,8 @@ and endian independent.")
       ;; There are no tests, but attempting to run python setup.py test leads to
       ;; problems, just disable the test
       (arguments '(#:tests? #f))
-(define glibc-2.27/bytz-patched
-            (synopsis "Mach-O binary signature tool")
+      (home-page "https://github.com/achow101/signapple")
+      (synopsis "Mach-O binary signature tool")
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
