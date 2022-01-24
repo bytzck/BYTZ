@@ -274,8 +274,8 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (uri (string-append "https://invisible-mirror.net/archives/ncurses"
                                   name "/ncurses-" version ".tar.gz"))
               (sha256
-                (base 32
-                  "1p4cpaq6pf1qkbhfvgdy2wsry1pi5pb6ac2qmpmd02xnpbn5qy6q"))))
+               (base32
+                "1p4cpaq6pf1qkbhfvgdy2wsry1pi5pb6ac2qmpmd02xnpbn5qy6q"))))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Bison is a general-purpose parser generator")
