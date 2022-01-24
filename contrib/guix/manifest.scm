@@ -135,7 +135,9 @@ chain for " target " development."))
       (home-page (package-home-page xgcc))
       (license (package-license xgcc)))))
 
-(define base-gcc gcc-9)
+(define base-gcc
+  (package-with-extra-patches gcc-8
+    (search-our-patches "gcc-8-sort-libtool-find-output.patch")))
 
 ;; Building glibc with stack smashing protector first landed in glibc 2.25, use
 ;; this function to disable for older glibcs
@@ -145,17 +147,17 @@ chain for " target " development."))
 ;;   * Most of glibc can now be built with the stack smashing protector enabled.
 ;;     It is recommended to build glibc with --enable-stack-protector=strong.
 ;;     Implemented by Nick Alcock (Oracle).
-(define (make-glibc-with-ssp xglibc)
+(define (make-glibc-without-ssp xglibc)
   (package-with-extra-configure-variable
    (package-with-extra-configure-variable
-    xglibc "libc_cv_ssp" "yes")
-   "libc_cv_ssp_strong" "yes"))
+    xglibc "libc_cv_ssp" "no")
+   "libc_cv_ssp_strong" "no"))
 
-(define* (make-bytz-cross-toolchain target
+(define* (make-bitcoin-cross-toolchain target
                                        #:key
-                                       (base-gcc-for-libc gcc-9)
+                                       (base-gcc-for-libc gcc-7)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-with-ssp glibc-2.24))
+                                       (base-libc (make-glibc-without-ssp glibc-2.24))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
 desirable for building Bytz Core release binaries."
@@ -244,6 +246,27 @@ parse, modify and abstract ELF, PE and MachO formats.")
 
 ;;(define-public bison
 ;;  (package
+;;(define-public bison
+;;  (package
+;;    (name "bison")
+;;    (version "3.8")
+;;    (source (origin
+;;              (method url-fetch)
+;;              (uri (string-append "https://ftp.gnu.org/gnu/bison"
+;;                                  name "/bison-" version ".tar.gz"))
+;;              (sha256
+;;                (base 32
+;;                  "0sx2ycbxd4xn0ih7hp4lpd55df03s10475gqkzcn2ha8ypycr8fh"))))
+;;          (build-system gnu-build-system)
+;;    (home-page "https://www.gnu.org/software/bison/")
+;;    (synopsis "Bison is a general-purpose parser generator")
+;;    (description "Bison is a general-purpose parser generator
+;;that converts an annotated context-free grammar into a deterministic
+;;LR or generalized LR (GLR) parser employing LALR(1) parser tables.
+;;As an experimental feature, Bison can also generate IELR(1)
+;;or canonical LR(1) parser tables")
+;;    (license license:gpl3+)))
+
 ;;    (name "bison")
 ;;    (version "3.8")
 ;;    (source (origin
@@ -448,6 +471,11 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                   (string-append indent
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
+               (substitute* "tests/test_validate.py"
+                 (("^(.*)def test_revocation_mode_soft" line indent)
+                  (string-append indent
+                                 "@unittest.skip(\"Disabled by Guix\")\n"
+                                 line)))
                (substitute* "tests/test_crl_client.py"
                  (("^(.*)def test_fetch_crl" line indent)
                   (string-append indent
@@ -593,7 +621,7 @@ and endian independent.")
       ;; There are no tests, but attempting to run python setup.py test leads to
       ;; problems, just disable the test
       (arguments '(#:tests? #f))
-      (home-page "https://github.com/achow101/signapple")
+(define glibc-2.27/bytz-patched
             (synopsis "Mach-O binary signature tool")
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
@@ -659,9 +687,9 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
-        ;; Native gcc 9 toolchain
-        gcc-toolchain-9
-        (list gcc-toolchain-9 "static"))
+        ;; Native gcc 7 toolchain
+        gcc-toolchain-7
+        (list gcc-toolchain-7 "static"))
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
@@ -677,5 +705,5 @@ inspecting signatures in Mach-O binaries.")
                        (else
                         (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
-           (list binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
+           (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
