@@ -153,7 +153,7 @@ chain for " target " development."))
     xglibc "libc_cv_ssp" "no")
    "libc_cv_ssp_strong" "no"))
 
-(define* (make-bitcoin-cross-toolchain target
+(define* (make-bytz-cross-toolchain target
                                        #:key
                                        (base-gcc-for-libc gcc-7)
                                        (base-kernel-headers linux-libre-headers-4.9)
@@ -695,7 +695,7 @@ inspecting signatures in Mach-O binaries.")
           ((string-contains target "-linux-")
            (list (cond ((string-contains target "riscv64-")
                         (make-bytz-cross-toolchain target
-                                                      #:base-libc glibc-2.27/bitcoin-patched
+                                                      #:base-libc glibc-2.27/bytz-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
                         (make-bytz-cross-toolchain target)))))
