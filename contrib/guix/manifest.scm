@@ -271,7 +271,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
     (version "5.9")
     (source (origin
               (method url-fetch)
-              (uri (string-append "https://invisible-mirror.net/archives/ncurses/"
+              (uri (string-append "https://invisible-mirror.net/archives/ncurses"
                                   name "/ncurses-" version ".tar.gz"))
               (sha256
                 (base 32
