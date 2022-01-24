@@ -276,7 +276,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (sha256
                (base32
                 "0fsn7xis81za62afan0vvm38bvgzg5wfmv1m86flqcj0nj7jjilh"))
-          patches (search-our-patches "ncurses-configure.patch")))
+              (patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
