@@ -614,7 +614,6 @@ inspecting signatures in Mach-O binaries.")
                 "0smhnabn62vzrbbc3554pyk9dbgdhg42s2dgjwic87pbim67pm92"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
                                            "glibc-versioned-locpath.patch"
-                                           "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
                                            "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
 
 (define glibc-2.27/bytz-patched
