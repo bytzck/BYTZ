@@ -613,8 +613,7 @@ inspecting signatures in Mach-O binaries.")
                (base32
                 "0smhnabn62vzrbbc3554pyk9dbgdhg42s2dgjwic87pbim67pm92"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
-                                           "glibc-versioned-locpath.patch"
-                                           "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
+                                           "glibc-versioned-locpath.patch"))))))
 
 (define glibc-2.27/bytz-patched
   (package-with-extra-patches glibc-2.27
