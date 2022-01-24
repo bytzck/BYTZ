@@ -270,13 +270,15 @@ parse, modify and abstract ELF, PE and MachO formats.")
     (name "ncurses")
     (version "5.9")
     (source (origin
-              (method url-fetch)
-              (uri (string-append "https://invisible-mirror.net/archives/"
-                                  name "/ncurses-" version ".tar.gz"))
+              (method git-fetch)
+              (uri (git-reference 
+                    (url "https://github.com/mirror/ncurses/")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
               (sha256
                (base32
-                "0fsn7xis81za62afan0vvm38bvgzg5wfmv1m86flqcj0nj7jjilh"))
-              (patches (search-our-patches "ncurses-configure.patch"))))
+                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))
+             (patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
