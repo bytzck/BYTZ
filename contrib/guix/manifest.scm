@@ -683,7 +683,7 @@ inspecting signatures in Mach-O binaries.")
         ;; Tests
         lief
         ;; Ncurses
-        ncurses-5
+        ncurses
         ;; Native gcc 7 toolchain
         gcc-toolchain-7
         (list gcc-toolchain-7 "static"))
