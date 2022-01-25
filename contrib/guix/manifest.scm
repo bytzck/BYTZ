@@ -23,6 +23,7 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
+             (gnu packages ncurses)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
@@ -681,6 +682,8 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
+        ;; Ncurses
+        ncurses@5.9
         ;; Native gcc 7 toolchain
         gcc-toolchain-7
         (list gcc-toolchain-7 "static"))
