@@ -594,10 +594,10 @@ inspecting signatures in Mach-O binaries.")
                 "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))))
              ;;(patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
-             (arguments
-               `(#:configure-flags
-                   ("--with-termlib"
-                    "--without-cxx-binding")))
+          (arguments
+           `(#:configure-flags
+             `("--with-termlib"
+               "--without-cxx-binding")))
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
     (description "Ncurses terminal programming")
