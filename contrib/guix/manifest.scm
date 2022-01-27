@@ -591,8 +591,8 @@ inspecting signatures in Mach-O binaries.")
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))))
-             ;;(patches (search-our-patches "ncurses-configure.patch"))))
+                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))
+              (patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
           (arguments
            `(#:configure-flags
