@@ -580,30 +580,31 @@ and endian independent.")
       (description "signapple is a Python tool for creating, verifying, and
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
-(define-public ncurses
-  (package
-    (name "ncurses")
-    (version "6.3")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference 
-                    (url "https://github.com/mirror/ncurses/")
-                    (commit "deb0d07e8eb4803b9e9653359eab17a30d04369d")))
-                    (file-name (git-file-name "ncurses" "deb0d07e8eb4803b9e9653359eab17a30d04369d"))
-              (sha256
-               (base32
-                "0igww9xi3a4l4a2qpmn864sqx6mfcig13ma67fb4a90qnxzgkx95"))))
-              ;;(patches (search-our-patches "ncurses-configure.patch"))))
-          (build-system gnu-build-system)
-          (arguments
-           `(#:configure-flags
-             `("--with-termlib"
-                "--with-cxx-shared" 
-                "--with-shared")))
-    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-    (synopsis "Ncurses terminal programming")
-    (description "Ncurses terminal programming")
-    (license license:gpl3+)))
+
+;;(define-public ncurses
+;;  (package
+;;    (name "ncurses")
+;;    (version "6.3")
+;;    (source (origin
+;;              (method git-fetch)
+;;              (uri (git-reference 
+;;                    (url "https://github.com/mirror/ncurses/")
+;;                    (commit "deb0d07e8eb4803b9e9653359eab17a30d04369d")))
+;;                    (file-name (git-file-name "ncurses" "deb0d07e8eb4803b9e9653359eab17a30d04369d"))
+;;              (sha256
+;;               (base32
+;;                "0igww9xi3a4l4a2qpmn864sqx6mfcig13ma67fb4a90qnxzgkx95"))))
+;;              ;;(patches (search-our-patches "ncurses-configure.patch"))))
+;;          (build-system gnu-build-system)
+;;          (arguments
+;;           `(#:configure-flags
+;;             `("--with-termlib"
+;;                "--with-cxx-shared" 
+;;                "--with-shared")))
+;;    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+;;    (synopsis "Ncurses terminal programming")
+;;    (description "Ncurses terminal programming")
+;;    (license license:gpl3+)))
 
 (define-public glibc-2.27
   (package
@@ -656,6 +657,7 @@ inspecting signatures in Mach-O binaries.")
         automake
         pkg-config
         bison
+        ncurses
         ;; Scripting
         perl
         python-3
@@ -681,5 +683,5 @@ inspecting signatures in Mach-O binaries.")
                        (else
                         (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
-           (list clang-toolchain-8 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
+           (list clang-toolchain-8 binutils ncurses imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
