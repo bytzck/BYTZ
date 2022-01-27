@@ -588,11 +588,11 @@ inspecting signatures in Mach-O binaries.")
               (method git-fetch)
               (uri (git-reference 
                     (url "https://github.com/mirror/ncurses/")
-                    (commit (string-append "v" version))))
-              (file-name (git-file-name name version))
+                    (commit "deb0d07e8eb4803b9e9653359eab17a30d04369d")))
+                    (file-name (git-file-name "ncurses" "deb0d07e8eb4803b9e9653359eab17a30d04369d"))
               (sha256
                (base32
-                "1c737qg8vn86gwyfpkk7s6ggvg07wzf6cjgcrrk1k1qmsv1n1ni7"))))
+                "0igww9xi3a4l4a2qpmn864sqx6mfcig13ma67fb4a90qnxzgkx95"))))
               ;;(patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
           (arguments
