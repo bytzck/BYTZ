@@ -6,7 +6,7 @@ qt_native_packages = native_protobuf
 qt_linux_packages:=qt expat libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
 qt_android_packages=qt
 
-qt_darwin_packages=qt backtrace
+qt_darwin_packages=qt
 qt_mingw32_packages=qt
 
 wallet_packages=bdb
@@ -15,7 +15,7 @@ zmq_packages=zeromq
 
 upnp_packages=miniupnpc
 
-darwin_native_packages = native_ds_store native_mac_alias
+darwin_native_packages = native_ds_store native_mac_alias native_backtrace
 
 ifneq ($(build_os),darwin)
 darwin_native_packages += native_cctools native_libtapi native_libdmg-hfsplus native_clang
