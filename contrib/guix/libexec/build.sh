@@ -235,9 +235,11 @@ mkdir -p "$OUTDIR"
 ###########################
 
 # CONFIGFLAGS
-CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests --disable-fuzz-binary"
+CONFIGFLAGS=" --disable-bench --disable-gui-tests --disable-fuzz-binary"
 case "$HOST" in
-    *linux*) CONFIGFLAGS+=" --disable-threadlocal" ;;
+    *linux*) CONFIGFLAGS+=" --disable-threadlocal --enable-reduce-exports" ;;
+    *mingw*) CONFIGFLAGS+=" --enable-reduce-exports" ;;
+    *darwin*) CONFIGFLAGS+=" --disable-reduce-exports" ;;
 esac
 
 # CFLAGS
