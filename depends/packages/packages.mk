@@ -9,7 +9,7 @@ qt_android_packages=qt
 qt_darwin_packages=qt
 qt_mingw32_packages=qt
 
-wallet_packages=bdb
+bdb_packages=bdb
 
 zmq_packages=zeromq
 
