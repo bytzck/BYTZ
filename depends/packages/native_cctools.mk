@@ -33,8 +33,8 @@ endef
 define $(package)_set_vars
 $(package)_config_opts=--target=$(host) --disable-lto-support
 $(package)_ldflags+=-Wl,-rpath=\\$$$$$$$$\$$$$$$$$ORIGIN/../lib
-$(package)_cc=$($(package)_extract_dir)/toolchain/bin/clang
-$(package)_cxx=$($(package)_extract_dir)/toolchain/bin/clang++
+$(package)_cc=$($(package)_staging_prefix_dir)/bin/clang
+$(package)_cxx=$($(package)_staging_prefix_dir)/bin/clang++
 endef
 
 define $(package)_preprocess_cmds
