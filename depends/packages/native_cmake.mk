@@ -1,4 +1,4 @@
-package=_nativecmake
+package=_native_cmake
 $(package)_version=3.14.7
 $(package)_download_path=https://github.com/Kitware/CMake/releases/download/v3.14.7/
 $(package)_file_name=cmake-$($(package)_version).tar.gz
