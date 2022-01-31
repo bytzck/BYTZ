@@ -12,7 +12,7 @@ bdb_packages=bdb
 
 zmq_packages=zeromq
 
-upnp_packages=miniupnpc
+wallet_packages=miniupnpc
 
 
 darwin_native_packages = native_ds_store native_mac_alias
