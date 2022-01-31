@@ -1,5 +1,8 @@
 packages:=boost libevent openssl cmake bls-dash gmp backtrace zeromq
 
+qt_native_packages = native_protobuf
+qt_packages = qrencode protobuf zlib
+
 qrencode_packages = qrencode
 
 qt_linux_packages:=qt expat libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
