@@ -1,4 +1,4 @@
-packages:=boost libevent openssl cmake bls-dash gmp backtrace
+packages:=boost libevent openssl cmake bls-dash gmp backtrace zeromq
 
 qrencode_packages = qrencode
 
@@ -10,10 +10,7 @@ qt_mingw32_packages=qt
 
 wallet_packages=bdb
 
-zmq_packages=zeromq
-
 upnp_packages=miniupnpc
-
 
 darwin_native_packages = native_ds_store native_mac_alias
 
