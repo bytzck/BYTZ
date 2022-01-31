@@ -8,11 +8,11 @@ qt_android_packages=qt
 qt_darwin_packages=qt
 qt_mingw32_packages=qt
 
-bdb_packages=bdb
+wallet_packages=bdb
 
 zmq_packages=zeromq
 
-wallet_packages=miniupnpc
+upnp_packages=miniupnpc
 
 
 darwin_native_packages = native_ds_store native_mac_alias
