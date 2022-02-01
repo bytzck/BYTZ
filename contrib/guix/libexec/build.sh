@@ -13,6 +13,9 @@ export TZ=UTC
 # This line should be placed before any commands which creates files.
 umask 0022
 
+echo "home directory `pwd`"
+echo "root directory `ls /`"
+
 if [ -n "$V" ]; then
     # Print both unexpanded (-v) and expanded (-x) forms of commands as they are
     # read from this file.
