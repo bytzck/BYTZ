@@ -304,7 +304,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
     (description "Ncurses terminal programming")
-    (license license:gpl3+)))
+    (license license:gpl3+))))
 
 (define osslsigncode
   (package
