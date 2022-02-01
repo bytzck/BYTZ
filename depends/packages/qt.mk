@@ -61,6 +61,7 @@ $(package)_config_opts += -no-use-gold-linker
 $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
 $(package)_config_opts += -opensource
+$(package)_config_opts += -ssl
 $(package)_config_opts += -feature-openssl
 $(package)_config_opts += -optimized-qmake
 $(package)_config_opts += -pch
@@ -74,7 +75,7 @@ $(package)_config_opts += -qt-zlib
 $(package)_config_opts += -static
 $(package)_config_opts += -v
 $(package)_config_opts += -no-feature-concurrent
-$(package)_config_opts += -no-feature-securetransport
+$(package)_config_opts += -no-feature-secure
 $(package)_config_opts += -no-feature-printdialog
 $(package)_config_opts += -no-feature-printer
 
