@@ -34,6 +34,7 @@ $(package)_config_opts += -confirm-license
 $(package)_config_opts += -dbus-runtime
 $(package)_config_opts += -hostprefix $(build_prefix)
 $(package)_config_opts += -no-compile-examples
+OPENSSL_PREFIX="$($(package)_staging_prefix_dir)"
 $(package)_config_opts += -no-cups
 $(package)_config_opts += -no-egl
 $(package)_config_opts += -no-eglfs
