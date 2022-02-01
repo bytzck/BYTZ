@@ -285,6 +285,27 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;    (description "Ncurses terminal programming")
 ;;    (license license:gpl3+)))
 
+(define-public openssl
+  (let ((commit "87bbd79ab7e361004c98cc8601d4e5f029fd8bd5"))
+  (package
+    (name "openssl")
+    (version "1.1.1f")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference 
+                    (url "git://git.openssl.org/openssl.git")
+                          (commit commit)))
+              (file-name (git-file-name name commit))
+              (sha256
+               (base32
+                "1wp7xzqygav1hic00ngca99pqihxa6ip1f25lva5x0rx19v9vm00"))
+             (patches (search-our-patches "ncurses-configure.patch"))))
+          (build-system gnu-build-system)
+    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+    (synopsis "Ncurses terminal programming")
+    (description "Ncurses terminal programming")
+    (license license:gpl3+)))
+
 (define osslsigncode
   (package
     (name "osslsigncode")
