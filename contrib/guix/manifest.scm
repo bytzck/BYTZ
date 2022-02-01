@@ -158,6 +158,7 @@ chain for " target " development."))
                                        #:key
                                        (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
+                                       (base-openssl openssl)
                                        (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
@@ -300,8 +301,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (file-name (git-file-name name commit))
               (sha256
                (base32
-                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))
-             (patches (search-our-patches "ncurses-configure.patch"))))
+                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
