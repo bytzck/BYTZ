@@ -10,6 +10,7 @@
              (gnu packages cmake)
              (gnu packages commencement)
              (gnu packages compression)
+             (gnu packages cross-base)
              (gnu packages curl)
              (gnu packages file)
              (gnu packages gawk)
