@@ -14,7 +14,7 @@ export TZ=UTC
 umask 0022
 
 echo "home directory `pwd`"
-echo "root directory `ls /gnu`"
+echo "root directory `ls /gnu/store`"
 
 if [ -n "$V" ]; then
     # Print both unexpanded (-v) and expanded (-x) forms of commands as they are
