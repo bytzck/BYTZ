@@ -298,7 +298,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (file-name (git-file-name name commit))
               (sha256
                (base32
-                "1wp7xzqygav1hic00ngca99pqihxa6ip1f25lva5x0rx19v9vm00"))
+                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))
              (patches (search-our-patches "ncurses-configure.patch"))))
           (build-system gnu-build-system)
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
