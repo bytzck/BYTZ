@@ -23,6 +23,7 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
+             (gnu packages openssl)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
