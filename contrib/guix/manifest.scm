@@ -158,7 +158,7 @@ chain for " target " development."))
                                        #:key
                                        (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-openssl openssl)
+                                       (base-openssl openssl-1.1.1j)
                                        (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
@@ -289,10 +289,10 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;    (license license:gpl3+)))
 
 (define base-openssl
-  (let ((commit "87bbd79ab7e361004c98cc8601d4e5f029fd8bd5"))
+  (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
   (package
     (name "openssl")
-    (version "1.1.1f")
+    (version "1.1.1j")
     (source (origin
               (method git-fetch)
               (uri (git-reference 
@@ -301,11 +301,15 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (file-name (git-file-name name commit))
               (sha256
                (base32
-                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))))
+                "0c8k7njyb7m6fi4kya3h51fb0hqsjv78pm4bxf0libvzkzkbr7mi"))))
           (build-system gnu-build-system)
-    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-    (synopsis "Ncurses terminal programming")
-    (description "Ncurses terminal programming")
+    (home-page "https://www.openssl.org/")
+    (synopsis "full-featured toolkit for general-purpose cryptography and secure communication")
+    (description "The OpenSSL Project develops and maintains the OpenSSL software - a robust,
+    commercial-grade, full-featured toolkit for general-purpose cryptography and secure
+    communication. The project's technical decision making is managed by the OpenSSL Technical
+    Committee (OTC) and the project governance is managed by the OpenSSL Management
+    Committee (OMC). The project operates under formal Bylaws.")
     (license license:gpl3+))))
 
 (define osslsigncode
