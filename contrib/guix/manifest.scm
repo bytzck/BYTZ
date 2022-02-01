@@ -88,7 +88,8 @@ http://www.linuxfromscratch.org/hlfs/view/development/chapter05/gcc-pass1.html"
                               base-gcc-for-libc
                               base-kernel-headers
                               base-libc
-                              base-gcc)
+                              base-gcc
+                              base-openssl)
   "Create a cross-compilation toolchain package for TARGET"
   (let* ((xbinutils (cross-binutils target))
          ;; 1. Build a cross-compiling gcc without targeting any libc, derived
@@ -165,7 +166,8 @@ desirable for building Bytz Core release binaries."
                         base-gcc-for-libc
                         base-kernel-headers
                         base-libc
-                        base-gcc))
+                        base-gcc
+                        base-openssl))
 
 (define (make-gcc-with-pthreads gcc)
   (package-with-extra-configure-variable gcc "--enable-threads" "posix"))
@@ -285,26 +287,26 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;    (description "Ncurses terminal programming")
 ;;    (license license:gpl3+)))
 
-;;(define-public openssl
-;;  (let ((commit "87bbd79ab7e361004c98cc8601d4e5f029fd8bd5"))
-;;  (package
-;;    (name "openssl")
-;;    (version "1.1.1f")
-;;    (source (origin
-;;              (method git-fetch)
-;;              (uri (git-reference 
-;;                    (url "git://git.openssl.org/openssl.git")
-;;                          (commit commit)))
-;;              (file-name (git-file-name name commit))
-;;              (sha256
-;;               (base32
-;;                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))
-;;             (patches (search-our-patches "ncurses-configure.patch"))))
-;;          (build-system gnu-build-system)
-;;    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-;;    (synopsis "Ncurses terminal programming")
-;;    (description "Ncurses terminal programming")
-;;    (license license:gpl3+))))
+(define base-openssl
+  (let ((commit "87bbd79ab7e361004c98cc8601d4e5f029fd8bd5"))
+  (package
+    (name "openssl")
+    (version "1.1.1f")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference 
+                    (url "git://git.openssl.org/openssl.git")
+                          (commit commit)))
+              (file-name (git-file-name name commit))
+              (sha256
+               (base32
+                "1nyvjisvyxyxnd0023xjf5846xd03lwawp5pfzr8vrky7wwm5maz"))
+             (patches (search-our-patches "ncurses-configure.patch"))))
+          (build-system gnu-build-system)
+    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+    (synopsis "Ncurses terminal programming")
+    (description "Ncurses terminal programming")
+    (license license:gpl3+))))
 
 (define osslsigncode
   (package
@@ -559,7 +561,6 @@ specific moment in time, whitelisting and revocation checks.")
 constructing graphs, BFS and DFS traversals, topological sort, shortest paths,
 etc. with graphviz output.")
     (license license:expat)))
-
 
 (define-public python-macholib
   (package
