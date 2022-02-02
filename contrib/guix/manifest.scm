@@ -23,7 +23,6 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
-             (gnu packages openssl)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
@@ -699,7 +698,7 @@ inspecting signatures in Mach-O binaries.")
         automake
         pkg-config
         bison
-        openssl
+        base-openssl
         ;; Scripting
         perl
         python-3
