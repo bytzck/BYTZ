@@ -696,6 +696,7 @@ inspecting signatures in Mach-O binaries.")
         automake
         pkg-config
         bison
+        openssl
         ;; Scripting
         perl
         python-3
