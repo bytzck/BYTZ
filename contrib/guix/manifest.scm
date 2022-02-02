@@ -718,8 +718,8 @@ inspecting signatures in Mach-O binaries.")
                                                       #:base-libc glibc-2.27/bytz-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
-                        (list base-openssl)
-                        (make-bytz-cross-toolchain target)))))
+                         (make-bytz-cross-toolchain target
+                                                       #:base-openssl)))))
           ((string-contains target "darwin")
            (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
