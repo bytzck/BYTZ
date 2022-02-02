@@ -88,6 +88,7 @@ http://www.linuxfromscratch.org/hlfs/view/development/chapter05/gcc-pass1.html"
                               base-gcc-for-libc
                               base-kernel-headers
                               base-libc
+                              base-openssl
                               base-gcc)
   "Create a cross-compilation toolchain package for TARGET"
   (let* ((xbinutils (cross-binutils target))
@@ -165,6 +166,7 @@ desirable for building Bytz Core release binaries."
                         base-gcc-for-libc
                         base-kernel-headers
                         base-libc
+                        base-openssl
                         base-gcc))
 
 (define (make-gcc-with-pthreads gcc)
@@ -720,8 +722,7 @@ inspecting signatures in Mach-O binaries.")
                                                       #:base-libc glibc-2.27/bytz-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
-                         (make-bytz-cross-toolchain target
-                                                       #:base-openssl)))))
+                         (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
            (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
