@@ -34,7 +34,6 @@ $(package)_config_opts += -confirm-license
 $(package)_config_opts += -dbus-runtime
 $(package)_config_opts += -hostprefix $(build_prefix)
 $(package)_config_opts += -no-compile-examples
-OPENSSL_LIBS=$(build_prefix)/lib
 $(package)_config_opts += -L /usr/lib/x86_64-linux-gnu
 $(package)_config_opts += -I /usr/include/openssl/
 $(package)_config_opts += -no-cups
@@ -219,6 +218,7 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
+  export OPENSSL_LIBS=$(host_prefix)/lib && \
   cd qtbase && \
   ./configure -top-level $($(package)_config_opts)
 endef
