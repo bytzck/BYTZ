@@ -158,7 +158,7 @@ chain for " target " development."))
                                        #:key
                                        (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-openssl ())
+                                       (base-openssl openssl-1.1.1j)
                                        (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
