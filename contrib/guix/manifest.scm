@@ -165,7 +165,7 @@ desirable for building Bytz Core release binaries."
                         base-gcc-for-libc
                         base-kernel-headers
                         base-libc
-                        base-gcc
+                        base-gcc))
 
 (define (make-gcc-with-pthreads gcc)
   (package-with-extra-configure-variable gcc "--enable-threads" "posix"))
@@ -562,6 +562,7 @@ specific moment in time, whitelisting and revocation checks.")
 constructing graphs, BFS and DFS traversals, topological sort, shortest paths,
 etc. with graphviz output.")
     (license license:expat)))
+
 
 (define-public python-macholib
   (package
