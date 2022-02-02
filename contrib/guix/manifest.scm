@@ -88,8 +88,7 @@ http://www.linuxfromscratch.org/hlfs/view/development/chapter05/gcc-pass1.html"
                               base-gcc-for-libc
                               base-kernel-headers
                               base-libc
-                              base-gcc
-                              base-openssl)
+                              base-gcc)
   "Create a cross-compilation toolchain package for TARGET"
   (let* ((xbinutils (cross-binutils target))
          ;; 1. Build a cross-compiling gcc without targeting any libc, derived
@@ -158,7 +157,6 @@ chain for " target " development."))
                                        #:key
                                        (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-openssl openssl-1.1.1j)
                                        (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
@@ -168,7 +166,6 @@ desirable for building Bytz Core release binaries."
                         base-kernel-headers
                         base-libc
                         base-gcc
-                        base-openssl))
 
 (define (make-gcc-with-pthreads gcc)
   (package-with-extra-configure-variable gcc "--enable-threads" "posix"))
@@ -288,7 +285,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;    (description "Ncurses terminal programming")
 ;;    (license license:gpl3+)))
 
-(define base-openssl
+(define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
   (package
     (name "openssl")
@@ -698,7 +695,6 @@ inspecting signatures in Mach-O binaries.")
         automake
         pkg-config
         bison
-        base-openssl
         ;; Scripting
         perl
         python-3
@@ -722,6 +718,7 @@ inspecting signatures in Mach-O binaries.")
                                                       #:base-libc glibc-2.27/bytz-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
+                        (list base-openssl)
                         (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
            (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
