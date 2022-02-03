@@ -297,7 +297,6 @@ mkdir -p "$DISTSRC"
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
                     ${HOST_CXXFLAGS:+CXXFLAGS="${HOST_CXXFLAGS}"} \
                     ${HOST_LDFLAGS:+LDFLAGS="${HOST_LDFLAGS}"}
-    cat config.log
 
     sed -i.old 's/-lstdc++ //g' config.status libtool src/univalue/config.status src/univalue/libtool
 
