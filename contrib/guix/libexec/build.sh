@@ -286,11 +286,11 @@ mkdir -p "$DISTSRC"
     # Configure this DISTSRC for $HOST
     # shellcheck disable=SC2086
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
-    env QT_CORE_LIBS="${BASEPREFIX}/${HOST}/plugins/platforms" \
         ./configure --prefix=/ \
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
+                    --with-qt-plugindir="${BASEPREFIX}/${HOST}/plugins/platforms" \
                     ${CONFIGFLAGS} \
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
                     ${HOST_CXXFLAGS:+CXXFLAGS="${HOST_CXXFLAGS}"} \
