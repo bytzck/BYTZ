@@ -198,7 +198,6 @@ ls `pwd`/depends/${HOST}/plugins/platforms
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    ${V:+V=1} \
-                                   QT_GUI_LIBS=`pwd`/depends/${HOST}/plugins/platforms \
                                    ${SOURCES_PATH+SOURCES_PATH="$SOURCES_PATH"} \
                                    ${BASE_CACHE+BASE_CACHE="$BASE_CACHE"} \
                                    ${SDK_PATH+SDK_PATH="$SDK_PATH"} \
@@ -286,7 +285,7 @@ mkdir -p "$DISTSRC"
 
     # Configure this DISTSRC for $HOST
     # shellcheck disable=SC2086
-    env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
+    env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" QT_CORE_LIBS=${BASEPREFIX}/${HOST}/plugins/platforms \
         ./configure --prefix=/ \
                     --disable-ccache \
                     --disable-maintainer-mode \
