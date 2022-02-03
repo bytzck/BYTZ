@@ -290,7 +290,7 @@ mkdir -p "$DISTSRC"
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
-                    --with-qt-plugindir="${BASEPREFIX}/${HOST}/plugins/platforms" \
+                    --with-qt-plugindir="${BASEPREFIX}/${HOST}/plugins" \
                     ${CONFIGFLAGS} \
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
                     ${HOST_CXXFLAGS:+CXXFLAGS="${HOST_CXXFLAGS}"} \
