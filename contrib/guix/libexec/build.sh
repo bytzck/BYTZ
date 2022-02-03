@@ -194,14 +194,11 @@ esac
 ####################
 # Depends Building #
 ####################
-echo "root DIrectory `ls /`"
-echo "home DIrectory `ls /home`"
-exit
-
+echo "£Depends `ls depends/${HOST}/plugins/platforms`"
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    ${V:+V=1} \
-                                   QTPLATFORM_LIBS=depends/${HOST}/plugins/platforms \
+                                   QT_GUI_LIBS=depends/${HOST}/plugins/platforms \
                                    ${SOURCES_PATH+SOURCES_PATH="$SOURCES_PATH"} \
                                    ${BASE_CACHE+BASE_CACHE="$BASE_CACHE"} \
                                    ${SDK_PATH+SDK_PATH="$SDK_PATH"} \
