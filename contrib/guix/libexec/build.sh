@@ -194,7 +194,8 @@ esac
 ####################
 # Depends Building #
 ####################
-echo "Home DIrectory `ls`"
+echo "root DIrectory `ls /`"
+
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    ${V:+V=1} \
