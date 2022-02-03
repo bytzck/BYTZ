@@ -285,7 +285,8 @@ mkdir -p "$DISTSRC"
 
     # Configure this DISTSRC for $HOST
     # shellcheck disable=SC2086
-    env 'CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" QT_CORE_LIBS="${BASEPREFIX}/${HOST}/plugins/platforms"' \
+    env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" \
+    env QT_CORE_LIBS="${BASEPREFIX}/${HOST}/plugins/platforms" \
         ./configure --prefix=/ \
                     --disable-ccache \
                     --disable-maintainer-mode \
