@@ -194,7 +194,7 @@ esac
 ####################
 # Depends Building #
 ####################
-ls /bin
+ls -R /
 exit
 
 # Build the depends tree, overriding variables that assume multilib gcc
