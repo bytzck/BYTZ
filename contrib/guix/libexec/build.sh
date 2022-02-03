@@ -302,8 +302,6 @@ mkdir -p "$DISTSRC"
     sed -i.old 's/-lstdc++ //g' config.status libtool src/univalue/config.status src/univalue/libtool
 
     # Build Bytz Core
-    ls ${BASEPREFIX}/${HOST}
-    exit
     make --jobs="$JOBS" ${V:+V=1}
 
     # Check that symbol/security checks tools are sane.
