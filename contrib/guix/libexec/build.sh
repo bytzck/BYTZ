@@ -194,7 +194,7 @@ esac
 ####################
 # Depends Building #
 ####################
-ls ${BASEPREFIX}/${HOST}
+ls ${BASEPREFIX}/${HOST}/lib
 exit
 
 # Build the depends tree, overriding variables that assume multilib gcc
