@@ -194,6 +194,8 @@ esac
 ####################
 # Depends Building #
 ####################
+ls ${BASEPREFIX}/${HOST}
+exit
 
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
