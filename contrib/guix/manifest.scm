@@ -268,25 +268,25 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;or canonical LR(1) parser tables")
 ;;    (license license:gpl3+)))
 
-;;(define-public ncurses
-;;  (package
-;;    (name "ncurses")
-;;    (version "5.9")
-;;    (source (origin
-;;              (method git-fetch)
-;;              (uri (git-reference 
-;;                    (url "https://github.com/mirror/ncurses/")
-;;                    (commit (string-append "v" version))))
-;;              (file-name (git-file-name name version))
-;;              (sha256
-;;               (base32
-;;                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))
-;;             (patches (search-our-patches "ncurses-configure.patch"))))
-;;          (build-system gnu-build-system)
-;;    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-;;    (synopsis "Ncurses terminal programming")
-;;    (description "Ncurses terminal programming")
-;;    (license license:gpl3+)))
+(define-public ncurses
+  (package
+    (name "ncurses")
+    (version "5.9")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference 
+                    (url "https://github.com/mirror/ncurses/")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))
+             (patches (search-our-patches "ncurses-configure.patch"))))
+          (build-system gnu-build-system)
+    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+    (synopsis "Ncurses terminal programming")
+    (description "Ncurses terminal programming")
+    (license license:gpl3+)))
 
 (define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
@@ -726,5 +726,5 @@ inspecting signatures in Mach-O binaries.")
                        (else
                          (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
-           (list clang-toolchain-10 libcap binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
+           (list clang-toolchain-10 ncurses libcap binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
