@@ -23,7 +23,7 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
-             (gnu packages ncurses@5.9)
+             (gnu packages ncurses)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
@@ -700,6 +700,7 @@ inspecting signatures in Mach-O binaries.")
         pkg-config
         bison
         openssl
+        ncurses@5.9
         ;; Scripting
         perl
         python-3
