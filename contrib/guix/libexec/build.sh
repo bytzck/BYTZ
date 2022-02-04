@@ -194,7 +194,7 @@ esac
 ####################
 # Depends Building #
 ####################
-clang -V
+clang -v
 exit
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
