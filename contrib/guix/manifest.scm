@@ -19,7 +19,6 @@
              (gnu packages image)
              (gnu packages imagemagick)
              (gnu packages installers)
-             (gnu packages libcap)
              (gnu packages linux)
              (gnu packages llvm)
              (gnu packages mingw)
@@ -36,6 +35,7 @@
              (guix build-system python)
              (guix build-system trivial)
              (guix download)
+             (guix libcap)
              (guix gexp)
              (guix git-download)
              ((guix licenses) #:prefix license:)
@@ -700,7 +700,6 @@ inspecting signatures in Mach-O binaries.")
         pkg-config
         bison
         openssl
-        libcap
         ;; Scripting
         perl
         python-3
