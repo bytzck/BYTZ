@@ -19,6 +19,7 @@
              (gnu packages image)
              (gnu packages imagemagick)
              (gnu packages installers)
+             (gnu packages libcap)
              (gnu packages linux)
              (gnu packages llvm)
              (gnu packages mingw)
@@ -699,6 +700,7 @@ inspecting signatures in Mach-O binaries.")
         pkg-config
         bison
         openssl
+        libcap
         ;; Scripting
         perl
         python-3
