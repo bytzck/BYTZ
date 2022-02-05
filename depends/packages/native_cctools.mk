@@ -12,8 +12,8 @@ define $(package)_set_vars
   ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
   $(package)_config_opts+=--enable-lto-support --with-llvm-config=$(build_prefix)/bin/llvm-config
   endif
-  $(package)_cc=$(clang_prog)
-  $(package)_cxx=$(clangxx_prog)
+  $(package)_cc=clang
+  $(package)_cxx=clang++
 endef
 
 define $(package)_config_cmds
