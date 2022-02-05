@@ -25,7 +25,7 @@ define $(package)_stage_cmds
   cp bin/llvm-config $($(package)_staging_prefix_dir)/bin/ && \
   cp lib/libLTO.so $($(package)_staging_prefix_dir)/lib/ && \
   cp -rf lib/clang/$($(package)_version)/include/* $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include/
-  $(shell find . ) -maxdepth 1 -type d)
+  $(shell find ) -maxdepth 1 -type d)
 endef
 
 define $(package)_postprocess_cmds
