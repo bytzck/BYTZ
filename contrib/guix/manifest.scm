@@ -156,7 +156,7 @@ chain for " target " development."))
 
 (define* (make-bytz-cross-toolchain target
                                        #:key
-                                       (base-gcc-for-libc gcc-7)
+                                       (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
                                        (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
@@ -706,9 +706,9 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
-        ;; Native gcc 7 toolchain
-        gcc-toolchain-7
-        (list gcc-toolchain-7 "static"))
+        ;; Native gcc 8 toolchain
+        gcc-toolchain-8
+        (list gcc-toolchain-8 "static"))
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
