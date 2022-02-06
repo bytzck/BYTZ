@@ -236,11 +236,10 @@ SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-$(git -c log.showSignature=false log --f
 
 # Execute "$@" in a pinned, possibly older version of Guix, for reproducibility
 # across time.
-#--commit=aa34d4d28dfe25ba47d5800d05000fb7221788c0 \
 time-machine() {
     # shellcheck disable=SC2086
     guix time-machine --url=https://git.savannah.gnu.org/git/guix.git \
-                      --commit=8f585083277e64ea1e9a0848ef3c49f12327618c \
+                      --commit=aa34d4d28dfe25ba47d5800d05000fb7221788c0 \
                       --cores="$JOBS" \
                       --keep-failed \
                       --fallback \
