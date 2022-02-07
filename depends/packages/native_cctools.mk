@@ -21,7 +21,7 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  $(MAKE)
+  CC=clang CXX=clang++ $(MAKE)
 endef
 
 define $(package)_stage_cmds
