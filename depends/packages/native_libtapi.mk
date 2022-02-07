@@ -10,7 +10,7 @@ $(package)_dependencies=native_clang
 endif
 
 define $(package)_build_cmds
-  make print-clang_prog
+  print-clang_prog
   CC=$(clang_prog) CXX=$(clangxx_prog) INSTALLPREFIX=$($(package)_staging_prefix_dir) ./build.sh
 endef
 
