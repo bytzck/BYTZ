@@ -10,7 +10,6 @@ $(package)_dependencies=native_clang
 endif
 
 define $(package)_build_cmds
-  $(foreach var,$(.VARIABLES),$(info $(var) = $($(var))))
   CC=$(clang_prog) CXX=$(clangxx_prog) INSTALLPREFIX=$($(package)_staging_prefix_dir) ./build.sh
 endef
 
