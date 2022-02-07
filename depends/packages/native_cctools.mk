@@ -9,9 +9,9 @@ $(package)_dependencies=native_libtapi
 define $(package)_set_vars
   $(package)_config_opts=--target=$(host)
   $(package)_ldflags+=-Wl,-rpath=\\$$$$$$$$\$$$$$$$$ORIGIN/../lib
-  ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
-  $(package)_config_opts+=--enable-lto-support --with-llvm-config=$(build_prefix)/bin/llvm-config
-  endif
+  #ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
+  #$(package)_config_opts+=--enable-lto-support --with-llvm-config=$(build_prefix)/bin/llvm-config
+  #endif
   $(package)_cc=$(clang_prog)
   $(package)_cxx=$(clangxx_prog)
 endef
