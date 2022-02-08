@@ -156,9 +156,9 @@ chain for " target " development."))
 
 (define* (make-bytz-cross-toolchain target
                                        #:key
-                                       (base-gcc-for-libc gcc-8)
+                                       (base-gcc-for-libc gcc-7)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-without-ssp glibc-2.27))
+                                       (base-libc (make-glibc-without-ssp glibc-2.24))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
 desirable for building Bytz Core release binaries."
@@ -647,21 +647,23 @@ and endian independent.")
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
 
-(define-public glibc-2.27
+(define-public glibc-2.24
   (package
     (inherit glibc)
-    (version "2.27")
+    (version "2.24")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                     (url "https://sourceware.org/git/glibc.git")
-                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
-              (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
+                    (commit "0d7f1ed30969886c8dde62fbf7d2c79967d4bace")))
+              (file-name (git-file-name "glibc" "0d7f1ed30969886c8dde62fbf7d2c79967d4bace"))
               (sha256
                (base32
-                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
+                "0g5hryia5v1k0qx97qffgwzrz4lr4jw3s5kj04yllhswsxyjbic3"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
-                                           "glibc-versioned-locpath.patch"))))))
+                                           "glibc-versioned-locpath.patch"
+                                           "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
+                                           "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
 
 (define glibc-2.27/bytz-patched
   (package-with-extra-patches glibc-2.27
@@ -706,9 +708,9 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
-        ;; Native gcc 8 toolchain
-        gcc-toolchain-8
-        (list gcc-toolchain-8 "static"))
+        ;; Native gcc 7 toolchain
+        gcc-toolchain-7
+        (list gcc-toolchain-7 "static"))
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
