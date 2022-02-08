@@ -36,7 +36,6 @@
              (guix build-system trivial)
              (guix download)
              (guix gexp)
-             (guix libcap)
              (guix git-download)
              ((guix licenses) #:prefix license:)
              (guix packages)
@@ -702,6 +701,7 @@ inspecting signatures in Mach-O binaries.")
         pkg-config
         bison
         openssl
+        libcap
         ;; Scripting
         perl
         python-3
