@@ -19,6 +19,7 @@
              (gnu packages image)
              (gnu packages imagemagick)
              (gnu packages installers)
+             (gnu packages libcap)
              (gnu packages linux)
              (gnu packages llvm)
              (gnu packages mingw)
