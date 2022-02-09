@@ -293,7 +293,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
     (description "Ncurses terminal programming")
-    (license license:gpl3+))
+    (license license:gpl3+)))
 
 (define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
