@@ -23,7 +23,6 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
-             (gnu packages ncurses)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
@@ -268,27 +267,27 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;or canonical LR(1) parser tables")
 ;;    (license license:gpl3+)))
 
-(define-public ncurses
-  (package
-    (name "ncurses")
-    (version "6.0")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference 
-                    (url "https://github.com/mirror/ncurses/")
-                    (commit (string-append "v" version))))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-                "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
-          (build-system gnu-build-system)
-
-          (arguments '(#:configure-flags `("--without-cxx" "--with-termlib" "--enable-cxx-shared" "--enable-symlinks" "--with-shared" "--without-tests")))
-
-    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-    (synopsis "Ncurses terminal programming")
-    (description "Ncurses terminal programming")
-    (license license:gpl3+)))
+;;(define-public ncurses
+;;  (package
+;;    (name "ncurses")
+;;    (version "6.0")
+;;    (source (origin
+;;              (method git-fetch)
+;;              (uri (git-reference 
+;;                    (url "https://github.com/mirror/ncurses/")
+;;                    (commit (string-append "v" version))))
+;;              (file-name (git-file-name name version))
+;;              (sha256
+;;               (base32
+;;                "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
+;;          (build-system gnu-build-system)
+;;
+;;          (arguments '(#:configure-flags `("--without-cxx" "--with-termlib" "--enable-cxx-shared" "--enable-symlinks" "--with-shared" "--without-tests")))
+;;
+;;    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+;;    (synopsis "Ncurses terminal programming")
+;;    (description "Ncurses terminal programming")
+;;    (license license:gpl3+)))
 
 (define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
@@ -705,7 +704,6 @@ inspecting signatures in Mach-O binaries.")
         bison
         openssl
         libcap
-        ncurses
         ;; Scripting
         perl
         python-3
