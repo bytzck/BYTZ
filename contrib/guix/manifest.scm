@@ -282,10 +282,9 @@ parse, modify and abstract ELF, PE and MachO formats.")
                (base32
                 "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
           (build-system gnu-build-system)
-          (configure-phase
-            (apply invoke "./configure"
+            (invoke "./configure"
               (string-append "SHELL=" (which "sh"))
-              (string-append "--without-cxx --with-termlib --enable-cxx-shared --enable-symlinks --with-shared")))
+              (string-append "--without-cxx --with-termlib --enable-cxx-shared --enable-symlinks --with-shared"))
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
     (description "Ncurses terminal programming")
