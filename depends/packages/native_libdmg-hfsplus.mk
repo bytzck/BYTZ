@@ -8,8 +8,7 @@ $(package)_patches=remove-libcrypto-dependency.patch
 
 define $(package)_preprocess_cmds
   patch -p1 < $($(package)_patch_dir)/remove-libcrypto-dependency.patch && \
-  mkdir build && \
-  mkdir $($(package)_staging_dir)
+  mkdir build
 endef
 
 define $(package)_config_cmds
@@ -21,5 +20,6 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
+  mkdir -p $($(package)_staging_dir) && \
   $(MAKE) DESTDIR=$($(package)_staging_dir) -C dmg install
 endef
