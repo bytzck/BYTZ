@@ -23,6 +23,7 @@
              (gnu packages llvm)
              (gnu packages mingw)
              (gnu packages moreutils)
+             (gnu packages ncurses)
              (gnu packages perl)
              (gnu packages pkg-config)
              (gnu packages python)
@@ -267,25 +268,26 @@ parse, modify and abstract ELF, PE and MachO formats.")
 ;;or canonical LR(1) parser tables")
 ;;    (license license:gpl3+)))
 
-;;(define-public ncurses
-;;  (package
-;;    (name "ncurses")
-;;    (version "5.9")
-;;    (source (origin
-;;              (method git-fetch)
-;;              (uri (git-reference 
-;;                    (url "https://github.com/mirror/ncurses/")
-;;                    (commit (string-append "v" version))))
-;;              (file-name (git-file-name name version))
-;;              (sha256
-;;               (base32
-;;                "0d8d23s6i6ka542k5s8yd77b54a4w3447bh596z1rpy25gxsmny7"))
-;;             (patches (search-our-patches "ncurses-configure.patch"))))
-;;          (build-system gnu-build-system)
-;;    (home-page "https://invisible-island.net/ncurses/ncurses.html")
-;;    (synopsis "Ncurses terminal programming")
-;;    (description "Ncurses terminal programming")
-;;    (license license:gpl3+)))
+(define-public ncurses
+  (package
+    (name "ncurses")
+    (version "6.0")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference 
+                    (url "https://github.com/mirror/ncurses/")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
+             ;;(patches (search-our-patches "ncurses-configure.patch"))))
+          (build-system gnu-build-system)
+    (home-page "https://invisible-island.net/ncurses/ncurses.html")
+    (synopsis "Ncurses terminal programming")
+    (description "Ncurses terminal programming")
+    (invoke "ls")
+    (license license:gpl3+)))
 
 (define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
@@ -702,6 +704,7 @@ inspecting signatures in Mach-O binaries.")
         bison
         openssl
         libcap
+        ncurses
         ;; Scripting
         perl
         python-3
