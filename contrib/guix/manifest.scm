@@ -282,12 +282,18 @@ parse, modify and abstract ELF, PE and MachO formats.")
                (base32
                 "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
              ;;(patches (search-our-patches "ncurses-configure.patch"))))
-          ;;(build-system gnu-build-system)
-          (arguments '(#:configure-flags '(" --without-cxx --with-termlib --enable-cxx-shared --enable-symlinks --with-shared")))
+          (build-system gnu-build-system)
+          (configure-phase
+            ;; The 'configure' script does not understand '--docdir', so we must
+            ;; override that and use '--mandir' instead.
+              (apply invoke "./configure"
+                (string-append "SHELL=" (which "sh"))
+                (string-append "--without-cxx --with-termlib --enable-cxx-shared --enable-symlinks --with-shared")))
+          ;;(arguments '(#:configure-flags '(" --without-cxx --with-termlib --enable-cxx-shared --enable-symlinks --with-shared")))
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
     (description "Ncurses terminal programming")
-    (license license:gpl3+)))
+    (license license:gpl3+))
 
 (define-public base-openssl
   (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
