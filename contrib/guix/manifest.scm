@@ -283,7 +283,12 @@ parse, modify and abstract ELF, PE and MachO formats.")
           (build-system gnu-build-system)
 
           (arguments '(#:tests? #f)
-                     '(#:configure-flags `("--without-cxx" "--with-termlib" "--enable-cxx-shared" "--enable-symlinks" "--with-shared" "--without-tests"))))
+                      (#:configure-flags `("--without-cxx"
+                       "--with-termlib"
+                       "--enable-cxx-shared" 
+                       "--enable-symlinks" 
+                       "--with-shared" 
+                       "--without-tests")))
 
     (home-page "https://invisible-island.net/ncurses/ncurses.html")
     (synopsis "Ncurses terminal programming")
