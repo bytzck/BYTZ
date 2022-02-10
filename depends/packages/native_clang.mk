@@ -19,7 +19,7 @@ define $(package)_stage_cmds
   ls && \
   pwd && \
   ls $($(package)_extract_dir) && \
-  ls bytz && \
+  ls bytz/bin && \
   mkdir -p $($(package)_staging_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_dir)/bin && \
   mkdir -p $($(package)_staging_dir)/include && \
