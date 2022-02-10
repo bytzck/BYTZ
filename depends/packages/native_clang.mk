@@ -24,12 +24,12 @@ define $(package)_stage_cmds
   mkdir -p $($(package)_staging_prefix_dir)/include && \
   pwd && \
   ls $($(package)_staging_prefix_dir) && \
-  cp bin/clang $($(package)_staging_prefix_dir)/bin/ && \
-  cp -P bin/clang++ $($(package)_staging_prefix_dir)/bin/ && \
-  cp bin/dsymutil $($(package)_staging_prefix_dir)/bin/$(host)-dsymutil && \
-  cp bin/llvm-config $($(package)_staging_prefix_dir)/bin/ && \
-  cp lib/libLTO.so $($(package)_staging_prefix_dir)/lib/ && \
-  cp -rf lib/clang/$($(package)_version)/include/* $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include/
+  cp $($(package)_extract_dir)/bin/clang $($(package)_staging_prefix_dir)/bin/ && \
+  cp -P $($(package)_extract_dir)/bin/clang++ $($(package)_staging_prefix_dir)/bin/ && \
+  cp $($(package)_extract_dir)/bin/dsymutil $($(package)_staging_prefix_dir)/bin/$(host)-dsymutil && \
+  cp $($(package)_extract_dir)/bin/llvm-config $($(package)_staging_prefix_dir)/bin/ && \
+  cp $($(package)_extract_dir)/lib/libLTO.so $($(package)_staging_prefix_dir)/lib/ && \
+  cp -rf $($(package)_extract_dir)/lib/clang/$($(package)_version)/include/* $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include/
 endef
 
 define $(package)_postprocess_cmds
