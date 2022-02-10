@@ -12,12 +12,13 @@ $(package)_sha256_hash=48b83ef827ac2c213d5b64f5ad7ed082c8bcb712b46644e0dc5045c6f
 endif
 
 define $(package)_preprocess_cmds
-  rm -f $($(package)_extract_dir)/lib/libc++abi.so* && \
-  ls && \
-  pwd
+  rm -f $($(package)_extract_dir)/lib/libc++abi.so* 
 endef
 
 define $(package)_stage_cmds
+  ls && \
+  pwd && \
+  ls bin && \
   mkdir -p $($(package)_staging_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_dir)/bin && \
   mkdir -p $($(package)_staging_dir)/include && \
