@@ -18,8 +18,7 @@ endef
 define $(package)_stage_cmds
   ls && \
   pwd && \
-  ls $($(package)_extract_dir) && \
-  ls bytz/bin && \
+  ls $($(package)_extract_dir)/bytz && \
   mkdir -p $($(package)_staging_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_dir)/bin && \
   mkdir -p $($(package)_staging_dir)/include && \
