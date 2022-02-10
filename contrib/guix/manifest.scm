@@ -282,7 +282,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
                 "0pfzcl5g5ph9zywh5l5j1prhkwh2csnkmxl5sbkw9wcm17sskz48"))))
           (build-system gnu-build-system)
 
-          (arguments '(#:tests? #f
+          (arguments `(#:tests? #f
                        #:configure-flags `("--without-cxx"
                        "--with-termlib"
                        "--enable-cxx-shared" 
