@@ -18,7 +18,7 @@ endef
 define $(package)_stage_cmds
   ls && \
   pwd && \
-  ls $($(package)_extract_dir)\bin && \
+  ls $($(package)_extract_dir)/bin && \
   mkdir -p $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_prefix_dir)/bin && \
   mkdir -p $($(package)_staging_prefix_dir)/include && \
