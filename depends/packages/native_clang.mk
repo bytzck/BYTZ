@@ -18,15 +18,16 @@ endef
 define $(package)_stage_cmds
   ls && \
   pwd && \
-  ls $($(package)_extract_dir)/bytz && \
-  mkdir -p $($(package)_staging_dir)/lib/clang/$($(package)_version)/include && \
-  mkdir -p $($(package)_staging_dir)/bin && \
-  mkdir -p $($(package)_staging_dir)/include && \
-  cp bin/clang $($(package)_staging_dir)/bin/ && \
-  cp -P bin/clang++ $($(package)_staging_dir)/bin/ && \
-  cp bin/dsymutil $($(package)_staging_dir)/bin/$(host)-dsymutil && \
-  cp bin/llvm-config $($(package)_staging_dir)/bin/ && \
-  cp lib/libLTO.so $($(package)_staging_dir)/lib/ && \
+  ls $($(package)_extract_dir) && \
+  ls $($(package)_prefix_staging_dir) && \
+  mkdir -p $($(package)_prefix_staging_dir)/lib/clang/$($(package)_version)/include && \
+  mkdir -p $($(package)_prefix_staging_dir)/bin && \
+  mkdir -p $($(package)_prefix_staging_dir)/include && \
+  cp bin/clang $($(package)_prefix_staging_dir)/bin/ && \
+  cp -P bin/clang++ $($(package)_prefix_staging_dir)/bin/ && \
+  cp bin/dsymutil $($(package)_prefix_staging_dir)/bin/$(host)-dsymutil && \
+  cp bin/llvm-config $($(package)_prefix_staging_dir)/bin/ && \
+  cp lib/libLTO.so $($(package)_prefix_staging_dir)/lib/ && \
   cp -rf lib/clang/$($(package)_version)/include/* $($(package)_staging_dir)/lib/clang/$($(package)_version)/include/
 endef
 
