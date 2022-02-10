@@ -209,7 +209,7 @@ make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    #i686_linux_RANLIB=i686-linux-gnu-ranlib \
                                    #i686_linux_NM=i686-linux-gnu-nm \
                                    #i686_linux_STRIP=i686-linux-gnu-strip \
-                                   #x86_64_linux_CC=x86_64-linux-gnu-gcc \
+                                   x86_64_linux_CC=x86_64-linux-gnu-gcc \
                                    #x86_64_linux_CXX=x86_64-linux-gnu-g++ \
                                    #x86_64_linux_AR=x86_64-linux-gnu-ar \
                                    #x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
