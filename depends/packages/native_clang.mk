@@ -19,10 +19,11 @@ define $(package)_stage_cmds
   ls && \
   pwd && \
   ls $($(package)_extract_dir) && \
-  ls $($(package)_staging_prefix_dir) && \
-    mkdir -p $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include && \
+  mkdir -p $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_prefix_dir)/bin && \
   mkdir -p $($(package)_staging_prefix_dir)/include && \
+  pwd && \
+  ls $($(package)_staging_prefix_dir) && \
   cp bin/clang $($(package)_staging_prefix_dir)/bin/ && \
   cp -P bin/clang++ $($(package)_staging_prefix_dir)/bin/ && \
   cp bin/dsymutil $($(package)_staging_prefix_dir)/bin/$(host)-dsymutil && \
