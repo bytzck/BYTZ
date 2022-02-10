@@ -13,6 +13,7 @@ endif
 
 define $(package)_preprocess_cmds
   rm -f $($(package)_extract_dir)/lib/libc++abi.so*
+  ls -R
 endef
 
 define $(package)_stage_cmds
