@@ -75,6 +75,9 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
+  echo $($(package)_staging_dir) && \
+  ls && \
+  sleep 60 && \
   $(MAKE) INSTALL_PREFIX=$($(package)_staging_dir) -j1 install_sw
 endef
 
