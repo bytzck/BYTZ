@@ -721,7 +721,7 @@ inspecting signatures in Mach-O binaries.")
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
-           (list zip
+           (list zip base-openssl
                  (make-mingw-pthreads-cross-toolchain "x86_64-w64-mingw32")
                  (make-nsis-with-sde-support nsis-x86_64)
                  osslsigncode))
