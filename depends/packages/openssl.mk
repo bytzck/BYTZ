@@ -78,7 +78,7 @@ define $(package)_stage_cmds
   echo $($(package)_staging_dir) && \
   ls && \
   $(MAKE) INSTALL_PREFIX=$($(package)_staging_dir) -j1 install_sw && \
-  ls $($(package)_staging_dir)/bytz && \
+  ls $($(package)_staging_dir)/bytz/depends && \
   sleep 60
 endef
 
