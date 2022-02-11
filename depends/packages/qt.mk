@@ -217,7 +217,7 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
-  ls ls $GUIX_PROFILE && \
+  ls $GUIX_PROFILE && \
   find / -name ssl.h && \
   sleep 60 && \
   export OPENSSL_LIBS=/lib && \
