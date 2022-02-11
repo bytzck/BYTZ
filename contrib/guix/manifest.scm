@@ -294,10 +294,10 @@ parse, modify and abstract ELF, PE and MachO formats.")
     (license license:gpl3+)))
 
 (define-public base-openssl
-  (let ((commit "52c587d60be67c337364b830dd3fdc15404a2f04"))
+  (let ((commit "b4a57c4c419a578d1a16862a6b445c34003b4c52"))
   (package
     (name "openssl")
-    (version "1.1.1j")
+    (version "1.0.1k")
     (source (origin
               (method git-fetch)
               (uri (git-reference 
@@ -306,7 +306,7 @@ parse, modify and abstract ELF, PE and MachO formats.")
               (file-name (git-file-name name commit))
               (sha256
                (base32
-                "0c8k7njyb7m6fi4kya3h51fb0hqsjv78pm4bxf0libvzkzkbr7mi"))))
+                "1bg7k9psrddcb79cpx2xd1r2vlxhi4i9v7mgwl0n4x0lg43dxvmh"))))
           (build-system gnu-build-system)
     (home-page "https://www.openssl.org/")
     (synopsis "full-featured toolkit for general-purpose cryptography and secure communication")
