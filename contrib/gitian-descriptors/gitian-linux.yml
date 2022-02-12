@@ -30,6 +30,7 @@ packages:
 - "binutils-i686-linux-gnu"
 - "g++-8-multilib"
 - "gcc-8-multilib"
+- "bison"
 - "binutils-gold"
 - "git"
 - "pkg-config"
