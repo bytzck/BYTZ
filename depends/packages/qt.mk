@@ -218,7 +218,7 @@ define $(package)_config_cmds
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
   echo $(host_prefix) && \
-  ls $(host_prefix)/lib && \
+  ls $(host_prefix) && \
   sleep 60 && \
   export OPENSSL_LIBS=$(host_prefix)/lib && \
   cd qtbase && \
