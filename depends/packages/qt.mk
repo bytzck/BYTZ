@@ -217,9 +217,9 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
-  find / -mount -type f -name ssl.h  && \
+  ls $(host_prefix)/lib && \
   sleep 60 && \
-  export OPENSSL_LIBS=/lib && \
+  export OPENSSL_LIBS=$(host_prefix)/lib && \
   cd qtbase && \
   ./configure -top-level $($(package)_config_opts)
 endef
