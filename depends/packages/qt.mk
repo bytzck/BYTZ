@@ -219,7 +219,6 @@ define $(package)_config_cmds
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
   ls $(host_prefix)/lib && \
-  sleep 60 && \
   export OPENSSL_LIBS=$(host_prefix)/lib && \
   cd qtbase && \
   ./configure -top-level $($(package)_config_opts)
@@ -233,6 +232,9 @@ define $(package)_stage_cmds
   $(MAKE) -C qtbase/src INSTALL_ROOT=$($(package)_staging_dir) $(addsuffix -install_subtargets,$(addprefix sub-,$($(package)_qt_libs))) && \
   $(MAKE) -C qttools/src/linguist INSTALL_ROOT=$($(package)_staging_dir) $(addsuffix -install_subtargets,$(addprefix sub-,$($(package)_linguist_tools))) && \
   $(MAKE) -C qttranslations INSTALL_ROOT=$($(package)_staging_dir) install_subtargets
+  if `test -f qtbase/src/plugins/platforms/xcb/xcb-static/libxcb-static.a`; then \
+    cp qtbase/src/plugins/platforms/xcb/xcb-static/libxcb-static.a $($(package)_staging_prefix_dir)/lib; \
+  fi
 endef
 
 define $(package)_postprocess_cmds
