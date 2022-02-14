@@ -284,6 +284,8 @@ mkdir -p "$DISTSRC"
 
     # Extract the source tarball
     tar --strip-components=1 -xf "${GIT_ARCHIVE}"
+    echo ${BASEPREFIX}/${HOST}
+    ls ${BASEPREFIX}/${HOST}
 
     ./autogen.sh
 
