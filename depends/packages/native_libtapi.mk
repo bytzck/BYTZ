@@ -8,8 +8,8 @@ $(package)_sha256_hash=62e419c12d1c9fad67cc1cd523132bc00db050998337c734c15bc8d73
 #ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
 #$(package)_dependencies=native_clang
 #endif
-ls /home/ckti/.guix-profile && \
 define $(package)_build_cmds
+  ls /home/ckti/.guix-profile && \
   CC=clang CXX=clang++ INSTALLPREFIX=$($(package)_staging_prefix_dir) ./build.sh
 endef
 
