@@ -10,7 +10,7 @@ $(package)_sha256_hash=62e419c12d1c9fad67cc1cd523132bc00db050998337c734c15bc8d73
 #endif
 
 define $(package)_build_cmds
-  CC=clang_prog CXX=clang++ INSTALLPREFIX=$($(package)_staging_prefix_dir) ./build.sh
+  CC=clang CXX=clang++ INSTALLPREFIX=$($(package)_staging_prefix_dir) ./build.sh
 endef
 
 define $(package)_stage_cmds
