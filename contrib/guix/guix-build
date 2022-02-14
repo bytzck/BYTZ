@@ -47,7 +47,7 @@ See contrib/guix/README.md for more details.
 EOF
 exit 1
 fi
-
+if [ $HOST 
 ################
 # The git worktree should not be dirty
 ################
@@ -130,6 +130,7 @@ for host in $HOSTS; do
             OSX_SDK="$(make -C "${PWD}/depends" --no-print-directory HOST="$host" print-OSX_SDK | sed 's@^[^=]\+=@@g')"
             if [ -e "$OSX_SDK" ]; then
                 echo "Found macOS SDK at '${OSX_SDK}', using..."
+                ADDITIONAL_GUIX_COMMON_FLAGS="--with-c-toolchain=hwloc=clang-toolchain intel-mpi-benchmarks"
             else
                 echo "macOS SDK does not exist at '${OSX_SDK}', please place the extracted, untarred SDK there to perform darwin builds, exiting..."
                 exit 1
