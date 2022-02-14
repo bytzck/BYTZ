@@ -284,8 +284,6 @@ mkdir -p "$DISTSRC"
 
     # Extract the source tarball
     tar --strip-components=1 -xf "${GIT_ARCHIVE}"
-    echo ${BASEPREFIX}/${HOST}
-    ls ${BASEPREFIX}/${HOST}/plugins
 
     ./autogen.sh
 
@@ -296,7 +294,6 @@ mkdir -p "$DISTSRC"
                     --disable-ccache \
                     --disable-maintainer-mode \
                     --disable-dependency-tracking \
-                    --with-qt-plugindir="${BASEPREFIX}/${HOST}/plugins/platforms" \
                     ${CONFIGFLAGS} \
                     ${HOST_CFLAGS:+CFLAGS="${HOST_CFLAGS}"} \
                     ${HOST_CXXFLAGS:+CXXFLAGS="${HOST_CXXFLAGS}"} \
