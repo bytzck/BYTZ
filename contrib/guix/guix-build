@@ -131,6 +131,7 @@ for host in $HOSTS; do
             if [ -e "$OSX_SDK" ]; then
                 echo "Found macOS SDK at '${OSX_SDK}', using..."
                 ADDITIONAL_GUIX_COMMON_FLAGS="--with-c-toolchain=hwloc=clang-toolchain intel-mpi-benchmarks"
+                echo $ADDITIONAL_GUIX_COMMON_FLAGS
             else
                 echo "macOS SDK does not exist at '${OSX_SDK}', please place the extracted, untarred SDK there to perform darwin builds, exiting..."
                 exit 1
