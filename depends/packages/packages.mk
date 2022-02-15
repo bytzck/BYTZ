@@ -1,8 +1,9 @@
-packages:=boost libevent openssl gmp bls-dash backtrace cmake native_protobuf
-
+packages:=boost libevent openssl cmake bls-dash gmp backtrace zeromq
 #qrencode_packages = qrencode
 qt_native_packages = native_protobuf
 qt_packages = qrencode protobuf zlib
+
+qrencode_packages = qrencode
 
 qt_linux_packages:=qt expat libxcb xcb_proto libXau xproto freetype fontconfig libxkbcommon
 qt_android_packages=qt
@@ -10,7 +11,7 @@ qt_android_packages=qt
 qt_darwin_packages=qt
 qt_mingw32_packages=qt
 
-bdb_packages=bdb
+wallet_packages=bdb
 sqlite_packages=sqlite
 
 zmq_packages=zeromq
