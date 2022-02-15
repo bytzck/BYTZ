@@ -4,8 +4,7 @@ $(package)_download_path=https://download.qt.io/official_releases/qt/5.12/$($(pa
 $(package)_suffix=everywhere-src-$($(package)_version).tar.xz
 $(package)_file_name=qtbase-$($(package)_suffix)
 $(package)_sha256_hash=1c1b4e33137ca77881074c140d54c3c9747e845a31338cfe8680f171f0bc3a39
-$(package)_dependencies=openssl zlib
-$(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon openssl
+$(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
 $(package)_qt_libs=corelib network widgets gui plugins testlib
 $(package)_linguist_tools = lrelease lupdate lconvert
 $(package)_patches = qt.pro qttools_src.pro
@@ -30,9 +29,8 @@ $(package)_config_opts_release += -silent
 $(package)_config_opts_debug = -debug
 $(package)_config_opts_debug += -optimized-tools
 $(package)_config_opts += -bindir $(build_prefix)/bin
-$(package)_config_opts += -c++std c++11
+$(package)_config_opts += -c++std c++1z
 $(package)_config_opts += -confirm-license
-$(package)_config_opts += -dbus-runtime
 $(package)_config_opts += -hostprefix $(build_prefix)
 $(package)_config_opts += -no-compile-examples
 $(package)_config_opts += -no-cups
@@ -42,13 +40,19 @@ $(package)_config_opts += -no-freetype
 $(package)_config_opts += -no-gif
 $(package)_config_opts += -no-glib
 $(package)_config_opts += -no-icu
+$(package)_config_opts += -no-ico
 $(package)_config_opts += -no-iconv
 $(package)_config_opts += -no-kms
 $(package)_config_opts += -no-linuxfb
+$(package)_config_opts += -no-libjpeg
+$(package)_config_opts += -no-libproxy
 $(package)_config_opts += -no-libudev
 $(package)_config_opts += -no-mtdev
+$(package)_config_opts += -no-openssl
 $(package)_config_opts += -no-openvg
 $(package)_config_opts += -no-reduce-relocations
+$(package)_config_opts += -no-sctp
+$(package)_config_opts += -no-securetransport
 $(package)_config_opts += -no-sql-db2
 $(package)_config_opts += -no-sql-ibase
 $(package)_config_opts += -no-sql-oci
@@ -58,27 +62,57 @@ $(package)_config_opts += -no-sql-odbc
 $(package)_config_opts += -no-sql-psql
 $(package)_config_opts += -no-sql-sqlite
 $(package)_config_opts += -no-sql-sqlite2
+$(package)_config_opts += -no-system-proxies
 $(package)_config_opts += -no-use-gold-linker
 $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
+$(package)_config_opts += -nomake tools
 $(package)_config_opts += -opensource
-$(package)_config_opts += -ssl
-$(package)_config_opts += -optimized-qmake
-$(package)_config_opts += -pch
 $(package)_config_opts += -pkg-config
 $(package)_config_opts += -prefix $(host_prefix)
 $(package)_config_opts += -qt-libpng
-$(package)_config_opts += -qt-libjpeg
 $(package)_config_opts += -qt-pcre
 $(package)_config_opts += -qt-harfbuzz
-$(package)_config_opts += -system-zlib
+$(package)_config_opts += -qt-zlib
 $(package)_config_opts += -static
 $(package)_config_opts += -v
+$(package)_config_opts += -no-feature-bearermanagement
+$(package)_config_opts += -no-feature-colordialog
+$(package)_config_opts += -no-feature-commandlineparser
 $(package)_config_opts += -no-feature-concurrent
-$(package)_config_opts += -no-feature-securetransport
+$(package)_config_opts += -no-feature-dial
+$(package)_config_opts += -no-feature-fontcombobox
+$(package)_config_opts += -no-feature-ftp
+$(package)_config_opts += -no-feature-http
+$(package)_config_opts += -no-feature-image_heuristic_mask
+$(package)_config_opts += -no-feature-keysequenceedit
+$(package)_config_opts += -no-feature-lcdnumber
+$(package)_config_opts += -no-feature-networkdiskcache
+$(package)_config_opts += -no-feature-networkproxy
+$(package)_config_opts += -no-feature-pdf
 $(package)_config_opts += -no-feature-printdialog
 $(package)_config_opts += -no-feature-printer
+$(package)_config_opts += -no-feature-printpreviewdialog
+$(package)_config_opts += -no-feature-printpreviewwidget
+$(package)_config_opts += -no-feature-sessionmanager
+$(package)_config_opts += -no-feature-socks5
+$(package)_config_opts += -no-feature-sql
+$(package)_config_opts += -no-feature-sqlmodel
+$(package)_config_opts += -no-feature-statemachine
+$(package)_config_opts += -no-feature-syntaxhighlighter
+$(package)_config_opts += -no-feature-textbrowser
+$(package)_config_opts += -no-feature-textodfwriter
+$(package)_config_opts += -no-feature-topleveldomain
+$(package)_config_opts += -no-feature-udpsocket
+$(package)_config_opts += -no-feature-undocommand
+$(package)_config_opts += -no-feature-undogroup
+$(package)_config_opts += -no-feature-undostack
+$(package)_config_opts += -no-feature-undoview
+$(package)_config_opts += -no-feature-vnc
+$(package)_config_opts += -no-feature-wizard
+$(package)_config_opts += -no-feature-xml
 
+$(package)_config_opts_darwin = -no-dbus
 $(package)_config_opts_darwin += -no-opengl
 $(package)_config_opts_darwin += -pch
 $(package)_config_opts_darwin += -no-feature-corewlan
@@ -89,9 +123,8 @@ $(package)_config_opts_darwin += -xplatform macx-clang-linux
 $(package)_config_opts_darwin += -device-option MAC_SDK_PATH=$(OSX_SDK)
 $(package)_config_opts_darwin += -device-option MAC_SDK_VERSION=$(OSX_SDK_VERSION)
 $(package)_config_opts_darwin += -device-option CROSS_COMPILE="$(host)-"
-$(package)_config_opts_darwin += -device-option MAC_MIN_VERSION=$(OSX_MIN_VERSION)
 $(package)_config_opts_darwin += -device-option MAC_TARGET=$(host)
-$(package)_config_opts_darwin += -device-option MAC_LD64_VERSION=$(LD64_VERSION)
+$(package)_config_opts_darwin += -device-option XCODE_VERSION=$(XCODE_VERSION)
 endif
 
 # for macOS on Apple Silicon (ARM) see https://bugreports.qt.io/browse/QTBUG-85279
@@ -101,7 +134,6 @@ $(package)_config_opts_linux = -qt-xcb
 $(package)_config_opts_linux += -no-xcb-xlib
 $(package)_config_opts_linux += -no-feature-xlib
 $(package)_config_opts_linux += -system-freetype
-$(package)_config_opts_linux += -no-feature-sessionmanager
 $(package)_config_opts_linux += -fontconfig
 $(package)_config_opts_linux += -no-opengl
 $(package)_config_opts_linux += -no-feature-vulkan
@@ -123,7 +155,6 @@ $(package)_config_opts_mingw32 += "QMAKE_CXXFLAGS = '$($(package)_cflags) $($(pa
 $(package)_config_opts_mingw32 += "QMAKE_LFLAGS = '$($(package)_ldflags)'"
 $(package)_config_opts_mingw32 += -device-option CROSS_COMPILE="$(host)-"
 $(package)_config_opts_mingw32 += -pch
-$(package)_config_opts_mingw32 += -openssl
 
 $(package)_config_opts_android = -xplatform android-clang
 $(package)_config_opts_android += -android-sdk $(ANDROID_SDK)
@@ -218,8 +249,6 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
-  ls $(host_prefix)/lib && \
-  export OPENSSL_LIBS=$(host_prefix)/lib && \
   cd qtbase && \
   ./configure -top-level $($(package)_config_opts)
 endef
@@ -231,10 +260,7 @@ endef
 define $(package)_stage_cmds
   $(MAKE) -C qtbase/src INSTALL_ROOT=$($(package)_staging_dir) $(addsuffix -install_subtargets,$(addprefix sub-,$($(package)_qt_libs))) && \
   $(MAKE) -C qttools/src/linguist INSTALL_ROOT=$($(package)_staging_dir) $(addsuffix -install_subtargets,$(addprefix sub-,$($(package)_linguist_tools))) && \
-  $(MAKE) -C qttranslations INSTALL_ROOT=$($(package)_staging_dir) install_subtargets && \
-  if `test -f qtbase/src/plugins/platforms/xcb/xcb-static/libxcb-static.a`; then \
-    cp qtbase/src/plugins/platforms/xcb/xcb-static/libxcb-static.a $($(package)_staging_prefix_dir)/lib; \
-  fi
+  $(MAKE) -C qttranslations INSTALL_ROOT=$($(package)_staging_dir) install_subtargets
 endef
 
 define $(package)_postprocess_cmds
