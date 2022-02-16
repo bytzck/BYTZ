@@ -15,7 +15,7 @@ ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
 # Clang is a dependency of native_cctools when FORCE_USE_SYSTEM_CLANG is empty
 darwin_native_toolchain=native_cctools
 
-clang_prog=$(build_prefix)/bin/clang
+clang_prog=clang
 clangxx_prog=$(clang_prog)++
 
 clang_resource_dir=$(build_prefix)/lib/clang/$(native_clang_version)
