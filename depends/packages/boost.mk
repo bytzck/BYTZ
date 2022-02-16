@@ -31,7 +31,6 @@ define $(package)_config_cmds
   ls && \
   ls / && \
   ls /bytz/depends/x86_64-apple-darwin18/native/bin && \
-  find / -mount -name "*-ar" && \
   sleep 60 && \
   ./bootstrap.sh --without-icu --with-libraries=$(boost_config_libraries)
 endef
