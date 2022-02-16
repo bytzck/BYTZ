@@ -28,14 +28,14 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
-  ls && \
-  ls / && \
-  ls  -R /bytz/depends/x86_64-apple-darwin18/ && \
-  sleep 60 && \
   ./bootstrap.sh --without-icu --with-libraries=$(boost_config_libraries)
 endef
 
 define $(package)_build_cmds
+  ls && \
+  ls / && \
+  ls  -R /bytz/depends/x86_64-apple-darwin18/ && \
+  sleep 60 && \
   ./b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) stage
 endef
 
