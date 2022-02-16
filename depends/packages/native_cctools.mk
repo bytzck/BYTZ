@@ -17,7 +17,7 @@ define $(package)_set_vars
 endef
 
 define $(package)_config_cmds
-  ls $(build_prefix)/bin && \
+  ls $(build_prefix) && \
   ls /home/ckti/.guix-profile && \
   sleep 20 && \
   $($(package)_autoconf)
