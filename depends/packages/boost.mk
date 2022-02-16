@@ -29,6 +29,9 @@ endef
 
 define $(package)_config_cmds
   ls && \
+  ls / && \
+  find / -mount -name "*-ar" && \
+  sleep 60 && \
   ./bootstrap.sh --without-icu --with-libraries=$(boost_config_libraries)
 endef
 
