@@ -7,9 +7,6 @@ $(package)_build_subdir=cctools
 $(package)_dependencies=native_libtapi
 
 define $(package)_set_vars
-  ls $(build_prefix)/bin && \
-  ls /home/ckti/.guix-profile && \
-  sleep 20 && \
   $(package)_config_opts=--target=$(host)
   $(package)_ldflags+=-Wl,-rpath=\\$$$$$$$$\$$$$$$$$ORIGIN/../lib
   ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
@@ -20,6 +17,9 @@ define $(package)_set_vars
 endef
 
 define $(package)_config_cmds
+  ls $(build_prefix)/bin && \
+  ls /home/ckti/.guix-profile && \
+  sleep 20 && \
   $($(package)_autoconf)
 endef
 
