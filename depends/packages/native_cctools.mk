@@ -18,7 +18,7 @@ endef
 
 define $(package)_config_cmds
   ls $(build_prefix) && \
-  ls /home/ckti/.guix-profile && \
+  ls /home/ckti/.guix-profile/bin && \
   sleep 20 && \
   $($(package)_autoconf)
 endef
