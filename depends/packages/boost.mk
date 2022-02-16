@@ -30,7 +30,7 @@ endef
 define $(package)_config_cmds
   ls && \
   ls / && \
-  ls /bytz/depends/x86_64-apple-darwin18/native/bin && \
+  ls  -R /bytz/depends/x86_64-apple-darwin18/ && \
   sleep 60 && \
   ./bootstrap.sh --without-icu --with-libraries=$(boost_config_libraries)
 endef
