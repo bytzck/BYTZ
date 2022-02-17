@@ -12,21 +12,19 @@ $(package)_sha256_hash=48b83ef827ac2c213d5b64f5ad7ed082c8bcb712b46644e0dc5045c6f
 endif
 
 define $(package)_preprocess_cmds
-  rm -f $($(package)_extract_dir)/lib/libc++abi.so*
+  rm -f $($(package)_extract_dir)/lib/libc++abi.so* 
 endef
 
 define $(package)_stage_cmds
   mkdir -p $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include && \
   mkdir -p $($(package)_staging_prefix_dir)/bin && \
   mkdir -p $($(package)_staging_prefix_dir)/include && \
-  cp bin/clang $($(package)_staging_prefix_dir)/bin/ && \
-  cp -P bin/clang++ $($(package)_staging_prefix_dir)/bin/ && \
-  cp bin/dsymutil $($(package)_staging_prefix_dir)/bin/$(host)-dsymutil && \
-  cp bin/llvm-config $($(package)_staging_prefix_dir)/bin/ && \
-  cp bin/llvm-ranlib $($(package)_staging_prefix_dir)/bin/ && \
-  cp bin/llvm-ar $($(package)_staging_prefix_dir)/bin/ && \
-  cp lib/libLTO.so $($(package)_staging_prefix_dir)/lib/ && \
-  cp -rf lib/clang/$($(package)_version)/include/* $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include/
+  cp $($(package)_extract_dir)/bin/clang $($(package)_staging_prefix_dir)/bin/ && \
+  cp -P $($(package)_extract_dir)/bin/clang++ $($(package)_staging_prefix_dir)/bin/ && \
+  cp $($(package)_extract_dir)/bin/dsymutil $($(package)_staging_prefix_dir)/bin/$(host)-dsymutil && \
+  cp $($(package)_extract_dir)/bin/llvm-config $($(package)_staging_prefix_dir)/bin/ && \
+  cp $($(package)_extract_dir)/lib/libLTO.so $($(package)_staging_prefix_dir)/lib/ && \
+  cp -rf $($(package)_extract_dir)/lib/clang/$($(package)_version)/include/* $($(package)_staging_prefix_dir)/lib/clang/$($(package)_version)/include/
 endef
 
 define $(package)_postprocess_cmds
