@@ -18,7 +18,7 @@ $(package)_config_opts_i686_linux=address-model=32 architecture=x86
 ifneq (,$(findstring clang,$($(package)_cxx)))
 $(package)_toolset_$(host_os)=clang
 $(package)_archiver_$(host_os)=ar
-$(package)_ranlib_$(host_os)=ranlib
+$(host_RANLIB)=ranlib
 else
 $(package)_toolset_$(host_os)=gcc
 $(package)_archiver_$(host_os)=$($(package)_ar)
