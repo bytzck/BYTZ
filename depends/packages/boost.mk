@@ -17,10 +17,12 @@ $(package)_config_opts_i686_mingw32=address-model=32
 $(package)_config_opts_i686_linux=address-model=32 architecture=x86
 ifneq (,$(findstring clang,$($(package)_cxx)))
 $(package)_toolset_$(host_os)=clang
+$(package)_archiver_$(host_os)=ar
+$(package)_ranlib_$(host_os)=ranlib
 else
 $(package)_toolset_$(host_os)=gcc
-endif
 $(package)_archiver_$(host_os)=$($(package)_ar)
+endif
 $(package)_toolset_darwin=clang-darwin
 $(package)_config_libraries=chrono,filesystem,program_options,system,thread,test
 $(package)_cxxflags=-std=c++11 -fvisibility=hidden
