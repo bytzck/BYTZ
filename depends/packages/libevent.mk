@@ -17,7 +17,7 @@ define $(package)_set_vars
 endef
 
 define $(package)_config_cmds
-  CC="$($(package)_cc)" \
+  CC=clang \
   $($(package)_autoconf)
 endef
 
