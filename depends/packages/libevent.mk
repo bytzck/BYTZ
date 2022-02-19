@@ -14,11 +14,13 @@ define $(package)_set_vars
   $(package)_config_opts_linux=--with-pic
   $(package)_config_opts_android=--with-pic
   $(package)_cppflags_mingw32=-D_WIN32_WINNT=0x0601
-  $(package)_cc=clang
-  $(package)_cxx=clang++
-  $(package)_ar=ar
-  $(package)_ranlib=ranlib
-  $(package)_libtool=_libtool
+  ifneq (,$(findstring clang,$($(package)_cxx)))
+    $(package)_cc=clang
+    $(package)_cxx=clang++
+    $(package)_ar=ar
+    $(package)_ranlib=ranlib
+    $(package)_libtool=libtool
+  endif
 endef
 
 define $(package)_config_cmds
