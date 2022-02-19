@@ -21,7 +21,7 @@ define $(package)_config_cmds
   ls ~/.guix-profile/bin && \
   sleep 60 && \
   $($(package)_autoconf) && \
-  echo $CC
+  echo ${CC}
 endef
 
 define $(package)_build_cmds
