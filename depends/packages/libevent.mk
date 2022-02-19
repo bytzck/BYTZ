@@ -19,9 +19,9 @@ endef
 define $(package)_config_cmds
   export CC=clang && \
   ls ~/.guix-profile/bin && \
-  sleep 60 && \
   $($(package)_autoconf) && \
-  echo ${CC}
+  echo ${CC} && \
+  sleep 60
 endef
 
 define $(package)_build_cmds
