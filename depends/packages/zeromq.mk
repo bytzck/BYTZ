@@ -18,8 +18,6 @@ define $(package)_set_vars
   $(package)_config_opts += --disable-libunwind --disable-radix-tree --without-gcov --disable-dependency-tracking
   $(package)_config_opts += --disable-Werror --disable-drafts --enable-option-checking
   $(package)_config_opts_linux=--with-pic
-  echo ${OSX_SDK} && \
-  sleep 10| && \
   $(package)_config_opts_darwin += -I$(OSX_SDK)
   $(package)_config_opts_darwin += MAC_SDK_VERSION=$(OSX_SDK_VERSION)
   $(package)_config_opts_android=--with-pic
@@ -32,10 +30,14 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
+  echo ${OSX_SDK} && \
+  sleep 10 && \
   $($(package)_autoconf)
 endef
 
 define $(package)_build_cmds
+  echo ${OSX_SDK} && \
+  sleep 10 && \
   $(MAKE) src/libzmq.la
 endef
 
