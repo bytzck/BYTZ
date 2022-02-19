@@ -6,13 +6,6 @@ $(package)_sha256_hash=bcbabe1e2c7d0eec4ed612e10b94b112dd5f06fcefa994a0c79a45d83
 $(package)_patches=remove_libstd_link.patch
 
 define $(package)_set_vars
-  ifneq (,$(findstring clang,$($(package)_cxx)))
-    $(package)_cc=clang
-    $(package)_cxx=clang++
-    $(package)_ar=ar
-    $(package)_ranlib=ranlib
-    $(package)_libtool=libtool
-  endif
   $(package)_config_opts=--without-docs --disable-shared --disable-curve --disable-curve-keygen --disable-perf
   $(package)_config_opts += --without-libsodium --without-libgssapi_krb5 --without-pgm --without-norm --without-vmci
   $(package)_config_opts += --disable-libunwind --disable-radix-tree --without-gcov --disable-dependency-tracking
