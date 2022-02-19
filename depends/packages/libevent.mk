@@ -20,7 +20,8 @@ define $(package)_config_cmds
   export CC=clang && \
   ls ~/.guix-profile/bin && \
   sleep 60 && \
-  $($(package)_autoconf)
+  $($(package)_autoconf) && \
+  echo $CC
 endef
 
 define $(package)_build_cmds
