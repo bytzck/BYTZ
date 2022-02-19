@@ -18,7 +18,7 @@ define $(package)_set_vars
   $(package)_config_opts += --disable-libunwind --disable-radix-tree --without-gcov --disable-dependency-tracking
   $(package)_config_opts += --disable-Werror --disable-drafts --enable-option-checking
   $(package)_config_opts_linux=--with-pic
-  $(package)_config_opts_darwin += -I$(OSX_SDK)/usr/include/
+  $(package)_config_opts_darwin += 'CPPFLAGS += "-I$(OSX_SDK)/usr/include/"'
   $(package)_config_opts_android=--with-pic
   $(package)_cxxflags=-std=c++17
 endef
