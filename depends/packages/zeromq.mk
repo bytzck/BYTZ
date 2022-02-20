@@ -10,10 +10,9 @@ define $(package)_set_vars
   $(package)_config_opts += --without-libsodium --without-libgssapi_krb5 --without-pgm --without-norm --without-vmci
   $(package)_config_opts += --disable-libunwind --disable-radix-tree --without-gcov --disable-dependency-tracking
   $(package)_config_opts += --disable-Werror --disable-drafts --enable-option-checking
-  $(package)_config_opts_darwin=--without-kqueue --without-epoll --without-devpoll --without-pollset --without-poll --without-select
   $(package)_config_opts_linux=--with-pic
   $(package)_config_opts_android=--with-pic
-  $(package)_cxxflags=-std=c++17
+  $(package)_cxxflags=-std=c++11
 endef
 
 define $(package)_preprocess_cmds
