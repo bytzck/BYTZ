@@ -13,7 +13,14 @@ define $(package)_set_vars
     $(package)_cc=clang \
               -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
               -isysroot$(OSX_SDK)
-    $(package)_cxx=clang++
+    $(package)_cxx=clang++ \
+    --target=$(host) -mmacosx-version-min=$(OSX_MIN_VERSION) \
+               -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
+               -isysroot$(OSX_SDK) \
+               -stdlib=libc++ \
+               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 \
+               -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
+               -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
     $(package)_cppflags="-I$(OSX_SDK)/usr/include"
     $(package)_ar=ar
     $(package)_ranlib=ranlib
