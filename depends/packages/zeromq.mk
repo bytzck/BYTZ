@@ -10,7 +10,11 @@ define $(package)_set_vars
   $(package)_config_opts_linux=--with-pic
   $(package)_cxxflags=-std=c++11
   ifneq (,$(findstring clang,$($(package)_cxx)))
-    $(package)_cc=clang
+    $(package)_cc=clang \
+              -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
+              -isysroot$(OSX_SDK) \
+              -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
+              -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
     $(package)_cxx=clang++
     $(package)_ar=ar
     $(package)_ranlib=ranlib
