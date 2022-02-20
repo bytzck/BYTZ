@@ -12,7 +12,7 @@ define $(package)_set_vars
   ifneq (,$(findstring clang,$($(package)_cxx)))
     $(package)_cc=clang \
               -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
-              -isysroot$(OSX_SDK) \
+              -isysroot$(OSX_SDK)
     $(package)_cxx=clang++
     $(package)_cppflags="-L$(OSX_SDK)/usr/include $(clang_resource_dir)/include"
     $(package)_ar=ar
