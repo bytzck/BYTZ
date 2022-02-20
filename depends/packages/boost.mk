@@ -15,7 +15,7 @@ $(package)_config_opts_mingw32=binary-format=pe target-os=windows threadapi=win3
 $(package)_config_opts_x86_64_mingw32=address-model=64
 $(package)_config_opts_i686_mingw32=address-model=32
 $(package)_config_opts_i686_linux=address-model=32 architecture=x86
-ifneq (,$(findstring clang,$($(package)_cxx)))
+ifneq (,$(findstring darwin,$($(host))))
   $(package)_cc="clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)"
   $(package)_cxx="clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++"
   $(package)_ar=ar
