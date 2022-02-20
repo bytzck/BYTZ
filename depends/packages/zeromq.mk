@@ -14,7 +14,7 @@ define $(package)_set_vars
               -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
               -isysroot$(OSX_SDK)
     $(package)_cxx=clang++
-    $(package)_cppflags="-L$(OSX_SDK)/usr/include"
+    $(package)_cppflags="-I$(OSX_SDK)/usr/include"
     $(package)_ar=ar
     $(package)_ranlib=ranlib
     $(package)_libtool=libtool
