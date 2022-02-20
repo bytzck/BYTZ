@@ -10,27 +10,26 @@ $(package)_config_opts_debug=variant=debug
 $(package)_config_opts=--layout=tagged --build-type=complete --user-config=user-config.jam
 $(package)_config_opts+=threading=multi link=static -sNO_BZIP2=1 -sNO_ZLIB=1
 $(package)_config_opts_linux=threadapi=pthread runtime-link=shared
-$(package)_config_opts_darwin=--toolset=clang-darwin runtime-link=shared
+$(package)_config_opts_darwin=target-os=darwin runtime-link=shared
 $(package)_config_opts_mingw32=binary-format=pe target-os=windows threadapi=win32 runtime-link=static
 $(package)_config_opts_x86_64_mingw32=address-model=64
 $(package)_config_opts_i686_mingw32=address-model=32
 $(package)_config_opts_i686_linux=address-model=32 architecture=x86
-ifneq (,$(findstring darwin,$($(host))))
-  $(package)_cc="clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)"
-  $(package)_cxx="clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++"
-  $(package)_ar=ar
-  $(package)_ranlib=ranlib
-  $(package)_libtool=libtool
-endif
+ifneq (,$(findstring clang,$($(package)_cxx)))
+$(package)_toolset_$(host_os)=clang
+$(package)_archiver_$(host_os)=ar
+$(package)_ranlib_$(host_os)=ranlib
+else
 $(package)_toolset_$(host_os)=gcc
 $(package)_archiver_$(host_os)=$($(package)_ar)
+endif
 $(package)_config_libraries=chrono,filesystem,program_options,system,thread,test
 $(package)_cxxflags=-std=c++11 -fvisibility=hidden
 $(package)_cxxflags_linux=-fPIC
 endef
 
 define $(package)_preprocess_cmds
-  echo "using $(boost_toolset_$(host_os)) : : $($(package)_cxx) : <cxxflags>\"$($(package)_cxxflags) $($(package)_cppflags)\" <linkflags>\"$($(package)_ldflags)\" <archiver>\"$(boost_archiver_$(host_os))\" <striper>\"$(host_STRIP)\"  <ranlib>\"$(host_RANLIB)\" <rc>\"$(host_WINDRES)\" : ;" > user-config.jam
+  echo "using $(boost_toolset_$(host_os)) : : $($(package)_cxx) : <cxxflags>\"$($(package)_cxxflags) $($(package)_cppflags)\" <linkflags>\"$($(package)_ldflags)\" <archiver>\"$(boost_archiver_$(host_os))\" <striper>\"$(host_STRIP)\"  <ranlib>\"ranlib\" <rc>\"$(host_WINDRES)\" : ;" > user-config.jam
 endef
 
 define $(package)_config_cmds
