@@ -37,7 +37,7 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  find -type f /home/ckti/.guix-profile/ -name "c++config.h" && \
+  find /home/ckti/.guix-profile/ -type f -name "c++config.h" && \
   sleep 10 && \
   ./b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) stage
 endef
