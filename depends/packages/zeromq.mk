@@ -9,17 +9,6 @@ define $(package)_set_vars
   $(package)_config_opts=--without-docs --disable-shared --without-libsodium --disable-curve --disable-curve-keygen --disable-perf --disable-Werror
   $(package)_config_opts_linux=--with-pic
   $(package)_cxxflags=-std=c++11
-  ifneq (,$(findstring clang,$($(package)_cxx)))
-    $(package)_cc=clang \
-              -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
-              -isysroot$(OSX_SDK)
-    $(package)_cxx=clang++ \
-               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 
-    $(package)_cppflags="-I$(OSX_SDK)/usr/include"
-    $(package)_ar=ar
-    $(package)_ranlib=ranlib
-    $(package)_libtool=libtool
-  endif
 endef
 
 define $(package)_preprocess_cmds
