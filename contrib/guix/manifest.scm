@@ -201,8 +201,8 @@ chain for " target " development."))
       (license (package-license pthreads-xgcc)))))
 
 (define (make-nsis-with-sde-support base-nsis)
-  (package base-nsis
-    ))
+  (package-with-extra-patches base-nsis
+    (search-our-patches "nsis-SConstruct-sde-support.patch")))
 
 (define-public font-tuffy
   (package
