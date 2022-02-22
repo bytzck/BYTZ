@@ -296,9 +296,10 @@ AC_DEFUN([_BITCOIN_QT_CHECK_STATIC_PLUGINS],[
   CHECK_STATIC_PLUGINS_TEMP_LIBS="$LIBS"
   LIBS="$2${qt_lib_suffix} $QT_LIBS $LIBS"
   AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-      #include <QtPlugin>
-      Q_IMPORT_PLUGIN($1)
-    ]])],
+    #define QT_STATICPLUGIN
+    #include <QtPlugin>
+    $1]],
+    [[return 0;]])],
     [AC_MSG_RESULT(yes); QT_LIBS="$2${qt_lib_suffix} $QT_LIBS"],
     [AC_MSG_RESULT(no); BITCOIN_QT_FAIL(Could not resolve: $2)])
   LIBS="$CHECK_STATIC_PLUGINS_TEMP_LIBS"
