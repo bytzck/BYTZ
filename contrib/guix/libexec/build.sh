@@ -248,7 +248,7 @@ esac
 HOST_CFLAGS="-O2 -g"
 case "$HOST" in
     #*linux*)  HOST_CFLAGS+=" --fdebug-prefix-map=${PWD}=." ;;
-    *mingw*)  HOST_CFLAGS+=" -fno-ident -L`pwd`/depends/${HOST}/plugins/platforms" ;;
+    *mingw*)  HOST_CFLAGS+=" -fno-ident" ;;
     *darwin*) unset HOST_CFLAGS ;;
 esac
 
@@ -262,7 +262,7 @@ esac
 # LDFLAGS
 case "$HOST" in
     *linux*)  HOST_LDFLAGS="-Wl,--as-needed -Wl,--dynamic-linker=$glibc_dynamic_linker -static-libstdc++ -Wl,-O2" ;;
-    *mingw*)  HOST_LDFLAGS="-Wl,--no-insert-timestamp" ;;
+    *mingw*)  HOST_LDFLAGS="-Wl,--no-insert-timestamp,-L`pwd`/depends/${HOST}/plugins/platforms" ;;
 esac
 
 # Using --no-tls-get-addr-optimize retains compatibility with glibc 2.17, by
