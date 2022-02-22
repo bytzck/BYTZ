@@ -248,7 +248,7 @@ esac
 HOST_CFLAGS="-O2 -g"
 case "$HOST" in
     #*linux*)  HOST_CFLAGS+=" --fdebug-prefix-map=${PWD}=." ;;
-    *mingw*)  HOST_CFLAGS+=" -fno-ident" ;;
+    *mingw*)  HOST_CFLAGS+=" -fno-ident -L`pwd`/depends/${HOST}/plugins/platforms" ;;
     *darwin*) unset HOST_CFLAGS ;;
 esac
 
