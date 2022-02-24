@@ -50,7 +50,6 @@ $(package)_config_opts += -ssl
 $(package)_config_opts += -openssl
 $(package)_config_opts += -no-openvg
 $(package)_config_opts += -no-reduce-relocations
-$(package)_config_opts += -no-qml-debug
 $(package)_config_opts += -no-sql-db2
 $(package)_config_opts += -no-sql-ibase
 $(package)_config_opts += -no-sql-oci
@@ -145,6 +144,8 @@ $(package)_config_opts_aarch64_android += -android-arch arm64-v8a
 $(package)_config_opts_armv7a_android += -android-arch armeabi-v7a
 $(package)_config_opts_x86_64_android += -android-arch x86_64
 $(package)_config_opts_i686_android += -android-arch i686
+$(package)_build_env  = QT_RCC_TEST=1
+$(package)_build_env += QT_RCC_SOURCE_DATE_OVERRIDE=1
 endef
 
 define $(package)_fetch_cmds
