@@ -194,8 +194,6 @@ esac
 ####################
 # Depends Building #
 ####################
-#ls ${BASEPREFIX}/${HOST}/lib/pkgconfig
-#exit
 
 # Build the depends tree, overriding variables that assume multilib gcc
 make -C depends --jobs="$JOBS" HOST="$HOST" \
@@ -203,20 +201,20 @@ make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    ${SOURCES_PATH+SOURCES_PATH="$SOURCES_PATH"} \
                                    ${BASE_CACHE+BASE_CACHE="$BASE_CACHE"} \
                                    ${SDK_PATH+SDK_PATH="$SDK_PATH"} \
-                                   #i686_linux_CC=i686-linux-gnu-gcc \
-                                   #i686_linux_CXX=i686-linux-gnu-g++ \
-                                   #i686_linux_AR=i686-linux-gnu-ar \
-                                   #i686_linux_RANLIB=i686-linux-gnu-ranlib \
-                                   #i686_linux_NM=i686-linux-gnu-nm \
-                                   #i686_linux_STRIP=i686-linux-gnu-strip \
-                                   #x86_64_linux_CC=x86_64-linux-gnu-gcc \
-                                   #x86_64_linux_CXX=x86_64-linux-gnu-g++ \
-                                   #x86_64_linux_AR=x86_64-linux-gnu-ar \
-                                   #x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
-                                   #x86_64_linux_NM=x86_64-linux-gnu-nm \
-                                   #x86_64_linux_STRIP=x86_64-linux-gnu-strip \
-                                   #qt_config_opts_i686_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
-                                   #qt_config_opts_x86_64_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
+                                   i686_linux_CC=i686-linux-gnu-gcc \
+                                   i686_linux_CXX=i686-linux-gnu-g++ \
+                                   i686_linux_AR=i686-linux-gnu-ar \
+                                   i686_linux_RANLIB=i686-linux-gnu-ranlib \
+                                   i686_linux_NM=i686-linux-gnu-nm \
+                                   i686_linux_STRIP=i686-linux-gnu-strip \
+                                   x86_64_linux_CC=x86_64-linux-gnu-gcc \
+                                   x86_64_linux_CXX=x86_64-linux-gnu-g++ \
+                                   x86_64_linux_AR=x86_64-linux-gnu-ar \
+                                   x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
+                                   x86_64_linux_NM=x86_64-linux-gnu-nm \
+                                   x86_64_linux_STRIP=x86_64-linux-gnu-strip \
+                                   qt_config_opts_i686_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
+                                   qt_config_opts_x86_64_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
                                    FORCE_USE_SYSTEM_CLANG=1
 
 
@@ -247,7 +245,7 @@ esac
 # CFLAGS
 HOST_CFLAGS="-O2 -g"
 case "$HOST" in
-    #*linux*)  HOST_CFLAGS+=" --fdebug-prefix-map=${PWD}=." ;;
+    *linux*)  HOST_CFLAGS+=" --fdebug-prefix-map=${PWD}=." ;;
     *mingw*)  HOST_CFLAGS+=" -fno-ident" ;;
     *darwin*) unset HOST_CFLAGS ;;
 esac
