@@ -28,6 +28,8 @@ $(package)_cxxflags_linux=-fPIC
 endef
 
 define $(package)_preprocess_cmds
+   ls ~/.guix_profile/bin && \
+   sleep 20 &&\
   echo "using $(boost_toolset_$(host_os)) : : $($(package)_cxx) : <cxxflags>\"$($(package)_cxxflags) $($(package)_cppflags)\" <linkflags>\"$($(package)_ldflags)\" <archiver>\"ar\" <striper>\"strip"  <ranlib>\"ranib" <rc>\"$(host_WINDRES)\" : ;" > user-config.jam
 endef
 
@@ -36,8 +38,6 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-   ls ~/.guix_profile/bin && \
-   sleep 20 &&\
   ./b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) stage
 endef
 
