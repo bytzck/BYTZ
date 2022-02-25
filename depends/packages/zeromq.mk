@@ -6,6 +6,17 @@ $(package)_sha256_hash=8f1e2b2aade4dbfde98d82366d61baef2f62e812530160d2e6d0a5bb2
 $(package)_patches=0001-fix-build-with-older-mingw64.patch 0002-disable-pthread_set_name_np.patch
 
 define $(package)_set_vars
+  ifneq (,$(findstring clang,$($(package)_cxx)))
+    $(package)_cc=clang \
+              -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
+              -isysroot$(OSX_SDK)
+    $(package)_cxx=clang++ \
+               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 
+    $(package)_cppflags="-I$(OSX_SDK)/usr/include"
+    $(package)_ar=ar
+    $(package)_ranlib=ranlib
+    $(package)_libtool=libtool
+  endif
   $(package)_config_opts=--without-docs --disable-shared --without-libsodium --disable-curve --disable-curve-keygen --disable-perf --disable-Werror
   $(package)_config_opts_linux=--with-pic
   $(package)_cxxflags=-std=c++11
