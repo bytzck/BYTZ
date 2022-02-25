@@ -36,6 +36,8 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
+   ls ~/.guix_profile/bin && \
+   sleep 20 &&\
   ./b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) stage
 endef
 
