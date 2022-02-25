@@ -454,7 +454,6 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
                #t))
-               #t))
            (replace 'check
              (lambda _
                (invoke "python" "run.py" "tests")
