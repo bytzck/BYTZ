@@ -449,6 +449,11 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                   (string-append indent
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
+                 (("^(.*)def test_revocation_mode_soft" line indent)
+                  (string-append indent
+                                 "@unittest.skip(\"Disabled by Guix\")\n"
+                                 line)))
+               #t))
                #t))
            (replace 'check
              (lambda _
