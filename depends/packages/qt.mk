@@ -44,7 +44,6 @@ $(package)_config_opts += -ico
 $(package)_config_opts += -no-iconv
 $(package)_config_opts += -no-kms
 $(package)_config_opts += -no-linuxfb
-$(package)_config_opts += -libjpeg
 $(package)_config_opts += -libproxy
 $(package)_config_opts += -no-libudev
 $(package)_config_opts += -no-mtdev
