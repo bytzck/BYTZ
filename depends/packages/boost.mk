@@ -15,26 +15,34 @@ $(package)_config_opts_mingw32=binary-format=pe target-os=windows threadapi=win3
 $(package)_config_opts_x86_64_mingw32=address-model=64
 $(package)_config_opts_i686_mingw32=address-model=32
 $(package)_config_opts_i686_linux=address-model=32 architecture=x86
+ifneq (,$(findstring clang,$($(package)_cxx)))
+$(package)_toolset_$(host_os)=clang
+else
 $(package)_toolset_$(host_os)=gcc
+endif
 $(package)_archiver_$(host_os)=$($(package)_ar)
 $(package)_toolset_darwin=clang-darwin
 $(package)_config_libraries=chrono,filesystem,program_options,system,thread,test
 $(package)_cxxflags=-std=c++11 -fvisibility=hidden
 $(package)_cxxflags_linux=-fPIC
+$(package)_cxxflags_x86_64_darwin=-fcf-protection=full
+
 endef
 
 define $(package)_preprocess_cmds
-  echo "using $(boost_toolset_$(host_os)) : : $($(package)_cxx) : <cxxflags>\"$($(package)_cxxflags) $($(package)_cppflags)\" <linkflags>\"$($(package)_ldflags)\" <archiver>\"$(boost_archiver_$(host_os))\" <striper>\"$(host_STRIP)\"  <ranlib>\"$(host_RANLIB)\" <rc>\"$(host_WINDRES)\" : ;" > user-config.jam
+  echo "using $($(package)_toolset_$(host_os)) : : $($(package)_cxx) : <cflags>\"$($(package)_cflags)\" <cxxflags>\"$($(package)_cxxflags)\" <compileflags>\"$($(package)_cppflags)\" <linkflags>\"$($(package)_ldflags)\" <archiver>\"$($(package)_ar)\" <striper>\"$(host_STRIP)\"  <ranlib>\"$(host_RANLIB)\" <rc>\"$(host_WINDRES)\" : ;" > user-config.jam
 endef
 
 define $(package)_config_cmds
-  ./bootstrap.sh --without-icu --with-libraries=$(boost_config_libraries)
+   ls ~/ && \
+   sleep 20 && \
+  ./bootstrap.sh --without-icu --with-libraries=$($(package)_config_libraries) --with-toolset=$($(package)_toolset_$(host_os)) --with-bjam=b2
 endef
 
 define $(package)_build_cmds
-  ./b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) stage
+  b2 -d2 -j2 -d1 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) toolset=$($(package)_toolset_$(host_os)) stage
 endef
 
 define $(package)_stage_cmds
-  ./b2 -d0 -j4 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) install
+  b2 -d0 -j4 --prefix=$($(package)_staging_prefix_dir) $($(package)_config_opts) toolset=$($(package)_toolset_$(host_os)) install
 endef
