@@ -153,14 +153,14 @@ chain for " target " development."))
     xglibc "libc_cv_ssp" "no")
    "libc_cv_ssp_strong" "no"))
 
-(define* (make-bytz-cross-toolchain target
+(define* (make-bitcoin-cross-toolchain target
                                        #:key
-                                       (base-gcc-for-libc gcc-7)
+                                       (base-gcc-for-libc gcc-8)
                                        (base-kernel-headers linux-libre-headers-4.9)
-                                       (base-libc (make-glibc-without-ssp glibc-2.24))
+                                       (base-libc (make-glibc-without-ssp glibc-2.27))
                                        (base-gcc (make-gcc-rpath-link base-gcc)))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
-desirable for building Bytz Core release binaries."
+desirable for building Bitcoin Core release binaries."
   (make-cross-toolchain target
                         base-gcc-for-libc
                         base-kernel-headers
@@ -449,11 +449,6 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
                   (string-append indent
                                  "@unittest.skip(\"Disabled by Guix\")\n"
                                  line)))
-               (substitute* "tests/test_validate.py"
-                 (("^(.*)def test_revocation_mode_soft" line indent)
-                  (string-append indent
-                                 "@unittest.skip(\"Disabled by Guix\")\n"
-                                 line)))
                #t))
            (replace 'check
              (lambda _
@@ -580,25 +575,23 @@ and endian independent.")
 inspecting signatures in Mach-O binaries.")
       (license license:expat))))
 
-(define-public glibc-2.24
+(define-public glibc-2.27
   (package
     (inherit glibc)
-    (version "2.24")
+    (version "2.27")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                     (url "https://sourceware.org/git/glibc.git")
-                    (commit "0d7f1ed30969886c8dde62fbf7d2c79967d4bace")))
-              (file-name (git-file-name "glibc" "0d7f1ed30969886c8dde62fbf7d2c79967d4bace"))
+                    (commit "23158b08a0908f381459f273a984c6fd328363cb")))
+              (file-name (git-file-name "glibc" "23158b08a0908f381459f273a984c6fd328363cb"))
               (sha256
                (base32
-                "0g5hryia5v1k0qx97qffgwzrz4lr4jw3s5kj04yllhswsxyjbic3"))
+                "1b2n1gxv9f4fd5yy68qjbnarhf8mf4vmlxk10i3328c1w5pmp0ca"))
               (patches (search-our-patches "glibc-ldd-x86_64.patch"
-                                           "glibc-versioned-locpath.patch"
-                                           "glibc-2.24-elfm-loadaddr-dynamic-rewrite.patch"
-                                           "glibc-2.24-no-build-time-cxx-header-run.patch"))))))
+                                           "glibc-versioned-locpath.patch"))))))
 
-(define glibc-2.27/bytz-patched
+(define glibc-2.27/bitcoin-patched
   (package-with-extra-patches glibc-2.27
     (search-our-patches "glibc-2.27-riscv64-Use-__has_include__-to-include-asm-syscalls.h.patch")))
 
@@ -640,9 +633,9 @@ inspecting signatures in Mach-O binaries.")
         git
         ;; Tests
         lief
-        ;; Native gcc 7 toolchain
-        gcc-toolchain-7
-        (list gcc-toolchain-7 "static"))
+        ;; Native gcc 8 toolchain
+        gcc-toolchain-8
+        (list gcc-toolchain-8 "static"))
   (let ((target (getenv "HOST")))
     (cond ((string-suffix? "-mingw32" target)
            ;; Windows
@@ -652,11 +645,11 @@ inspecting signatures in Mach-O binaries.")
                  osslsigncode))
           ((string-contains target "-linux-")
            (list (cond ((string-contains target "riscv64-")
-                        (make-bytz-cross-toolchain target
-                                                      #:base-libc glibc-2.27/bytz-patched
+                        (make-bitcoin-cross-toolchain target
+                                                      #:base-libc glibc-2.27/bitcoin-patched
                                                       #:base-kernel-headers linux-libre-headers-4.19))
                        (else
-                        (make-bytz-cross-toolchain target)))))
+                        (make-bitcoin-cross-toolchain target)))))
           ((string-contains target "darwin")
-           (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
+           (list clang-toolchain-10 libcap binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
