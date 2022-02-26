@@ -325,12 +325,12 @@ AC_DEFUN([_BITCOIN_QT_FIND_STATIC_PLUGINS],[
       elif test "x$TARGET_OS" = xdarwin; then
         PKG_CHECK_MODULES([QTCLIPBOARD], [Qt5ClipboardSupport${qt_lib_suffix}], [QT_LIBS="-lQt5ClipboardSupport${qt_lib_suffix} $QT_LIBS"])
         PKG_CHECK_MODULES([QTGRAPHICS], [Qt5GraphicsSupport${qt_lib_suffix}], [QT_LIBS="-lQt5GraphicsSupport${qt_lib_suffix} $QT_LIBS"])
-        PKG_CHECK_MODULES([QT_SERVICE], [${qt_lib_prefix}ServiceSupport${qt_lib_suffix}], [QT_LIBS="$QT_SERVICE_LIBS $QT_LIBS"])
+        PKG_CHECK_MODULES([QT_SERVICE], [Qt5ServiceSupport${qt_lib_suffix}], [QT_LIBS="-lQT5ServiceSupport${qt_lib_suffix} $QT_LIBS"])
       fi
-          PKG_CHECK_MODULES([QT_SERVICE], [${qt_lib_prefix}ServiceSupport${qt_lib_suffix}], [QT_LIBS="$QT_SERVICE_LIBS $QT_LIBS"])
       elif test "x$TARGET_OS" = xwindows; then
-        PKG_CHECK_MODULES([QT_WINDOWSUIAUTOMATION], [${qt_lib_prefix}WindowsUIAutomationSupport${qt_lib_suffix}], [QT_LIBS="$QT_WINDOWSUIAUTOMATION_LIBS $QT_LIBS"])
+        PKG_CHECK_MODULES([QT_WINDOWSUIAUTOMATION], [Qt5WindowsUIAutomationSupport${qt_lib_suffix}], [QT_LIBS="-lQt5WindowsUIAutomationSupport $QT_LIBS"])
       fi
+    fi
 ])
 
 dnl Internal. Find Qt libraries using pkg-config.
