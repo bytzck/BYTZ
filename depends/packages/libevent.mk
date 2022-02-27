@@ -8,6 +8,7 @@ $(package)_sha256_hash=965cc5a8bb46ce4199a47e9b2c9e1cae3b137e8356ffdad6d94d3b906
 # version as we do in configure. Due to quirks in libevents build system, this
 # is also required to enable support for ipv6. See #19375.
 define $(package)_set_vars
+  CC=clang CXX=clang++ && \
   $(package)_config_opts=--disable-shared --disable-openssl --disable-libevent-regress --disable-samples
   $(package)_config_opts += --disable-dependency-tracking --enable-option-checking
   $(package)_config_opts_release=--disable-debug-mode
@@ -17,7 +18,6 @@ define $(package)_set_vars
 endef
 
 define $(package)_config_cmds
-  CC=clang CXX=clang++ && \
   $($(package)_autoconf)
 endef
 
