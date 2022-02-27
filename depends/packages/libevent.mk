@@ -16,7 +16,11 @@ define $(package)_set_vars
   $(package)_config_opts += --disable-dependency-tracking --enable-option-checking
   $(package)_config_opts_release=--disable-debug-mode
   $(package)_config_opts_linux=--with-pic
-  $(package)_config_opts_darwin="CC=clang CXX=clang++"
+  ifneq (,$(findstring clang,$($(package)_cxx)))
+    $(package)_toolset_$(host_os)=clang
+  else
+    $(package)_toolset_$(host_os)=gcc
+  endif
   $(package)_config_opts_android=--with-pic
   $(package)_cppflags_mingw32=-D_WIN32_WINNT=0x0601
 endef
