@@ -4,10 +4,6 @@ $(package)_download_path=https://github.com/libevent/libevent/releases/download/
 $(package)_file_name=$(package)-$($(package)_version)-stable.tar.gz
 $(package)_sha256_hash=965cc5a8bb46ce4199a47e9b2c9e1cae3b137e8356ffdad6d94d3b9069b71dc2
 
-define $(package)_preprocess_cmds
-  ./autogen.sh
-endef
-
 # When building for Windows, we set _WIN32_WINNT to target the same Windows
 # version as we do in configure. Due to quirks in libevents build system, this
 # is also required to enable support for ipv6. See #19375.
