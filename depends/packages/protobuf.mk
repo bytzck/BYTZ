@@ -1,10 +1,10 @@
 package=protobuf
-$(package)_version=2.6.1
-$(package)_download_path=https://github.com/google/protobuf/releases/download/v$($(package)_version)
-$(package)_file_name=protobuf-$($(package)_version).tar.bz2
-$(package)_sha256_hash=ee445612d544d885ae240ffbcbf9267faa9f593b7b101f21d58beceb92661910
-$(package)_dependencies=native_protobuf
-$(package)_cxxflags=-std=c++1z
+$(package)_version=$(native_$(package)_version)
+$(package)_download_path=$(native_$(package)_download_path)
+$(package)_file_name=$(native_$(package)_file_name)
+$(package)_sha256_hash=$(native_$(package)_sha256_hash)
+$(package)_dependencies=native_$(package)
+$(package)_cxxflags=-std=c++11
 
 define $(package)_set_vars
   $(package)_config_opts=--disable-shared --with-protoc=$(build_prefix)/bin/protoc
