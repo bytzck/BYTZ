@@ -104,7 +104,8 @@ build_id:=$(shell env CC='$(build_CC)' CXX='$(build_CXX)' AR='$(build_AR)' RANLI
 $(host_arch)_$(host_os)_id:=$(shell env CC='$(host_CC)' CXX='$(host_CXX)' AR='$(host_AR)' RANLIB='$(host_RANLIB)' STRIP='$(host_STRIP)' SHA256SUM='$(build_SHA256SUM)' DEBUG='$(DEBUG)' ./gen_id '$(HOST_ID_SALT)' 'GUIX_ENVIRONMENT=$(realpath $(GUIX_ENVIRONMENT))')
 
 qt_packages_$(NO_QT) = $(qt_packages) $(qt_$(host_os)_packages) $(qt_$(host_arch)_$(host_os)_packages)
-wallet_packages_$(NO_WALLET) = $(wallet_packages)
+wallet_packages_$(NO_WALLET) = $(bdb_packages)
+
 bdb_packages_$(NO_BDB) = $(bdb_packages)
 upnp_packages_$(NO_UPNP) = $(upnp_packages)
 
