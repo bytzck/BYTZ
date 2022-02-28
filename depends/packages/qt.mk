@@ -51,7 +51,6 @@ $(package)_config_opts += -no-libudev
 $(package)_config_opts += -no-mtdev
 $(package)_config_opts += -ssl
 $(package)_config_opts += -openssl
-$(package)_config_opts += -qr
 $(package)_config_opts += -no-openvg
 $(package)_config_opts += -no-reduce-relocations
 $(package)_config_opts += -no-sctp
