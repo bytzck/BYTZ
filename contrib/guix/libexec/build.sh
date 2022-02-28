@@ -357,12 +357,6 @@ mkdir -p "$DISTSRC"
     (
         cd installed
 
-        case "$HOST" in
-            *mingw*)
-                mv --target-directory="$DISTNAME"/lib/ "$DISTNAME"/bin/*.dll
-                ;;
-        esac
-
         # Prune libtool and object archives
         find . -name "lib*.la" -delete
         find . -name "lib*.a" -delete
