@@ -363,15 +363,12 @@ mkdir -p "$DISTSRC"
 
         # Prune pkg-config files
         rm -rf "${DISTNAME}/lib/pkgconfig"
-        ls ${DISTNAME}
-        sleep 10
         case "$HOST" in
             *darwin*) ;;
             *)
                 # Split binaries and libraries from their debug symbols
                 {
                     find "${DISTNAME}/bin" -type f -executable -print0
-                    find "${DISTNAME}/lib" -type f -print0
                 } | xargs -0 -n1 -P"$JOBS" -I{} "${DISTSRC}/contrib/devtools/split-debug.sh" {} {} {}.dbg
                 ;;
         esac
