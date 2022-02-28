@@ -105,6 +105,7 @@ $(host_arch)_$(host_os)_id:=$(shell env CC='$(host_CC)' CXX='$(host_CXX)' AR='$(
 
 qt_packages_$(NO_QT) = $(qt_packages) $(qt_$(host_os)_packages) $(qt_$(host_arch)_$(host_os)_packages)
 wallet_packages_$(NO_WALLET) = $(wallet_packages)
+bdb_packages_$(NO_BDB) = $(bdb_packages)
 upnp_packages_$(NO_UPNP) = $(upnp_packages)
 
 packages += $($(host_arch)_$(host_os)_packages) $($(host_os)_packages) $(qt_packages_) $(wallet_packages_) $(upnp_packages_)
