@@ -363,7 +363,8 @@ mkdir -p "$DISTSRC"
 
         # Prune pkg-config files
         rm -rf "${DISTNAME}/lib/pkgconfig"
-
+        ls ${DISTNAME}
+        sleep 10
         case "$HOST" in
             *darwin*) ;;
             *)
