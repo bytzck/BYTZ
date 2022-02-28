@@ -357,11 +357,11 @@ mkdir -p "$DISTSRC"
     (
         cd installed
 
-        case "$HOST" in
-            *mingw*)
-                mv --target-directory="$DISTNAME"/lib/ "$DISTNAME"/bin/*.dll
-                ;;
-        esac
+        #case "$HOST" in
+        #    *mingw*)
+        #        mv --target-directory="$DISTNAME"/lib/ "$DISTNAME"/bin/*.dll
+        #        ;;
+        #esac
 
         # Prune libtool and object archives
         find . -name "lib*.la" -delete
@@ -434,6 +434,8 @@ mkdir -p "$DISTSRC"
             (
                 cd ./windeploy
                 mkdir -p unsigned
+                ls ${OUTDIR}
+                sleep 20
                 cp --target-directory=unsigned/ "${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
                 find . -print0 \
                     | sort --zero-terminated \
