@@ -60,8 +60,8 @@ endef
 define $(package)_config_cmds
   ifneq (,$(findstring clang,$($(package)_cxx)))
     $(package)_toolset_$(host_os)=clang && \
-    export CC=darwin_CC && \
-    export CXX=darwin_CXX
+    export CC=${darwin_CC} && \
+    export CXX=${darwin_CXX}
   else
     $(package)_toolset_$(host_os)=gcc && \
     export CC="$($(package)_cc)" && \
