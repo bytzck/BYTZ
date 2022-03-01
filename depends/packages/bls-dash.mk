@@ -63,9 +63,9 @@ define $(package)_config_cmds
     export CC=darwin_CC && \
     export CXX=darwin_CXX
   else
-    export CC="$($(package)_cc)" && \
-    export CXX="$($(package)_cxx)" && \
     $(package)_toolset_$(host_os)=gcc
+    export CC="$($(package)_cc)" && \
+    export CXX="$($(package)_cxx)" 
   endif
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
