@@ -314,7 +314,10 @@ mkdir -p "$DISTSRC"
     # Make the os-specific installers
     case "$HOST" in
         *mingw*)
-            make deploy ${V:+V=1} BITCOIN_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
+            make deploy ${V:+V=1} 
+            make install DESTDIR=${OUTDIR}
+            ls ${OUTDIR}
+            sleep 20
             ;;
     esac
 
