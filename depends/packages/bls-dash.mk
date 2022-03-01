@@ -18,8 +18,12 @@ $(package)_extra_sources=$($(package)_relic_file_name)
 
 ifneq (,$(findstring clang,$($(package)_cxx)))
 $(package)_toolset_$(host_os)=clang
+CC=${darwin_CC}
+CXX=${darwin_CXX}
 else
 $(package)_toolset_$(host_os)=gcc
+CC="$($(package)_cc)"
+CXX="$($(package)_cxx)"
 endif
 
 define $(package)_fetch_cmds
