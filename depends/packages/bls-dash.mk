@@ -61,7 +61,7 @@ define $(package)_config_cmds
   ifneq (,$(findstring clang,$($(package)_cxx)))
     $(package)_toolset_$(host_os)=clang
     export CC=darwin_CC && \
-    export CXX=darwin_CXX && \
+    export CXX=darwin_CXX
   else
     export CC="$($(package)_cc)" && \
     export CXX="$($(package)_cxx)" && \
