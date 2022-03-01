@@ -59,14 +59,16 @@ endef
 
 define $(package)_config_cmds
   ifneq (,$(findstring clang,$($(package)_cxx)))
-    $(package)_toolset_$(host_os)=clang && \
-    export CC=${darwin_CC} && \
-    export CXX=${darwin_CXX}
+    CC=${darwin_CC} 
+    CXX=${darwin_CXX} 
+    $(package)_toolset_$(host_os)=clang
   else
-    $(package)_toolset_$(host_os)=gcc && \
-    export CC="$($(package)_cc)" && \
-    export CXX="$($(package)_cxx)" 
+    CC="$($(package)_cc)"
+    CXX="$($(package)_cxx)" 
+    $(package)_toolset_$(host_os)=gcc
   endif
+  export CC && \
+  export CXX && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
