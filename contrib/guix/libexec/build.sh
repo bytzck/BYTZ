@@ -315,10 +315,7 @@ mkdir -p "$DISTSRC"
     case "$HOST" in
         *mingw*)
             make deploy ${V:+V=1} 
-            ls
-            make install DESTDIR=${OUTDIR}
-            ls ${OUTDIR}
-            sleep 60
+            cp -f bytz-*setup*.exe ${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe
             ;;
     esac
 
