@@ -58,15 +58,15 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
-  ifneq (,$(findstring clang,$($(package)_cxx)))
-    CC="${darwin_CC}"
-    CXX="${darwin_CXX}" 
-    $(package)_toolset_$(host_os)=clang
-  else
-    CC="$($(package)_cc)"
-    CXX="$($(package)_cxx)" 
-    $(package)_toolset_$(host_os)=gcc
-  endif
+  #ifneq (,$(findstring clang,$($(package)_cxx)))
+  #  CC="${darwin_CC}"
+  #  CXX="${darwin_CXX}" 
+  #  $(package)_toolset_$(host_os)=clang
+  #else
+  #  CC="$($(package)_cc)"
+  #  CXX="$($(package)_cxx)" 
+  #  $(package)_toolset_$(host_os)=gcc
+  #endif
   export CC && \
   export CXX && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
