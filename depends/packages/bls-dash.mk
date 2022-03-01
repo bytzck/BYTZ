@@ -59,7 +59,7 @@ endef
 
 define $(package)_config_cmds
   export CC=${darwin_CC} && \
-  export CXX ${darwin_CXX} && \
+  export CXX=${darwin_CXX} && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
