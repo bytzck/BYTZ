@@ -16,16 +16,6 @@ $(package)_relic_sha256_hash=ddad83b1406985a1e4703bd03bdbab89453aa700c0c99567cf8
 
 $(package)_extra_sources=$($(package)_relic_file_name)
 
-ifneq (,$(findstring clang,$($(package)_cxx)))
-$(package)_toolset_$(host_os)=clang
-CC=${darwin_CC}
-CXX=${darwin_CXX}
-else
-$(package)_toolset_$(host_os)=gcc
-CC="$($(package)_cc)"
-CXX="$($(package)_cxx)"
-endif
-
 define $(package)_fetch_cmds
 $(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
 $(call fetch_file,$(package),$($(package)_relic_download_path),$($(package)_relic_download_file),$($(package)_relic_file_name),$($(package)_relic_sha256_hash))
@@ -68,6 +58,8 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
+  export CC="$($(package)_cc)" && \
+  export CXX="$($(package)_cxx)" && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
@@ -75,8 +67,6 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  echo ${CC} && \
-  echo ${CXX} && \
   $(MAKE) $($(package)_build_opts)
 endef
 
