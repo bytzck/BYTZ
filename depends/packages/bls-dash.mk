@@ -67,6 +67,8 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
+export CC="clang" && \
+export CXX="clang++" && \
 echo ${CC} && \
 echo ${CXX} && \
 ${CC} -v && \
