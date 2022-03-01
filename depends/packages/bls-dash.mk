@@ -58,8 +58,8 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
-  export CC="$($(package)_cc)" && \
-  export CXX="$($(package)_cxx)" && \
+  export CC="clang" && \
+  export CXX="clang++" && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
