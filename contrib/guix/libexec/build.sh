@@ -315,7 +315,9 @@ mkdir -p "$DISTSRC"
     case "$HOST" in
         *mingw*)
             make deploy ${V:+V=1} 
+            rename 's/-setup\.exe$/-setup-unsigned.exe/' *-setup.exe
             ls
+            #BITCOIN_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
             make install DESTDIR=${OUTDIR}
             ls ${OUTDIR}
             sleep 60
