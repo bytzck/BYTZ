@@ -315,9 +315,10 @@ mkdir -p "$DISTSRC"
     case "$HOST" in
         *mingw*)
             make deploy ${V:+V=1} 
+            ls
             make install DESTDIR=${OUTDIR}
             ls ${OUTDIR}
-            sleep 20
+            sleep 60
             ;;
     esac
 
@@ -437,8 +438,6 @@ mkdir -p "$DISTSRC"
             (
                 cd ./windeploy
                 mkdir -p unsigned
-                ls ${OUTDIR}
-                sleep 20
                 cp --target-directory=unsigned/ "${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
                 find . -print0 \
                     | sort --zero-terminated \
