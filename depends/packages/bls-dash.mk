@@ -58,6 +58,11 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
+  ifneq (,$(findstring clang,$($(package)_cxx)))
+    $(package)_toolset_$(host_os)=clang
+  else
+    $(package)_toolset_$(host_os)=gcc
+endif
   export CC="$($(package)_cc)" && \
   export CXX="$($(package)_cxx)" && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
@@ -69,7 +74,7 @@ endef
 define $(package)_build_cmds
 echo ${CC}&& \
 echo ${CXX} && \
-  $(MAKE) $($(package)_build_opts)
+$(MAKE) $($(package)_build_opts)
 endef
 
 define $(package)_stage_cmds
