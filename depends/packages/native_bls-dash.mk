@@ -1,8 +1,8 @@
-package=bls-dash
+package=native_bls-dash
 $(package)_version=1.1.0
 $(package)_download_path=https://github.com/dashpay/bls-signatures/archive
 $(package)_download_file=$($(package)_version).tar.gz
-$(package)_file_name=$(package)-$($(package)_download_file)
+$(package)_file_name=bls-dash-$($(package)_download_file)
 $(package)_build_subdir=build
 $(package)_sha256_hash=276c8573104e5f18bb5b9fd3ffd49585dda5ba5f6de2de74759dda8ca5a9deac
 $(package)_dependencies=gmp cmake
@@ -70,5 +70,6 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
+  mkdir -p /bytz/depends/work/staging/x86_64-apple-darwin16/native_bls-dash/1.1.0-7ada2cd8a5c/bytz/depends/x86_64-apple-darwin16/native && \
   $(MAKE) install
 endef
