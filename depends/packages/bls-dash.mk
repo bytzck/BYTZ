@@ -58,7 +58,7 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
-  export CC="gcc)" && \
+  export CC="gcc" && \
   export CXX="g++" && \
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
