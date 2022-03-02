@@ -1,4 +1,7 @@
-packages:=boost openssl libevent zeromq gmp bls-dash backtrace cmake
+packages:=boost openssl libevent zeromq gmp backtrace cmake
+ifeq ($(build_os),darwin)
+packages+=bls-dash
+endif
 
 qt_native_packages = native_protobuf
 qt_packages = qrencode protobuf zlib
@@ -18,7 +21,7 @@ upnp_packages=miniupnpc
 darwin_native_packages = native_ds_store native_mac_alias
 
 ifneq ($(build_os),darwin)
-darwin_native_packages += native_cctools native_libtapi native_libdmg-hfsplus
+darwin_native_packages += native_cctools native_libtapi native_libdmg-hfsplus native_bls-dash
 
 ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
 darwin_native_packages+= native_clang
