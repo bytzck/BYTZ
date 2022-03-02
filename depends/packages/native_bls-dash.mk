@@ -1,5 +1,5 @@
 $(package)_version=$(bls-dash_version)
-$(package)_download_path=$(blsa-dasht_download_path)
+$(package)_download_path=$(bls-dash_download_path)
 $(package)_file_name=$(bls-dash_file_name)
 $(package)_sha256_hash=$(bls-dash_sha256_hash)
 $(package)_dependencies=gmp cmake
