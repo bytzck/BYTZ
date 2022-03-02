@@ -71,5 +71,6 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
+  mkdir -p $($(package)_staging_dir) && \
   $(MAKE) DESTDIR=$($(package)_staging_dir) install
 endef
