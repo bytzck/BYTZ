@@ -70,5 +70,6 @@ define $(package)_build_cmds
 endef
 
 define $(package)_stage_cmds
+  mkdir -p /bytz/depends/work/staging/x86_64-apple-darwin16/native_bls-dash/1.1.0-7ada2cd8a5c/bytz/depends/x86_64-apple-darwin16/native && \
   $(MAKE) install
 endef
