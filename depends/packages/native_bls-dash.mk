@@ -1,7 +1,7 @@
 package=native_bls-dash
 $(package)_version=1.1.0
 $(package)_download_path=https://github.com/dashpay/bls-signatures/archive
-$(package)_download_file=$(bls-dash_version).tar.gz
+$(package)_download_file=bls-dash_$(version).tar.gz
 $(package)_file_name=$(package)-$($(package)_download_file)
 $(package)_build_subdir=build
 $(package)_sha256_hash=276c8573104e5f18bb5b9fd3ffd49585dda5ba5f6de2de74759dda8ca5a9deac
