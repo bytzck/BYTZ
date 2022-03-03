@@ -44,6 +44,11 @@ define $(package)_set_vars
   $(package)_config_opts_armv7l+= -DWSIZE=32
   $(package)_config_opts_debug=-DDEBUG=ON -DCMAKE_BUILD_TYPE=Debug
 
+  ifneq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
+    $(package)_config_opts_darwin+= -DCMAKE_AR="$($(package)_ar)"
+    $(package)_config_opts_darwin+= -DCMAKE_RANLIB="$($(package)_ranlib)"
+  endif
+
   ifneq ($(darwin_native_toolchain),)
     $(package)_config_opts_darwin+= -DCMAKE_AR="$(host_prefix)/native/bin/$($(package)_ar)"
     $(package)_config_opts_darwin+= -DCMAKE_RANLIB="$(host_prefix)/native/bin/$($(package)_ranlib)"
@@ -63,6 +68,7 @@ define $(package)_config_cmds
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
+  echo  $($(package)_config_opts) && \
   $(host_prefix)/bin/cmake ../ $($(package)_config_opts)
 endef
 
