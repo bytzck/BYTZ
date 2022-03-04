@@ -1,10 +1,7 @@
-OSX_MIN_VERSION=10.14
-OSX_SDK_VERSION=10.15.6
-XCODE_VERSION=12.1
-XCODE_BUILD_ID=12A7403
-LD64_VERSION=609
-
-OSX_SDK=$(SDK_PATH)/Xcode-$(XCODE_VERSION)-$(XCODE_BUILD_ID)-extracted-SDK-with-libcxx-headers
+OSX_MIN_VERSION=10.10
+OSX_SDK_VERSION=10.11
+OSX_SDK=$(SDK_PATH)/MacOSX$(OSX_SDK_VERSION).sdk
+LD64_VERSION=253.9
 
 darwin_native_binutils=native_cctools
 
@@ -90,7 +87,7 @@ $(foreach TOOL,$(cctools_TOOLS),$(eval darwin_$(TOOL) = $$(build_prefix)/bin/$$(
 #         include search paths, as that would be wrong in general but would also
 #         break #include_next's.
 #
-darwin_CC=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
+#darwin_CC=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
               -u OBJC_INCLUDE_PATH -u OBJCPLUS_INCLUDE_PATH -u CPATH \
               -u LIBRARY_PATH \
             $(clang_prog) --target=$(host) -mmacosx-version-min=$(OSX_MIN_VERSION) \
@@ -98,7 +95,7 @@ darwin_CC=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
               -isysroot$(OSX_SDK) \
               -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
               -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
-darwin_CXX=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
+#darwin_CXX=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
                -u OBJC_INCLUDE_PATH -u OBJCPLUS_INCLUDE_PATH -u CPATH \
                -u LIBRARY_PATH \
              $(clangxx_prog) --target=$(host) -mmacosx-version-min=$(OSX_MIN_VERSION) \
@@ -108,6 +105,8 @@ darwin_CXX=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
                -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 \
                -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
                -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
+darwin_CC=clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)
+darwin_CXX=clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++
 
 darwin_CFLAGS=-pipe
 darwin_CXXFLAGS=$(darwin_CFLAGS)
