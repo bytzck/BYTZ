@@ -105,8 +105,8 @@ $(foreach TOOL,$(cctools_TOOLS),$(eval darwin_$(TOOL) = $$(build_prefix)/bin/$$(
                -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 \
                -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
                -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
-darwin_CC=clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)
-darwin_CXX=clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++ -stdlib++-isystem$(OSX_SDK)/usr/include/c++/4.2.1 
+darwin_CC=clang -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION)  -Xclang -internal-externc-isystem$(clang_resource_dir)/include -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
+darwin_CXX=clang++ -target $(host) -mmacosx-version-min=$(OSX_MIN_VERSION) --sysroot $(OSX_SDK) -mlinker-version=$(LD64_VERSION) -stdlib=libc++ -stdlib++-isystem$(OSX_SDK)/usr/include/c++/4.2.1 -Xclang -internal-externc-isystem$(clang_resource_dir)/include -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
 
 
 darwin_CFLAGS=-pipe
