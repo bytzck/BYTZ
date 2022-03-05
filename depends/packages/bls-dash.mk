@@ -15,17 +15,17 @@ $(package)_dependencies=gmp cmake
 
 #$(package)_extra_sources=$($(package)_relic_file_name)
 
-define $(package)_fetch_cmds
-  $(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
-endef
+#define $(package)_fetch_cmds
+#  $(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
+#endef
 
-define $(package)_extract_cmds
-  mkdir -p $($(package)_extract_dir) && \
-  echo "$($(package)_sha256_hash)  $($(package)_source)" > $($(package)_extract_dir)/.$($(package)_file_name).hash && \
-  $(build_SHA256SUM) -c $($(package)_extract_dir)/.$($(package)_file_name).hash && \
-  tar --strip-components=1 -xf $($(package)_source) -C . && \
-  cp $($(package)_source_dir)/$($(package)_relic_file_name) .
-endef
+#define $(package)_extract_cmds
+#  mkdir -p $($(package)_extract_dir) && \
+#  echo "$($(package)_sha256_hash)  $($(package)_source)" > $($(package)_extract_dir)/.$($(package)_file_name).hash && \
+#  $(build_SHA256SUM) -c $($(package)_extract_dir)/.$($(package)_file_name).hash && \
+#  tar --strip-components=1 -xf $($(package)_source) -C . && \
+#  cp $($(package)_source_dir)/$($(package)_relic_file_name) .
+#endef
 
 define $(package)_set_vars
   $(package)_config_opts=-DCMAKE_INSTALL_PREFIX=$($(package)_staging_dir)/$(host_prefix)
