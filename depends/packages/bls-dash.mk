@@ -63,7 +63,7 @@ define $(package)_config_cmds
   echo ${CFLAGS} && \
   echo ${CXXFLAGS} && \
   echo ${LDFLAGS} && \
-  echo $(package)_config_opts && \
+  echo $($(package)_config_opts) && \
   sleep 20 && \
   $(host_prefix)/bin/cmake ../ $($(package)_config_opts)
 endef
