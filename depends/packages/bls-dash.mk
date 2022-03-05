@@ -16,7 +16,7 @@ $(package)_dependencies=gmp cmake
 #$(package)_extra_sources=$($(package)_relic_file_name)
 
 define $(package)_fetch_cmds
-$(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
+  $(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
 endef
 
 define $(package)_extract_cmds
