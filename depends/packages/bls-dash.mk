@@ -64,6 +64,9 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
+  echo ${CFLAGS} && \
+  echo ${CXXFLAGS} && \
+  echo ${LDFLAGS} && \
   $(MAKE) $($(package)_build_opts)
 endef
 
