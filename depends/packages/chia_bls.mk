@@ -15,6 +15,7 @@ define $(package)_set_vars
   $(package)_config_opts=-DCMAKE_INSTALL_PREFIX=$($(package)_staging_dir)/$(host_prefix)
   $(package)_config_opts+= -DCMAKE_PREFIX_PATH=$($(package)_staging_dir)/$(host_prefix)
   $(package)_config_opts+= -DSTLIB=ON -DSHLIB=OFF -DSTBIN=ON
+  $(package)_config_opts+= -DBUILD_BLS_PYTHON_BINDINGS=0 -DBUILD_BLS_TESTS=0 -DBUILD_BLS_BENCHMARKS=0
   $(package)_config_opts_linux=-DOPSYS=LINUX -DCMAKE_SYSTEM_NAME=Linux
   $(package)_config_opts_darwin=-DOPSYS=MACOSX -DCMAKE_SYSTEM_NAME=Darwin
   $(package)_config_opts_mingw32=-DOPSYS=WINDOWS -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_SHARED_LIBRARY_LINK_C_FLAGS="" -DCMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS=""
@@ -36,6 +37,13 @@ define $(package)_set_vars
     $(package)_config_opts_darwin+= -DCMAKE_AR="$(host_prefix)/native/bin/$($(package)_ar)"
     $(package)_config_opts_darwin+= -DCMAKE_RANLIB="$(host_prefix)/native/bin/$($(package)_ranlib)"
   endif
+
+  $(package)_cppflags+=-UBLSALLOC_SODIUM
+endef
+
+define $(package)_preprocess_cmds
+  sed -i.old "s|GIT_REPOSITORY https://github.com/relic-toolkit/relic.git|URL \"../../relic-toolkit-$($(package)_relic_version).tar.gz\"|" src/CMakeLists.txt && \
+  sed -i.old "s|GIT_TAG        .*RELIC_GIT_TAG.*|URL_HASH SHA256=$($(package)_relic_sha256_hash)|" src/CMakeLists.txt
 endef
 
 define $(package)_config_cmds
@@ -44,16 +52,13 @@ define $(package)_config_cmds
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
-  mkdir -p build && cd build && \
   $(host_prefix)/bin/cmake ../ $($(package)_config_opts)
 endef
 
 define $(package)_build_cmds
-  cd build && \
   $(MAKE) $($(package)_build_opts)
 endef
 
 define $(package)_stage_cmds
-  cd build && \
   $(MAKE) install
 endef
