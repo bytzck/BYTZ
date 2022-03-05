@@ -52,13 +52,16 @@ define $(package)_config_cmds
   export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
   export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
   export LDFLAGS="$($(package)_ldflags)" && \
+  mkdir -p build && cd build && \
   $(host_prefix)/bin/cmake ../ $($(package)_config_opts)
 endef
 
 define $(package)_build_cmds
+  cd build && \
   $(MAKE) $($(package)_build_opts)
 endef
 
 define $(package)_stage_cmds
+  cd build && \
   $(MAKE) install
 endef
