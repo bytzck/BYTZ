@@ -57,9 +57,9 @@ endef
 define $(package)_config_cmds
   export CC="$($(package)_cc)" && \
   export CXX="$($(package)_cxx)" && \
-  export CFLAGS="$($(package)_cflags) $($(package)_cppflags)" && \
-  export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags)" && \
-  export LDFLAGS="$($(package)_ldflags)" && \
+  export CFLAGS="$($(package)_cflags) $($(package)_cppflags) -I $(host_prefix)/include" && \
+  export CXXFLAGS="$($(package)_cxxflags) $($(package)_cppflags) -I $(host_prefix)/include" && \
+  export LDFLAGS="$($(package)_ldflags) -L $(host_prefix)/lib" && \
   echo ${CFLAGS} && \
   echo ${CXXFLAGS} && \
   echo ${LDFLAGS} && \
