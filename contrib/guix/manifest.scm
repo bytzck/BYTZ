@@ -399,6 +399,25 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
              (chdir "tests")
              #t)))))))
 
+(define-public biplist
+  (package
+    (name "biplist")
+    (version "1.0.3")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (string-append "https://bitbucket.org/wooster/biplist/downloads/bipist-" version ".tar.gz"))
+       (sha256
+        (base32
+         "1im45a9z7ryrfyp1v6i39qia5qagw6i1mhif0hl0praz9iv4j1ac"))))
+    (build-system python-build-system)
+    (home-page "https://bitbucket.org/wooster/")
+    (synopsis "Biplist for Mac build")
+    (description
+     "Biplist for Mac build")
+    (license license:public-domain)))
+
+
 (define-public python-certvalidator
   (let ((commit "e5bdb4bfcaa09fa0af355eb8867d00dfeecba08c"))
     (package
@@ -658,5 +677,5 @@ inspecting signatures in Mach-O binaries.")
                        (else
                         (make-bytz-cross-toolchain target)))))
           ((string-contains target "darwin")
-           (list clang-toolchain-10 binutils imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
+           (list clang-toolchain-10 binutils biplist imagemagick libtiff librsvg font-tuffy cmake xorriso python-signapple))
           (else '())))))
