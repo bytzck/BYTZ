@@ -407,7 +407,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
     (source
      (origin
        (method url-fetch)
-       (uri (string-append "https://bitbucket.org/wooster/biplist/downloads/bipist-" version ".tar.bz2"))
+       (uri (string-append "https://bitbucket.org/wooster/biplist/downloads/bipist-" version ".tar.gz"))
        (sha256
         (base32
          "1im45a9z7ryrfyp1v6i39qia5qagw6i1mhif0hl0praz9iv4j1ac"))))
@@ -427,7 +427,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
     (source
      (origin
        (method url-fetch)
-       (uri (string-append "http://distro.ibiblio.org/fatdog/source/600/c/cdrkit-" version ".tar.gz"))
+       (uri (string-append "http://distro.ibiblio.org/fatdog/source/600/c/cdrkit-" version ".tar.bz2"))
        (sha256
         (base32
          "0r15cp1hlpdq7rwmsq5sw8rl46lkj7369ag3mxwilnx62k1683dm"))))
