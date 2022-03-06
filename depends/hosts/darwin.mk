@@ -1,7 +1,10 @@
-OSX_MIN_VERSION=10.10
-OSX_SDK_VERSION=10.11
-OSX_SDK=$(SDK_PATH)/MacOSX$(OSX_SDK_VERSION).sdk
-LD64_VERSION=253.9
+OSX_MIN_VERSION=10.14
+OSX_SDK_VERSION=10.15.6
+XCODE_VERSION=12.1
+XCODE_BUILD_ID=12A7403
+LD64_VERSION=609
+
+OSX_SDK=$(SDK_PATH)/Xcode-$(XCODE_VERSION)-$(XCODE_BUILD_ID)-extracted-SDK-with-libcxx-headers
 
 darwin_native_binutils=native_cctools
 
@@ -102,7 +105,7 @@ darwin_CXX=env -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
                -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
                -isysroot$(OSX_SDK) \
                -stdlib=libc++ \
-               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/4.2v1 \
+               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 \
                -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
                -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
 

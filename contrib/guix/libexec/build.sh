@@ -303,11 +303,18 @@ mkdir -p "$DISTSRC"
     make --jobs="$JOBS" ${V:+V=1}
 
     # Check that symbol/security checks tools are sane.
-    #make test-security-check ${V:+V=1}
-    # Perform basic security checks on a series of executables.
-    make -C src --jobs=1 check-security ${V:+V=1}
-    # Check that executables only contain allowed version symbols.
-    make -C src --jobs=1 check-symbols  ${V:+V=1}
+    case "$HOST" in
+        *darwin*)
+            make -C src --jobs=1 check-symbols  ${V:+V=1}
+            ;;
+        *)
+            #make test-security-check ${V:+V=1}
+            # Perform basic security checks on a series of executables.
+            make -C src --jobs=1 check-security ${V:+V=1}
+            # Check that executables only contain allowed version symbols.
+            make -C src --jobs=1 check-symbols  ${V:+V=1}
+            ;;
+    esac
 
     mkdir -p "$OUTDIR"
 
@@ -337,12 +344,16 @@ mkdir -p "$DISTSRC"
     case "$HOST" in
         *darwin*)
             make osx_volname ${V:+V=1}
+            echo "Here 1"
             make deploydir ${V:+V=1}
+            echo "Here 2"
             mkdir -p "unsigned-app-${HOST}"
+            echo "Here 3"
             cp  --target-directory="unsigned-app-${HOST}" \
                 osx_volname \
                 contrib/macdeploy/detached-sig-{apply,create}.sh \
                 "${BASEPREFIX}/${HOST}"/native/bin/dmg
+            echo "Here 4"
             mv --target-directory="unsigned-app-${HOST}" dist
             (
                 cd "unsigned-app-${HOST}"
@@ -352,7 +363,9 @@ mkdir -p "$DISTSRC"
                     | gzip -9n > "${OUTDIR}/${DISTNAME}-osx-unsigned.tar.gz" \
                     || ( rm -f "${OUTDIR}/${DISTNAME}-osx-unsigned.tar.gz" && exit 1 )
             )
+            echo "Here 5"
             make deploy ${V:+V=1} OSX_DMG="${OUTDIR}/${DISTNAME}-osx-unsigned.dmg"
+            echo "Here 6"
             ;;
     esac
     (
