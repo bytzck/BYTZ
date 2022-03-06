@@ -314,6 +314,7 @@ mkdir -p "$DISTSRC"
             # Check that executables only contain allowed version symbols.
             make -C src --jobs=1 check-symbols  ${V:+V=1}
             ;;
+    esac
 
     mkdir -p "$OUTDIR"
 
