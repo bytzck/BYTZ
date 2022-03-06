@@ -672,6 +672,7 @@ inspecting signatures in Mach-O binaries.")
         automake
         pkg-config
         bison
+        cmake
         ;; Scripting
         perl
         python-3
