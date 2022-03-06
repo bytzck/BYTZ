@@ -35,9 +35,6 @@ OSX_BACKGROUND_IMAGE_DPIS=36 72
 OSX_DEPLOY_SCRIPT=$(top_srcdir)/contrib/macdeploy/macdeployqtplus
 OSX_INSTALLER_ICONS=$(top_srcdir)/src/qt/res/icons/bytz.icns
 OSX_PLIST=$(top_builddir)/share/qt/Info.plist #not installed
-OSX_QT_TRANSLATIONS = da,de,es,hu,ru,uk,zh_CN,zh_TW
-
-
 
 DIST_DOCS = $(wildcard doc/*.md) $(wildcard doc/release-notes/*.md)
 DIST_CONTRIB = $(top_srcdir)/contrib/bytz-cli.bash-completion \
