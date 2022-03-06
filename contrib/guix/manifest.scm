@@ -33,6 +33,7 @@
              (guix build-system font)
              (guix build-system gnu)
              (guix build-system python)
+             (guix build-system cmake)
              (guix build-system trivial)
              (guix download)
              (guix gexp)
