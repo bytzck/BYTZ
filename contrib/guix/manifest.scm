@@ -411,6 +411,8 @@ PKCS#8, PKCS#12, PKCS#5, X.509 and TSP.")
         (base32
          "1im45a9z7ryrfyp1v6i39qia5qagw6i1mhif0hl0praz9iv4j1ac"))))
     (build-system python-build-system)
+     (arguments
+     `(#:tests? #f))
     (home-page "https://bitbucket.org/wooster/")
     (synopsis "Biplist for Mac build")
     (description
