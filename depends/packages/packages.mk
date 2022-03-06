@@ -15,10 +15,10 @@ zmq_packages=zeromq
 
 upnp_packages=miniupnpc
 
-darwin_native_packages = native_biplist native_ds_store native_mac_alias
+darwin_native_packages = native_ds_store native_mac_alias
 
 ifneq ($(build_os),darwin)
-darwin_native_packages += native_cctools native_libtapi native_libdmg-hfsplus
+darwin_native_packages += native_cctools native_cdrkit native_libtapi native_libdmg-hfsplus
 
 ifeq ($(strip $(FORCE_USE_SYSTEM_CLANG)),)
 darwin_native_packages+= native_clang
