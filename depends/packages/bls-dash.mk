@@ -50,7 +50,7 @@ define $(package)_set_vars
   endif
 
   ifneq ($(darwin_native_toolchain),)
-    $(package)_config_opts_darwin+= -DCMAKE_AR="x$(host_prefix)/native/bin/$($(package)_ar)"
+    $(package)_config_opts_darwin+= -DCMAKE_AR="$(host_prefix)/native/bin/$($(package)_ar)"
     $(package)_config_opts_darwin+= -DCMAKE_RANLIB="$(host_prefix)/native/bin/$($(package)_ranlib)"
   endif
 
