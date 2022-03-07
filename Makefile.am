@@ -9,6 +9,8 @@ if ENABLE_MAN
 SUBDIRS += doc/man
 endif
 .PHONY: deploy FORCE
+.INTERMEDIATE: $(OSX_TEMP_ISO) $(COVERAGE_INFO)
+
 
 export PYTHONPATH
 
@@ -128,9 +130,10 @@ $(APP_DIST_DIR)/Applications:
 	@cd $(@D); $(LN_S) /Applications $(@F)
 
 $(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Bytz-Qt
-	.INTERMEDIATE: $(OSX_TEMP_ISO)
+
 $(OSX_TEMP_ISO): $(APP_DIST_EXTRAS)
- 	$(XORRISOFS) -D -l -V "$(OSX_VOLNAME)" -no-pad -r -dir-mode 0755 -o $@ dist
+	$(XORRISOFS) -D -l -V "$(OSX_VOLNAME)" -no-pad -r -dir-mode 0755 -o $@ $(APP_DIST_DIR) -- $(if $(SOURCE_DATE_EPOCH),-volume_date all_file_dates =$(SOURCE_DATE_EPOCH))
+
 $(OSX_DMG): $(OSX_TEMP_ISO)
 	$(DMG) dmg "$<" "$@"
 
