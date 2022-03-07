@@ -29,6 +29,7 @@ packages:
 - "fonts-tuffy"
 - "xorriso"
 - "doxygen"
+- "bison"
 remotes:
 - "url": "https://github.com/bytzcurrency/bytz.git"
   "dir": "bytz"
