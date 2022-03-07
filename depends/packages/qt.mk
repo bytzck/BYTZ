@@ -10,9 +10,9 @@ $(package)_qt_libs=corelib network widgets gui plugins testlib
 $(package)_linguist_tools = lrelease lupdate lconvert
 $(package)_patches = qt.pro qttools_src.pro
 $(package)_patches += fix_qt_pkgconfig.patch mac-qmake.conf fix_no_printer.patch no-xlib.patch
-$(package)_patches+= fix_android_qmake_conf.patch fix_android_jni_static.patch dont_hardcode_pwd.patch
+$(package)_patches+= dont_hardcode_pwd.patch
 $(package)_patches+= no_sdk_version_check.patch
-$(package)_patches+= fix_lib_paths.patch fix_android_pch.patch
+$(package)_patches+= fix_lib_paths.patch
 $(package)_patches+= qtbase-moc-ignore-gcc-macro.patch fix_limits_header.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
@@ -159,27 +159,6 @@ $(package)_config_opts_mingw32 += "QMAKE_LFLAGS = '$($(package)_ldflags)'"
 $(package)_config_opts_mingw32 += -device-option CROSS_COMPILE="$(host)-"
 $(package)_config_opts_mingw32 += -pch
 
-$(package)_config_opts_android = -xplatform android-clang
-$(package)_config_opts_android += -android-sdk $(ANDROID_SDK)
-$(package)_config_opts_android += -android-ndk $(ANDROID_NDK)
-$(package)_config_opts_android += -android-ndk-platform android-$(ANDROID_API_LEVEL)
-$(package)_config_opts_android += -device-option CROSS_COMPILE="$(host)-"
-$(package)_config_opts_android += -egl
-$(package)_config_opts_android += -qpa xcb
-$(package)_config_opts_android += -no-eglfs
-$(package)_config_opts_android += -no-dbus
-$(package)_config_opts_android += -opengl es2
-$(package)_config_opts_android += -qt-freetype
-$(package)_config_opts_android += -no-fontconfig
-$(package)_config_opts_android += -L $(host_prefix)/lib
-$(package)_config_opts_android += -I $(host_prefix)/include
-$(package)_config_opts_android += -pch
-$(package)_config_opts_android += -no-feature-vulkan
-
-$(package)_config_opts_aarch64_android += -android-arch arm64-v8a
-$(package)_config_opts_armv7a_android += -android-arch armeabi-v7a
-$(package)_config_opts_x86_64_android += -android-arch x86_64
-$(package)_config_opts_i686_android += -android-arch i686
 $(package)_build_env  = QT_RCC_TEST=1
 $(package)_build_env += QT_RCC_SOURCE_DATE_OVERRIDE=1
 endef
@@ -229,9 +208,6 @@ define $(package)_preprocess_cmds
   patch -p1 -i $($(package)_patch_dir)/dont_hardcode_pwd.patch && \
   patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch && \
   patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_qmake_conf.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_jni_static.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_pch.patch && \
   patch -p1 -i $($(package)_patch_dir)/no-xlib.patch && \
   patch -p1 -i $($(package)_patch_dir)/no_sdk_version_check.patch && \
   patch -p1 -i $($(package)_patch_dir)/fix_lib_paths.patch && \

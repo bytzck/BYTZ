@@ -7,7 +7,7 @@ dnl Output: If qt version is auto, set bitcoin_enable_qt to false. Else, exit.
 AC_DEFUN([BITCOIN_QT_FAIL],[
   if test "x$bitcoin_qt_want_version" = xauto && test "x$bitcoin_qt_force" != xyes; then
     if test "x$bitcoin_enable_qt" != xno; then
-      AC_MSG_WARN([$1; bitcoin-qt frontend will not be built])
+      AC_MSG_WARN([$1; bytz-qt frontend will not be built])
     fi
     bitcoin_enable_qt=no
     bitcoin_enable_qt_test=no
@@ -54,7 +54,7 @@ AC_DEFUN([BITCOIN_QT_INIT],[
   dnl enable qt support
   AC_ARG_WITH([gui],
     [AS_HELP_STRING([--with-gui@<:@=no|qt5|auto@:>@],
-    [build bitcoin-qt GUI (default=auto)])],
+    [build bytz-qt GUI (default=auto)])],
     [
      bitcoin_qt_want_version=$withval
      if test "x$bitcoin_qt_want_version" = xyes; then
@@ -79,18 +79,9 @@ AC_DEFUN([BITCOIN_QT_INIT],[
 
   AC_ARG_WITH([qtdbus],
     [AS_HELP_STRING([--with-qtdbus],
-    [enable DBus support (default is yes if qt is enabled and QtDBus is found, except on Android)])],
+    [enable DBus support (default is yes if qt is enabled and QtDBus is found)])],
     [use_dbus=$withval],
     [use_dbus=auto])
-
-  dnl Android doesn't support D-Bus and certainly doesn't use it for notifications
-  case $host in
-    *android*)
-      if test "x$use_dbus" != xyes; then
-        use_dbus=no
-      fi
-    ;;
-  esac
 
   AC_SUBST(QT_TRANSLATION_DIR,$qt_translation_path)
 ])
@@ -131,16 +122,9 @@ AC_DEFUN([BITCOIN_QT_CONFIGURE],[
       if test -d "$qt_plugin_path/accessible"; then
         QT_LIBS="$QT_LIBS -L$qt_plugin_path/accessible"
       fi
-      if test -d "$qt_plugin_path/platforms/android"; then
-        QT_LIBS="$QT_LIBS -L$qt_plugin_path/platforms/android -lqtfreetype -lEGL"
-      fi
     fi
 
     AC_DEFINE(QT_STATICPLUGIN, 1, [Define this symbol if qt plugins are static])
-    if test "x$TARGET_OS" != xandroid; then
-      _BITCOIN_QT_CHECK_STATIC_PLUGIN([QMinimalIntegrationPlugin], [-lqminimal])
-      AC_DEFINE(QT_QPA_PLATFORM_MINIMAL, 1, [Define this symbol if the minimal qt platform exists])
-    fi
     if test "x$TARGET_OS" = xwindows; then
       dnl Linking against wtsapi32 is required. See #17749 and
       dnl https://bugreports.qt.io/browse/QTBUG-27097.
@@ -161,9 +145,6 @@ AC_DEFUN([BITCOIN_QT_CONFIGURE],[
       _BITCOIN_QT_CHECK_STATIC_PLUGIN([QCocoaIntegrationPlugin], [-lqcocoa])
       _BITCOIN_QT_CHECK_STATIC_PLUGIN([QMacStylePlugin], [-lqmacstyle])
       AC_DEFINE(QT_QPA_PLATFORM_COCOA, 1, [Define this symbol if the qt platform is cocoa])
-    elif test "x$TARGET_OS" = xandroid; then
-      QT_LIBS="-Wl,--export-dynamic,--undefined=JNI_OnLoad -lqtforandroid -ljnigraphics -landroid -lqtfreetype $QT_LIBS"
-      AC_DEFINE(QT_QPA_PLATFORM_ANDROID, 1, [Define this symbol if the qt platform is android])
     fi
   fi
   CPPFLAGS=$TEMP_CPPFLAGS
@@ -359,8 +340,6 @@ AC_DEFUN([_BITCOIN_QT_CHECK_STATIC_LIBS], [
     PKG_CHECK_MODULES([QT_SERVICE], [${qt_lib_prefix}ServiceSupport${qt_lib_suffix}], [QT_LIBS="$QT_SERVICE_LIBS $QT_LIBS"])
   elif test "x$TARGET_OS" = xwindows; then
     PKG_CHECK_MODULES([QT_WINDOWSUIAUTOMATION], [${qt_lib_prefix}WindowsUIAutomationSupport${qt_lib_suffix}], [QT_LIBS="$QT_WINDOWSUIAUTOMATION_LIBS $QT_LIBS"])
-  elif test "x$TARGET_OS" = xandroid; then
-    PKG_CHECK_MODULES([QT_EGL], [${qt_lib_prefix}EglSupport], [QT_LIBS="$QT_EGL_LIBS $QT_LIBS"])
   fi
 ])
 
