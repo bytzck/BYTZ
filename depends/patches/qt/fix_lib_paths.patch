@@ -1,5 +1,28 @@
---- qt_configure.prf	2022-03-14 11:51:40.204748491 +0000
-+++ qt_configure.prf.orig	2022-03-14 12:10:50.690192625 +0000
+--- old/qtbase/mkspecs/common/mac.conf
++++ new/qtbase/mkspecs/common/mac.conf
+@@ -14,7 +14,6 @@
+ 
+ QMAKE_RESOURCE          = /Developer/Tools/Rez
+ QMAKE_EXTENSION_SHLIB   = dylib
+-QMAKE_EXTENSIONS_AUX_SHLIB = tbd
+ QMAKE_LIBDIR            =
+ 
+ # sdk.prf will prefix the proper SDK sysroot
+
+--- old/qtbase/mkspecs/features/qmake_use.prf
++++ new/qtbase/mkspecs/features/qmake_use.prf
+@@ -22,6 +22,8 @@
+         !defined(QMAKE_LIBS_$$nu, var): \
+             error("Library '$$lower($$replace(nu, _, -))' is not defined.")
+ 
++        QMAKE_LIBDIR += $$eval(QMAKE_LIBDIR_$$nu)
++
+         debug: \
+             LIBS$${suffix} += $$eval(QMAKE_LIBS_$${nu}_DEBUG) $$eval(QMAKE_LIBS_$$nu)
+         else: \
+
+--- old/qtbase/mkspecs/features/qt_configure.prf
++++ new/qtbase/mkspecs/features/qt_configure.prf
 @@ -515,96 +515,28 @@
      }
  }
