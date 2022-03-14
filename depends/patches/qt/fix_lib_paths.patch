@@ -93,7 +93,7 @@
 -        } else {
 -            out += $$l
 -        }
-     }
+-     }
 -    $$1 = $$out
 +    for (path, 3): \
 +        pre_lflags += -L$$path
