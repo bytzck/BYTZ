@@ -23,12 +23,9 @@
 
 --- old/qtbase/mkspecs/features/qt_configure.prf
 +++ new/qtbase/mkspecs/features/qt_configure.prf
-@@ -515,96 +515,28 @@
-     }
- }
+@@ -517,94 +517,26 @@
  
--# libs-var, libs, in-paths, out-paths-var
-+# libs-var, libs, in-paths
+ # libs-var, libs, in-paths, out-paths-var
  defineTest(qtConfResolveLibs) {
 -    ret = true
 -    paths = $$3
@@ -93,8 +90,8 @@
 -        } else {
 -            out += $$l
 -        }
--     }
--    $$1 = $$out
+-    }
+     $$1 = $$out
 +    for (path, 3): \
 +        pre_lflags += -L$$path
 +    $$1 = $$pre_lflags $$2
