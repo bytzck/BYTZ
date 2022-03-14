@@ -19,7 +19,7 @@ $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
 $(package)_qttranslations_sha256_hash=eefcec0a91c302548f9d948a138b8ec77d78570ce818931bd8475b1bff1205ca
 
 $(package)_qttools_file_name=qttools-$($(package)_suffix)
-$(package)_qttools_sha256_hash=eefcec0a91c302548f9d948a138b8ec77d78570ce818931bd8475b1bff1205ca
+$(package)_qttools_sha256_hash=c9e92d2f0d369e44bb1a60e9fa6d970f8d9893d653212305e04be5e6daec2cd8
 
 $(package)_extra_sources  = $($(package)_qttranslations_file_name)
 $(package)_extra_sources += $($(package)_qttools_file_name)
