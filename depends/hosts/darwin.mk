@@ -102,7 +102,7 @@ darwin_CXX=`which env` -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
                -B$(build_prefix)/bin -mlinker-version=$(LD64_VERSION) \
                -isysroot$(OSX_SDK) \
                -stdlib=libc++ \
-               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/v1 \
+               -stdlib++-isystem$(OSX_SDK)/usr/include/c++/4.2.1 \
                -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
                -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
 
