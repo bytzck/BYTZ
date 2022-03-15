@@ -104,6 +104,7 @@ darwin_CXX=`which env` -u C_INCLUDE_PATH -u CPLUS_INCLUDE_PATH \
                -stdlib=libc++ \
                -stdlib++-isystem$(OSX_SDK)/usr/include/c++/4.2.1 \
                -Xclang -internal-externc-isystem$(clang_resource_dir)/include \
+               -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include/c++/4.2.1/tr1 \
                -Xclang -internal-externc-isystem$(OSX_SDK)/usr/include
 
 darwin_CFLAGS=-pipe
