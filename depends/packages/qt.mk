@@ -232,9 +232,9 @@ define $(package)_config_cmds
   export PKG_CONFIG_SYSROOT_DIR=/ && \
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
-  export OPENSSL_LIBS=$(host_prefix)/lib && \
-  export OPENSSL_INCDIR=$(host_prefix)/include && \
-  export OPENSSL_LIBDIR=$(host_prefix) && \
+  export OPENSSL_LIBS="$(host_prefix)/lib" && \
+  export OPENSSL_INCDIR="$(host_prefix)/include" && \
+  export OPENSSL_LIBDIR="$(host_prefix)" && \
   cd qtbase && \
   echo "Openssh Include dir" && \
   ls ${OPENSSL_INCDIR} && \
