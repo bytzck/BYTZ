@@ -236,8 +236,11 @@ define $(package)_config_cmds
   export OPENSSL_INCDIR=$(host_prefix)/include && \
   export OPENSSL_LIBDIR=$(host_prefix) && \
   cd qtbase && \
+  echo "Openssh Include dir" && \
   ls ${OPENSSL_INCDIR} && \
+  echo "Openssk Lib Dir" && \
   ls ${OPENSSL_LIBDIR} && \
+  echo "Openssl Libs" && \
   ls ${OPENSSL_LIBS} && \
   sleep 20 && \
   ./configure -top-level $($(package)_config_opts)
