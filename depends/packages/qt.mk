@@ -233,11 +233,11 @@ define $(package)_config_cmds
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
   cd qtbase && \
-  echo "Openssh Include dir" && \
+  echo "Openssh Include dir ${OPENSSL_INCDIR}" && \
   ls ${OPENSSL_INCDIR} && \
-  echo "Openssk Lib Dir" && \
+  echo "Openssk Lib Dir ${OPENSSL_LIBDIR}" && \
   ls ${OPENSSL_LIBDIR} && \
-  echo "Openssl Libs" && \
+  echo "Openssl Libs"${OPENSSL_LIBS} && \
   ls ${OPENSSL_LIBS} && \
   sleep 20 && \
   ./configure -top-level $($(package)_config_opts)
