@@ -236,7 +236,9 @@ define $(package)_config_cmds
   export OPENSSL_INCDIR=$(host_prefix)/include && \
   export OPENSSL_LIBDIR=$(host_prefix) && \
   cd qtbase && \
-  ls /usr/include/linux && \
+  ls ${OPENSSL_INCDIR} && \
+  ls ${OPENSSL_LIBDIR} && \
+  ls ${OPENSSL_LIBS} && \
   sleep 20 && \
   ./configure -top-level $($(package)_config_opts)
 endef
