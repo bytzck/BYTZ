@@ -151,9 +151,9 @@ $(package)_config_opts_s390x_linux = -platform linux-g++ -xplatform bytz-linux-g
 
 $(package)_config_opts_mingw32 = -no-opengl
 $(package)_config_opts_mingw32 += -no-dbus
-$(package)_config_opts_mingw32 += OPENSSL_LIBS="$(host_prefix)/lib" 
-$(package)_config_opts_mingw32 += OPENSSL_INCDIR="$(host_prefix)/include"
-$(package)_config_opts_mingw32 += OPENSSL_LIBDIR="$(host_prefix)"
+$(package)_config_opts_mingw32 += OPENSSL_LIBS="$(host_prefix)"
+$(package)_config_opts_mingw32 += OPENSSL_INCDIR="$(host_prefix)/include/openssl"
+$(package)_config_opts_mingw32 += OPENSSL_LIBDIR="$(host_prefix)/lib"
 $(package)_config_opts_mingw32 += -xplatform win32-g++
 $(package)_config_opts_mingw32 += "QMAKE_CFLAGS = '$($(package)_cflags) $($(package)_cppflags)'"
 $(package)_config_opts_mingw32 += "QMAKE_CXXFLAGS = '$($(package)_cflags) $($(package)_cppflags)'"
