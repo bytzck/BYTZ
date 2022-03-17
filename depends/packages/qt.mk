@@ -1,25 +1,20 @@
 PACKAGE=qt
-$(package)_version=5.12.11
-$(package)_download_path=https://download.qt.io/official_releases/qt/5.12/$($(package)_version)/submodules
+$(package)_version=5.12.0
+$(package)_download_path=https://download.qt.io/archive/qt/5.9/$($(package)_version)/submodules
 $(package)_suffix=everywhere-src-$($(package)_version).tar.xz
 $(package)_file_name=qtbase-$($(package)_suffix)
-$(package)_sha256_hash=1c1b4e33137ca77881074c140d54c3c9747e845a31338cfe8680f171f0bc3a39
+$(package)_sha256_hash=5e03221d780e121aabd734896aab8f331e5d8c9d9b54f1eb04907d0818eaeecb
 $(package)_dependencies=openssl zlib qrencode
-$(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
+$(package)_linux_dependencies=freetype fontconfig libxcb
+$(package)_build_subdir=qtbase
 $(package)_qt_libs=corelib network widgets gui plugins testlib
-$(package)_linguist_tools = lrelease lupdate lconvert
-$(package)_patches = qt.pro qttools_src.pro
-$(package)_patches += fix_qt_pkgconfig.patch mac-qmake.conf fix_no_printer.patch no-xlib.patch
-$(package)_patches+= dont_hardcode_pwd.patch
-$(package)_patches+= no_sdk_version_check.patch
-$(package)_patches+= fix_lib_paths.patch
-$(package)_patches+= qtbase-moc-ignore-gcc-macro.patch fix_limits_header.patch
+$(package)_patches=fix_qt_pkgconfig.patch mac-qmake.conf fix_no_printer.patch dont_hardcode_pwd.patch xkb-default.patch no-xlib.patch fix_limits_gcc10_plus.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
-$(package)_qttranslations_sha256_hash=577b0668a777eb2b451c61e8d026d79285371597ce9df06b6dee6c814164b7c3
+$(package)_qttranslations_sha256_hash=5b4f186e0b96703041319b5b131393b6aa829ea74e067697ede548d936327508
 
 $(package)_qttools_file_name=qttools-$($(package)_suffix)
-$(package)_qttools_sha256_hash=98b2aaca230458f65996f3534fd471d2ffd038dd58ac997c0589c06dc2385b4f
+$(package)_qttools_sha256_hash=574ce34b6e5bcd5dce4020a3947730f3c2223eee65d0396a311099223364dac3
 
 $(package)_extra_sources  = $($(package)_qttranslations_file_name)
 $(package)_extra_sources += $($(package)_qttools_file_name)
@@ -49,8 +44,7 @@ $(package)_config_opts += -no-libjpeg
 $(package)_config_opts += -no-libproxy
 $(package)_config_opts += -no-libudev
 $(package)_config_opts += -no-mtdev
-$(package)_config_opts += -ssl
-$(package)_config_opts += -openssl
+$(package)_config_opts += -openssl-linked
 $(package)_config_opts += -no-openvg
 $(package)_config_opts += -no-reduce-relocations
 $(package)_config_opts += -no-sctp
@@ -203,16 +197,10 @@ endef
 # 7. Adjust a regex in toolchain.prf, to accommodate Guix's usage of
 # CROSS_LIBRARY_PATH. See #15277.
 define $(package)_preprocess_cmds
-  cp $($(package)_patch_dir)/qt.pro qt.pro && \
-  cp $($(package)_patch_dir)/qttools_src.pro qttools/src/src.pro && \
-  patch -p1 -i $($(package)_patch_dir)/dont_hardcode_pwd.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch && \
-  patch -p1 -i $($(package)_patch_dir)/no-xlib.patch && \
-  patch -p1 -i $($(package)_patch_dir)/no_sdk_version_check.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_lib_paths.patch && \
-  patch -p1 -i $($(package)_patch_dir)/qtbase-moc-ignore-gcc-macro.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_limits_header.patch && \
+  patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/xkb-default.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/dont_hardcode_pwd.patch &&\
   mkdir -p qtbase/mkspecs/macx-clang-linux &&\
   cp -f qtbase/mkspecs/macx-clang/qplatformdefs.h qtbase/mkspecs/macx-clang-linux/ &&\
   cp -f $($(package)_patch_dir)/mac-qmake.conf qtbase/mkspecs/macx-clang-linux/qmake.conf && \
@@ -221,6 +209,8 @@ define $(package)_preprocess_cmds
   echo "!host_build: QMAKE_CFLAGS     += $($(package)_cflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
   echo "!host_build: QMAKE_CXXFLAGS   += $($(package)_cxxflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
   echo "!host_build: QMAKE_LFLAGS     += $($(package)_ldflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
+  patch -p1 -i $($(package)_patch_dir)/no-xlib.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_limits_gcc10_plus.patch &&\
   sed -i.old "s|QMAKE_CC                = \$$$$\$$$${CROSS_COMPILE}clang|QMAKE_CC                = $($(package)_cc)|" qtbase/mkspecs/common/clang.conf && \
   sed -i.old "s|QMAKE_CXX               = \$$$$\$$$${CROSS_COMPILE}clang++|QMAKE_CXX               = $($(package)_cxx)|" qtbase/mkspecs/common/clang.conf && \
   sed -i.old "s/LIBRARY_PATH/(CROSS_)?\0/g" qtbase/mkspecs/features/toolchain.prf

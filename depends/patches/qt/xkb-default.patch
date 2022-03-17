@@ -1,0 +1,17 @@
+--- old/qtbase/src/gui/configure.pri	2018-12-03 11:15:26.000000000 +0000
++++ new/qtbase/src/gui/configure.pri	2022-03-17 13:14:16.861033482 +0000
+@@ -42,6 +42,14 @@
+     return(false)
+ }
+ 
++defineTest(qtConfTest_xkbConfigRoot) {
++    $${1}.value = "/usr/share/X11/xkb"
++    export($${1}.value)
++    $${1}.cache += value
++    export($${1}.cache)
++    return(true)
++}
++
+ defineTest(qtConfTest_qpaDefaultPlatform) {
+     name =
+     !isEmpty(config.input.qpa_default_platform): name = $$config.input.qpa_default_platform
