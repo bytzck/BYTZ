@@ -1,5 +1,5 @@
---- old/qtbase/mkspecs/features/qt_module.prf
-+++ new/qtbase/mkspecs/features/qt_module.prf
+--- qtbase-everywhere-src-5.12.0/mkspecs/features/qt_module.prf	2018-12-03 11:15:26.000000000 +0000
++++ qt_module.prf	2022-03-17 12:37:07.828057903 +0000
 @@ -264,7 +264,7 @@
  load(qt_targets)
  
@@ -9,14 +9,12 @@
      CONFIG += create_pc
      QMAKE_PKGCONFIG_DESTDIR = pkgconfig
      host_build: \
-@@ -278,10 +278,10 @@
-         QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS/raw]
+@@ -279,9 +279,9 @@
          QMAKE_PKGCONFIG_CFLAGS = -D$$MODULE_DEFINE -I${includedir}/$$MODULE_INCNAME
      }
      QMAKE_PKGCONFIG_NAME = $$replace(TARGET, ^Qt, "Qt$$QT_MAJOR_VERSION ")
 -    QMAKE_PKGCONFIG_FILE = $$replace(TARGET, ^Qt, Qt$$QT_MAJOR_VERSION)
 +    QMAKE_PKGCONFIG_FILE = $$replace(TARGET, ^Qt, Qt$$QT_MAJOR_VERSION)$$qtPlatformTargetSuffix()
-+ 
      for(i, MODULE_DEPENDS): \
 -        QMAKE_PKGCONFIG_REQUIRES += $$replace(QT.$${i}.name, ^Qt, Qt$$section(QT.$${i}.VERSION, ., 0, 0))
 +        QMAKE_PKGCONFIG_REQUIRES += $$replace(QT.$${i}.name, ^Qt, Qt$$section(QT.$${i}.VERSION, ., 0, 0))$$qtPlatformTargetSuffix() \
