@@ -1,5 +1,5 @@
---- qtbase-everywhere-src-5.12.0/configure	2018-12-03 11:15:26.000000000 +0000
-+++ /home/ckti/bytz/depends/work/build/x86_64-linux-gnu/qt/5.12.0-03cc0708847/qtbase/configure	2022-03-17 13:22:02.149578948 +0000
+--- old/qtbase/configure	2018-12-03 11:15:26.000000000 +0000
++++ new/qtbase/configure	2022-03-17 13:22:02.149578948 +0000
 @@ -36,9 +36,9 @@
  relconf=`basename $0`
  # the directory of this script is the "source tree"
