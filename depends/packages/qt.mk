@@ -8,12 +8,7 @@ $(package)_dependencies=openssl zlib qrencode
 $(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
 $(package)_qt_libs=corelib network widgets gui plugins testlib
 $(package)_linguist_tools = lrelease lupdate lconvert
-$(package)_patches = qt.pro qttools_src.pro
-$(package)_patches += fix_qt_pkgconfig.patch mac-qmake.conf fix_no_printer.patch no-xlib.patch
-$(package)_patches+= dont_hardcode_pwd.patch
-$(package)_patches+= no_sdk_version_check.patch
-$(package)_patches+= fix_lib_paths.patch
-$(package)_patches+= qtbase-moc-ignore-gcc-macro.patch fix_limits_header.patch
+$(package)_patches=fix_qt_pkgconfig.patch mac-qmake.conf fix_configure_mac.patch fix_no_printer.patch fix_rcc_determinism.patch xkb-default.patch no-xlib.patch fix_limits_gcc10_plus.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
 $(package)_qttranslations_sha256_hash=5b4f186e0b96703041319b5b131393b6aa829ea74e067697ede548d936327508
@@ -207,14 +202,16 @@ endef
 define $(package)_preprocess_cmds
   cp $($(package)_patch_dir)/qt.pro qt.pro && \
   cp $($(package)_patch_dir)/qttools_src.pro qttools/src/src.pro && \
-  patch -p1 -i $($(package)_patch_dir)/dont_hardcode_pwd.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch && \
-  patch -p1 -i $($(package)_patch_dir)/no-xlib.patch && \
-  patch -p1 -i $($(package)_patch_dir)/no_sdk_version_check.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_lib_paths.patch && \
-  patch -p1 -i $($(package)_patch_dir)/qtbase-moc-ignore-gcc-macro.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_limits_header.patch && \
+  patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_configure_mac.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_rcc_determinism.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/xkb-default.patch &&\
+  echo "!host_build: QMAKE_CFLAGS     += $($(package)_cflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
+  echo "!host_build: QMAKE_CXXFLAGS   += $($(package)_cxxflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
+  echo "!host_build: QMAKE_LFLAGS     += $($(package)_ldflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
+  patch -p1 -i $($(package)_patch_dir)/no-xlib.patch &&\
+  patch -p1 -i $($(package)_patch_dir)/fix_limits_gcc10_plus.patch &&\
   mkdir -p qtbase/mkspecs/macx-clang-linux &&\
   cp -f qtbase/mkspecs/macx-clang/qplatformdefs.h qtbase/mkspecs/macx-clang-linux/ &&\
   cp -f $($(package)_patch_dir)/mac-qmake.conf qtbase/mkspecs/macx-clang-linux/qmake.conf && \
