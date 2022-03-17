@@ -223,6 +223,8 @@ define $(package)_config_cmds
   export PKG_CONFIG_LIBDIR=$(host_prefix)/lib/pkgconfig && \
   export PKG_CONFIG_PATH=$(host_prefix)/share/pkgconfig && \
   export OPENSSL_LIBS=$(host_prefix)/lib && \
+  ls && \
+  sleep 10 && \
   cd qtbase && \
   ./configure -top-level $($(package)_config_opts)
 endef
