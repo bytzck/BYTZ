@@ -1,0 +1,14 @@
+--- old/qtbase/configure	2022-03-16 16:41:22.708592183 +0000
++++ new/qtbase/configure	2022-03-16 16:41:46.741026692 +0000
+@@ -36,9 +36,9 @@
+ relconf=`basename $0`
+ # the directory of this script is the "source tree"
+ relpath=`dirname $0`
+-relpath=`(cd "$relpath"; /bin/pwd)`
++relpath=`(cd "$relpath"; pwd)`
+ # the current directory is the "build tree" or "object tree"
+-outpath=`/bin/pwd`
++outpath=`pwd`
+ 
+ WHICH="which"
+ 
