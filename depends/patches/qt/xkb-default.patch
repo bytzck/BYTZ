@@ -1,26 +1,17 @@
---- old/qtbase/src/gui/configure.pri	2018-06-06 17:28:10.000000000 -0400
-+++ new/qtbase/src/gui/configure.pri	2018-08-17 18:43:01.589384567 -0400
-@@ -43,18 +43,11 @@
+--- qtbase-everywhere-src-5.12.0/src/gui/configure.pri	2018-12-03 11:15:26.000000000 +0000
++++ /home/ckti/bytz/depends/work/build/x86_64-linux-gnu/qt/5.12.0-a9b7cfd1094/qtbase/src/gui/configure.pri	2022-03-17 13:14:16.861033482 +0000
+@@ -42,6 +42,14 @@
+     return(false)
  }
-
- defineTest(qtConfTest_xkbConfigRoot) {
--    qtConfTest_getPkgConfigVariable($${1}): return(true)
--
--    for (dir, $$list("/usr/share/X11/xkb", "/usr/local/share/X11/xkb")) {
--        exists($$dir) {
--            $${1}.value = $$dir
--            export($${1}.value)
--            $${1}.cache += value
--            export($${1}.cache)
--            return(true)
--        }
--    }
--    return(false)
+ 
++defineTest(qtConfTest_xkbConfigRoot) {
 +    $${1}.value = "/usr/share/X11/xkb"
 +    export($${1}.value)
 +    $${1}.cache += value
 +    export($${1}.cache)
 +    return(true)
- }
-
++}
++
  defineTest(qtConfTest_qpaDefaultPlatform) {
+     name =
+     !isEmpty(config.input.qpa_default_platform): name = $$config.input.qpa_default_platform
