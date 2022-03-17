@@ -1,5 +1,5 @@
---- qtbase-everywhere-src-5.12.0/src/gui/configure.pri	2018-12-03 11:15:26.000000000 +0000
-+++ /home/ckti/bytz/depends/work/build/x86_64-linux-gnu/qt/5.12.0-a9b7cfd1094/qtbase/src/gui/configure.pri	2022-03-17 13:14:16.861033482 +0000
+--- old/qtbase/src/gui/configure.pri	2018-12-03 11:15:26.000000000 +0000
++++ new/qtbase/src/gui/configure.pri	2022-03-17 13:14:16.861033482 +0000
 @@ -42,6 +42,14 @@
      return(false)
  }
