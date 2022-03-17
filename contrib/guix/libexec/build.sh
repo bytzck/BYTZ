@@ -213,8 +213,6 @@ make -C depends --jobs="$JOBS" HOST="$HOST" \
                                    x86_64_linux_RANLIB=x86_64-linux-gnu-ranlib \
                                    x86_64_linux_NM=x86_64-linux-gnu-nm \
                                    x86_64_linux_STRIP=x86_64-linux-gnu-strip \
-                                   qt_config_opts_i686_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
-                                   qt_config_opts_x86_64_linux='-platform linux-g++ -xplatform bytz-linux-g++' \
                                    FORCE_USE_SYSTEM_CLANG=1
 
 
@@ -237,7 +235,7 @@ mkdir -p "$OUTDIR"
 ###########################
 
 # CONFIGFLAGS
-CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests --disable-fuzz-binary"
+CONFIGFLAGS="--enable-reduce-exports --enable-bench --enable-gui-tests --enable-fuzz-binary"
 case "$HOST" in
     *linux*) CONFIGFLAGS+=" --disable-threadlocal" ;;
 esac
