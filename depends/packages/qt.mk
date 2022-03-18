@@ -1,9 +1,9 @@
 PACKAGE=qt
-$(package)_version=5.12.11
+$(package)_version=5.12.0
 $(package)_download_path=https://download.qt.io/official_releases/qt/5.12/$($(package)_version)/submodules
 $(package)_suffix=everywhere-src-$($(package)_version).tar.xz
 $(package)_file_name=qtbase-$($(package)_suffix)
-$(package)_sha256_hash=1c1b4e33137ca77881074c140d54c3c9747e845a31338cfe8680f171f0bc3a39
+$(package)_sha256_hash=5e03221d780e121aabd734896aab8f331e5d8c9d9b54f1eb04907d0818eaeecb
 $(package)_dependencies=openssl zlib qrencode
 $(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
 $(package)_qt_libs=corelib network widgets gui plugins testlib
@@ -16,10 +16,10 @@ $(package)_patches+= fix_lib_paths.patch
 $(package)_patches+= qtbase-moc-ignore-gcc-macro.patch fix_limits_header.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
-$(package)_qttranslations_sha256_hash=577b0668a777eb2b451c61e8d026d79285371597ce9df06b6dee6c814164b7c3
+$(package)_qttranslations_sha256_hash=5b4f186e0b96703041319b5b131393b6aa829ea74e067697ede548d936327508
 
 $(package)_qttools_file_name=qttools-$($(package)_suffix)
-$(package)_qttools_sha256_hash=98b2aaca230458f65996f3534fd471d2ffd038dd58ac997c0589c06dc2385b4f
+$(package)_qttools_sha256_hash=574ce34b6e5bcd5dce4020a3947730f3c2223eee65d0396a311099223364dac3
 
 $(package)_extra_sources  = $($(package)_qttranslations_file_name)
 $(package)_extra_sources += $($(package)_qttools_file_name)
@@ -49,8 +49,7 @@ $(package)_config_opts += -no-libjpeg
 $(package)_config_opts += -no-libproxy
 $(package)_config_opts += -no-libudev
 $(package)_config_opts += -no-mtdev
-$(package)_config_opts += -ssl
-$(package)_config_opts += -openssl
+$(package)_config_opts += -openssl-linked
 $(package)_config_opts += -no-openvg
 $(package)_config_opts += -no-reduce-relocations
 $(package)_config_opts += -no-sctp
