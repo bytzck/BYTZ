@@ -8,15 +8,3 @@
  QMAKE_LIBDIR            =
  
  # sdk.prf will prefix the proper SDK sysroot
-
---- old/qtbase/mkspecs/features/qmake_use.prf
-+++ new/qtbase/mkspecs/features/qmake_use.prf
-@@ -22,6 +22,8 @@
-         !defined(QMAKE_LIBS_$$nu, var): \
-             error("Library '$$lower($$replace(nu, _, -))' is not defined.")
- 
-+        QMAKE_LIBDIR += $$eval(QMAKE_LIBDIR_$$nu)
-+
-         debug: \
-             LIBS$${suffix} += $$eval(QMAKE_LIBS_$${nu}_DEBUG) $$eval(QMAKE_LIBS_$$nu)
-         else: \
