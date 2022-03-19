@@ -344,16 +344,12 @@ mkdir -p "$DISTSRC"
     case "$HOST" in
         *darwin*)
             make osx_volname ${V:+V=1}
-            echo "Here 1"
             make deploydir ${V:+V=1}
-            echo "Here 2"
             mkdir -p "unsigned-app-${HOST}"
-            echo "Here 3"
             cp  --target-directory="unsigned-app-${HOST}" \
                 osx_volname \
                 contrib/macdeploy/detached-sig-{apply,create}.sh \
                 "${BASEPREFIX}/${HOST}"/native/bin/dmg
-            echo "Here 4"
             mv --target-directory="unsigned-app-${HOST}" dist
             (
                 cd "unsigned-app-${HOST}"
@@ -363,9 +359,7 @@ mkdir -p "$DISTSRC"
                     | gzip -9n > "${OUTDIR}/${DISTNAME}-osx-unsigned.tar.gz" \
                     || ( rm -f "${OUTDIR}/${DISTNAME}-osx-unsigned.tar.gz" && exit 1 )
             )
-            echo "Here 5"
             make deploy ${V:+V=1} OSX_DMG="${OUTDIR}/${DISTNAME}-osx-unsigned.dmg"
-            echo "Here 6"
             ;;
     esac
     (
