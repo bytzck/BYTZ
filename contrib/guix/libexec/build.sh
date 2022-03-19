@@ -237,9 +237,10 @@ mkdir -p "$OUTDIR"
 ###########################
 
 # CONFIGFLAGS
-CONFIGFLAGS="--enable-reduce-exports --enable-bench --enable-gui-tests --enable-fuzz-binary"
+CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests --disable-fuzz-binary"
 case "$HOST" in
-    *linux*) CONFIGFLAGS+=" --disable-threadlocal" ;;
+    *linux*) CONFIGFLAGS+="--enable-crash-hooks --disable-threadlocal" ;;
+    *mingw*) CONFIGFLAGS+="--enable-crash-hooks" ;;
 esac
 
 # CFLAGS
